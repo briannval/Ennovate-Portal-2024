@@ -1,9 +1,4 @@
-export const links = [
+export const navbarLinks = [
   { name: "THE TEAM", href: "#" },
   { name: "FINAL COMP", href: "#" },
-  {
-    name: "ADMIN",
-    href: "#",
-    isButton: true,
-  },
 ];
