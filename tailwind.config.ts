@@ -18,6 +18,7 @@ const config: Config = {
         "ennovate-yellow": "#ffbc1c",
         "ennovate-gray": "#9c9c9c",
         "ennovate-dark-blue": "#273f80",
+        "ennovate-member": "#213c87",
       },
     },
   },
