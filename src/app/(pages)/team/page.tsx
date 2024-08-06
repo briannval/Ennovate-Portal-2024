@@ -1,10 +1,53 @@
+"use client";
+
 import Search from "@/components/search";
 import TeamMember from "@/components/teamMember";
 import TeamMemberSkeleton from "@/components/teamMemberSkeleton";
 import TeamMemberSkeletonGrid from "@/components/teamMemberSkeletonGrid";
 import Pagination from "@/components/pagination";
-import { useQuery } from "@tanstack/react-query";
 import { fetchTeamMembers } from "@/actions/db";
+import { TeamMemberType } from "@/models/TeamMember";
+
+interface TeamMembersState {
+  teamMembers: TeamMemberType[];
+  totalPages: number;
+  loading: boolean;
+}
+
+type TeamMembersAction =
+  | { type: "FETCH_START" }
+  | {
+      type: "FETCH_SUCCESS";
+      payload: { teamMembers: TeamMemberType[]; totalPages: number };
+    }
+  | { type: "FETCH_FAILURE" };
+
+const initialState: TeamMembersState = {
+  teamMembers: [],
+  totalPages: 0,
+  loading: true,
+};
+
+const teamMembersReducer = (
+  state: TeamMembersState,
+  action: TeamMembersAction
+): TeamMembersState => {
+  switch (action.type) {
+    case "FETCH_START":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        teamMembers: action.payload.teamMembers,
+        totalPages: action.payload.totalPages,
+        loading: false,
+      };
+    case "FETCH_FAILURE":
+      return { ...state, loading: false };
+    default:
+      return state;
+  }
+};
 
 export default function Team({
   searchParams,
