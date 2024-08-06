@@ -2,6 +2,7 @@ import Search from "@/components/search";
 import TeamMember from "@/components/teamMember";
 import TeamMemberSkeleton from "@/components/teamMemberSkeleton";
 import TeamMemberSkeletonGrid from "@/components/teamMemberSkeletonGrid";
+import Pagination from "@/components/pagination";
 
 export default function Team() {
   return (
@@ -11,12 +12,16 @@ export default function Team() {
       </h1>
       <Search />
       <TeamMemberSkeletonGrid />
+      <Pagination totalPages={2} />
+    </div>
+  );
+
+  /*
       <TeamMember
         name="Arisha Ahmed"
         email="test email"
         img="/arisha-ahmed.jpg"
         title="test"
       />
-    </div>
-  );
+  */
 }

@@ -48,7 +48,7 @@ const Search = () => {
         <input
           type="search"
           id="default-search"
-          className="block w-full p-4 ps-10 text-md text-gray-900 border border-ennovate-gray rounded-lg bg-white"
+          className="block w-full p-4 ps-10 text-lg text-ennovate-gray border border-ennovate-gray rounded-lg bg-white"
           placeholder="Search by name or title..."
           onChange={(e) => handleSearch(e.target.value)}
         />
