@@ -52,12 +52,6 @@ const Search = () => {
           placeholder="Search by name or title..."
           onChange={(e) => handleSearch(e.target.value)}
         />
-        <button
-          type="submit"
-          className="text-white absolute end-2.5 bottom-2.5 bg-ennovate-main font-medium rounded-lg text-sm px-4 py-2"
-        >
-          Search
-        </button>
       </div>
     </form>
   );
