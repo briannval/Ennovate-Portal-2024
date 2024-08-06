@@ -1,5 +1,24 @@
 "use client";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
+
 const Search = () => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const handleSearch = useDebouncedCallback((term: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
+    if (term) {
+      params.set("query", term);
+    } else {
+      params.delete("query");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }, 300);
+
   return (
     <form className="max-w-xl w-full mx-auto mt-4">
       <label
@@ -31,7 +50,7 @@ const Search = () => {
           id="default-search"
           className="block w-full p-4 ps-10 text-md text-gray-900 border border-ennovate-gray rounded-lg bg-white"
           placeholder="Search by name or title..."
-          required
+          onChange={(e) => handleSearch(e.target.value)}
         />
         <button
           type="submit"
