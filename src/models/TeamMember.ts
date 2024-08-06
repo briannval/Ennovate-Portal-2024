@@ -29,10 +29,10 @@ const TeamMemberSchema: Schema = new Schema<ITeamMember>({
   },
 });
 
+TeamMemberSchema.index({ name: "text", title: "text" });
+
 const TeamMember =
   (mongoose.models.TeamMember as mongoose.Model<ITeamMember>) ||
   mongoose.model<ITeamMember>("TeamMember", TeamMemberSchema);
-
-export type TeamMemberType = InferSchemaType<typeof TeamMemberSchema>;
 
 export default TeamMember;

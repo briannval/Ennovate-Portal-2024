@@ -6,10 +6,11 @@ import TeamMemberSkeleton from "@/components/teamMemberSkeleton";
 import TeamMemberSkeletonGrid from "@/components/teamMemberSkeletonGrid";
 import Pagination from "@/components/pagination";
 import { fetchTeamMembers } from "@/actions/db";
-import { TeamMemberType } from "@/models/TeamMember";
+import { ITeamMember } from "@/models/TeamMember";
+import { useEffect, useReducer } from "react";
 
 interface TeamMembersState {
-  teamMembers: TeamMemberType[];
+  teamMembers: ITeamMember[];
   totalPages: number;
   loading: boolean;
 }
@@ -18,7 +19,7 @@ type TeamMembersAction =
   | { type: "FETCH_START" }
   | {
       type: "FETCH_SUCCESS";
-      payload: { teamMembers: TeamMemberType[]; totalPages: number };
+      payload: { teamMembers: ITeamMember[]; totalPages: number };
     }
   | { type: "FETCH_FAILURE" };
 
@@ -59,6 +60,30 @@ export default function Team({
 }) {
   const query: string = searchParams?.query || "";
   const currentPage: number = Number(searchParams?.page) || 1;
+  const [state, dispatch] = useReducer(teamMembersReducer, initialState);
+  const { teamMembers, totalPages, loading } = state;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      dispatch({ type: "FETCH_START" });
+      try {
+        const { teamMembers, totalPages } = await fetchTeamMembers(
+          query,
+          currentPage
+        );
+        console.log(teamMembers, totalPages);
+        dispatch({
+          type: "FETCH_SUCCESS",
+          payload: { teamMembers, totalPages },
+        });
+      } catch (error) {
+        console.error(error);
+        dispatch({ type: "FETCH_FAILURE" });
+      }
+    };
+
+    fetchData();
+  }, [query, currentPage]);
 
   return (
     <div className="w-full flex flex-col items-center justify-center min-h-full">
@@ -66,8 +91,8 @@ export default function Team({
         Get to know us!
       </h1>
       <Search />
-      <TeamMemberSkeletonGrid />
-      <Pagination totalPages={2} />
+      {loading ? <TeamMemberSkeletonGrid /> : <h1>Loaded</h1>}
+      <Pagination totalPages={totalPages} />
     </div>
   );
 

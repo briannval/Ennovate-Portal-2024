@@ -1,10 +1,10 @@
 "use server";
 
 import { connectToDatabase } from "@/lib/mongoose";
-import TeamMember, { ITeamMember, TeamMemberType } from "@/models/TeamMember";
+import TeamMember, { ITeamMember } from "@/models/TeamMember";
 import { FilterQuery } from "mongoose";
 
-export async function createTeamMember(data: TeamMemberType) {
+export async function createTeamMember(data: ITeamMember) {
   try {
     await connectToDatabase();
     const { name, email, image, title } = data;
@@ -20,12 +20,11 @@ export async function fetchTeamMembers(
   query: string = "",
   currentPage: number = 1
 ) {
+  await connectToDatabase();
   let queryObject: FilterQuery<ITeamMember> = {};
 
   if (query) {
-    queryObject = {
-      $or: [{ name: { $search: query } }, { title: { $search: query } }],
-    };
+    queryObject.$text = { $search: query };
   }
 
   const skip = (currentPage - 1) * TEAM_MEMBERS_PER_PAGE;
