@@ -19,8 +19,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        {children}
+        <div style={{ minHeight: "calc(100% - 5rem)", marginTop: "5rem" }}>
+          {children}
+        </div>
       </body>
     </html>
   );
+
+  /*
+  NOTE: h-20 is 5 rem
+  */
 }
