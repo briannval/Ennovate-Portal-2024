@@ -3,8 +3,20 @@ import TeamMember from "@/components/teamMember";
 import TeamMemberSkeleton from "@/components/teamMemberSkeleton";
 import TeamMemberSkeletonGrid from "@/components/teamMemberSkeletonGrid";
 import Pagination from "@/components/pagination";
+import { useQuery } from "@tanstack/react-query";
+import { fetchTeamMembers } from "@/actions/db";
 
-export default function Team() {
+export default function Team({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page: string;
+  };
+}) {
+  const query: string = searchParams?.query || "";
+  const currentPage: number = Number(searchParams?.page) || 1;
+
   return (
     <div className="w-full flex flex-col items-center justify-center min-h-full">
       <h1 className="text-center font-bold text-4xl mt-8 text-ennovate-dark-blue">
