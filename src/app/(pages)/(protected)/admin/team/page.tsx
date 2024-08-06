@@ -42,9 +42,12 @@ export default function Comp() {
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
-  const onSubmit = async (data: TeamMemberFormData) => {
-    console.log(data);
-  };
+  const onSubmit = async ({
+    name,
+    email,
+    image,
+    title,
+  }: TeamMemberFormData) => {};
 
   const CameraIcon = () => (
     <svg
