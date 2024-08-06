@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, InferSchemaType } from "mongoose";
 
 export interface ITeamMember {
   name: string;
@@ -32,5 +32,7 @@ const TeamMemberSchema: Schema = new Schema<ITeamMember>({
 const TeamMember =
   (mongoose.models.TeamMember as mongoose.Model<ITeamMember>) ||
   mongoose.model<ITeamMember>("TeamMember", TeamMemberSchema);
+
+export type TeamMemberType = InferSchemaType<typeof TeamMemberSchema>;
 
 export default TeamMember;

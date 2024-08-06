@@ -1,5 +1,6 @@
 "use client";
 
+import { createTeamMember } from "@/actions/db";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
@@ -42,12 +43,13 @@ export default function Comp() {
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
-  const onSubmit = async ({
-    name,
-    email,
-    image,
-    title,
-  }: TeamMemberFormData) => {};
+  const onSubmit = async (data: TeamMemberFormData) => {
+    try {
+      await createTeamMember(data);
+    } catch (e) {
+      //
+    }
+  };
 
   const CameraIcon = () => (
     <svg
