@@ -8,6 +8,7 @@ import Pagination from "@/components/pagination";
 import { fetchTeamMembers } from "@/actions/db";
 import { ITeamMember } from "@/models/TeamMember";
 import { useEffect, useReducer } from "react";
+import TeamMemberGrid from "@/components/teamMemberGrid";
 
 interface TeamMembersState {
   teamMembers: ITeamMember[];
@@ -91,7 +92,13 @@ export default function Team({
         Get to know us!
       </h1>
       <Search />
-      {loading ? <TeamMemberSkeletonGrid /> : <h1>Loaded</h1>}
+      {loading ? (
+        <TeamMemberSkeletonGrid />
+      ) : totalPages == 0 ? (
+        <h1>No Team Members</h1>
+      ) : (
+        <TeamMemberGrid teamMembers={teamMembers} />
+      )}
       <Pagination totalPages={totalPages} />
     </div>
   );
