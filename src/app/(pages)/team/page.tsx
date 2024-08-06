@@ -1,5 +1,7 @@
 import Search from "@/components/search";
 import TeamMember from "@/components/teamMember";
+import TeamMemberSkeleton from "@/components/teamMemberSkeleton";
+import TeamMemberSkeletonGrid from "@/components/teamMemberSkeletonGrid";
 
 export default function Team() {
   return (
@@ -8,6 +10,7 @@ export default function Team() {
         Get to know us!
       </h1>
       <Search />
+      <TeamMemberSkeletonGrid />
       <TeamMember
         name="Arisha Ahmed"
         email="test email"
