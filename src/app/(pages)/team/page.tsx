@@ -9,6 +9,7 @@ import { fetchTeamMembers } from "@/actions/db";
 import { ITeamMember } from "@/models/TeamMember";
 import { useEffect, useReducer } from "react";
 import TeamMemberGrid from "@/components/teamMemberGrid";
+import NoTeam from "@/components/noTeam";
 
 interface TeamMembersState {
   teamMembers: ITeamMember[];
@@ -95,7 +96,7 @@ export default function Team({
       {loading ? (
         <TeamMemberSkeletonGrid />
       ) : totalPages == 0 ? (
-        <h1>No Team Members</h1>
+        <NoTeam />
       ) : (
         <TeamMemberGrid teamMembers={teamMembers} />
       )}
