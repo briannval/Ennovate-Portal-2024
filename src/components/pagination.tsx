@@ -15,7 +15,7 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex mb-10">
       <button
         onClick={() => createPageUrl(currentPage - 1)}
         disabled={currentPage === 1 || totalPages === 0}
