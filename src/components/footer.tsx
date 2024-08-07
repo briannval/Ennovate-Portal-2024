@@ -1,12 +1,17 @@
+import { footerSocialsLinks } from "@/constants/footer";
+import Link from "next/link";
+
 const Footer = () => {
   return (
     <footer>
-      <h2 className="wholesome-message" style={{ fontWeight: "200" }}>
-        {" "}
+      <h2 className="font-extralight text-xl">
         Made with love from the Ennovate Team ♥
       </h2>
-      <div className="bottom-row">
-        <div className="social-media">
+      <div className="justify-between flex mb-0">
+        {footerSocialsLinks.map((footerSocialsLink) => (
+          <Link href={footerSocialsLink.href}></Link>
+        ))}
+        <div>
           <a href="mailto:admin@ennovateubc.org" target="_blank">
             <img
               className="social-media-link"

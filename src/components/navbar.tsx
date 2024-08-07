@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { navbarLinks } from "@/constants/navbar";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,9 +14,12 @@ const Navbar = () => {
   return (
     <nav className="bg-ennovate-main fixed w-full h-20 z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl h-max flex flex-wrap items-center justify-between mx-auto px-4 py-2">
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link
+          href="/"
+          className="flex items-center space-x-3 rtl:space-x-reverse"
+        >
           <img src="/ennovate-w.png" className="h-16" alt="Logo" />
-        </a>
+        </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button className="text-ennovate-dark-blue text-xl font-bold bg-ennovate-yellow hover:bg-white font-medium rounded-3xl text-sm px-4 py-2 text-center">
             ADMIN
@@ -53,12 +57,12 @@ const Navbar = () => {
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-ennovate-main md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
             {navbarLinks.map((navbarLink, index) => (
               <li key={index}>
-                <a
+                <Link
                   href={navbarLink.href}
                   className="block py-2 px-2 font-bold text-xl text-white rounded hover:text-ennovate-gray"
                 >
                   {navbarLink.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
