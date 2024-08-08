@@ -21,7 +21,7 @@ const Navbar = () => {
           <img src="/ennovate-w.png" className="h-16" alt="Logo" />
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <button className="text-ennovate-dark-blue text-xl font-extrabold bg-ennovate-yellow hover:bg-white font-medium rounded-3xl text-sm px-4 py-2 text-center">
+          <button className="text-ennovate-dark-blue text-xl font-extrabold bg-ennovate-yellow hover:bg-white rounded-3xl px-4 py-2 text-center">
             ADMIN
           </button>
           <button

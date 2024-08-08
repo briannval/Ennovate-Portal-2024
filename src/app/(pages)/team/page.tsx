@@ -10,6 +10,7 @@ import { ITeamMember } from "@/models/TeamMember";
 import { useEffect, useReducer } from "react";
 import TeamMemberGrid from "@/components/teamMemberGrid";
 import NoTeam from "@/components/noTeam";
+import PageCenteringWrapper from "@/app/wrappers/pageCenteringWrapper";
 
 interface TeamMembersState {
   teamMembers: ITeamMember[];
@@ -88,7 +89,7 @@ export default function Team({
   }, [query, currentPage]);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center min-h-full">
+    <PageCenteringWrapper>
       <h1 className="text-center font-bold text-4xl mt-8 text-ennovate-dark-blue">
         Get to know us!
       </h1>
@@ -101,7 +102,7 @@ export default function Team({
         <TeamMemberGrid teamMembers={teamMembers} />
       )}
       <Pagination totalPages={totalPages} />
-    </div>
+    </PageCenteringWrapper>
   );
 
   /*
