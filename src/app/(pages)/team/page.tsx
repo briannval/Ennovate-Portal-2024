@@ -10,7 +10,7 @@ import { ITeamMember } from "@/models/TeamMember";
 import { useEffect, useReducer } from "react";
 import TeamMemberGrid from "@/components/teamMemberGrid";
 import NoTeam from "@/components/noTeam";
-import PageCenteringWrapper from "@/app/wrappers/pageCenteringWrapper";
+import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 
 interface TeamMembersState {
   teamMembers: ITeamMember[];

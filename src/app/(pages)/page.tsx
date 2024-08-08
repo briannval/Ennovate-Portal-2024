@@ -1,5 +1,5 @@
 import Landing from "@/components/landing";
-import PageCenteringWrapper from "../wrappers/pageCenteringWrapper";
+import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 
 export default function Home() {
   return (
