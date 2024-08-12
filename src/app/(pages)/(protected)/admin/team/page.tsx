@@ -164,6 +164,7 @@ export default function Comp() {
         type="submit"
         className="text-white text-lg font-bold bg-ennovate-main rounded-lg w-full px-5 py-2.5 text-center"
         style={{ opacity: isSubmitting ? 0.7 : 1 }}
+        disabled={isSubmitting}
       >
         {isSubmitting ? "Submitting..." : "Submit"}
       </button>
