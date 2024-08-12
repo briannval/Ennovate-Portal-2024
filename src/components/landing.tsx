@@ -57,10 +57,24 @@ const Landing = () => {
           />
         </div>
         <div className="relative flex flex-col md:flex-row items-center mt-12">
-          <button className="text-white hover:text-ennovate-dark-blue text-md md:text-xl font-extrabold bg-ennovate-main hover:bg-white rounded-xl px-4 py-2 text-center">
+          <button
+            onClick={() =>
+              document
+                .querySelector("#about")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="text-white hover:text-ennovate-dark-blue text-md md:text-xl font-extrabold bg-ennovate-main hover:bg-white rounded-xl px-4 py-2 text-center"
+          >
             Get Started
           </button>
-          <button className="md:ml-8 text-ennovate-dark-blue mt-4 md:mt-0 text-md md:text-xl font-extrabold bg-ennovate-yellow hover:bg-white rounded-xl px-4 py-2 text-center">
+          <button
+            onClick={() =>
+              document
+                .querySelector("#about")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="md:ml-8 text-ennovate-dark-blue mt-4 md:mt-0 text-md md:text-xl font-extrabold bg-ennovate-yellow hover:bg-white rounded-xl px-4 py-2 text-center"
+          >
             Learn More
           </button>
         </div>
