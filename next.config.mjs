@@ -8,6 +8,7 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
+    domains: ["tailwindui.com"], // for development
   },
 };
 
