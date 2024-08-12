@@ -37,7 +37,7 @@ const TeamMember = ({
     >
       {/* Loaded State */}
       <Image
-        className="absolute w-full h-full object-cover rounded-[25px] transition-transform duration-300 ease-in-out transform hover:scale-105"
+        className="absolute w-full h-full object-cover object-top rounded-[25px] transition-transform duration-300 ease-in-out transform hover:scale-105"
         src={img}
         alt={`${name}'s picture`}
         fill={true}
