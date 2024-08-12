@@ -27,6 +27,7 @@ export default function Comp() {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<TeamMemberFormData>({
     resolver: zodResolver(teamMemberSchema),
@@ -64,8 +65,8 @@ export default function Comp() {
         image: imageUrl,
       });
       setIsSubmitting(false);
+      reset();
     } catch (e) {
-      console.log(e);
       setIsSubmitting(false);
     }
   };
@@ -89,7 +90,7 @@ export default function Comp() {
       <div className="mb-5">
         <label
           htmlFor="name"
-          className="block mb-2 text-lg font-bold text-ennovate-dark-blue dark:text-white"
+          className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
         >
           Member Name
         </label>
@@ -105,7 +106,7 @@ export default function Comp() {
       <div className="mb-5">
         <label
           htmlFor="email"
-          className="block mb-2 text-lg font-bold text-ennovate-dark-blue dark:text-white"
+          className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
         >
           Member Email
         </label>
@@ -122,7 +123,7 @@ export default function Comp() {
       <div className="mb-5">
         <label
           htmlFor="title"
-          className="block mb-2 text-lg font-bold text-ennovate-dark-blue dark:text-white"
+          className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
         >
           Member Title
         </label>
@@ -138,7 +139,7 @@ export default function Comp() {
       <div className="mb-5">
         <label
           htmlFor="image"
-          className="block mb-2 text-lg font-bold text-ennovate-dark-blue dark:text-white"
+          className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
         >
           Member Image
         </label>
