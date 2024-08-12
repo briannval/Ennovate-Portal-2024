@@ -10,12 +10,12 @@ const About = () => {
               <p className="mt-2 text-3xl font-extrabold tracking-tight text-ennovate-dark-blue sm:text-4xl">
                 About Us
               </p>
-              <p className="mt-2 text-xl font-semibold leading-8 text-ennovate-dark-blue opacity-70">
+              <p className="mt-2 text-xl font-bold leading-8 text-ennovate-dark-blue opacity-70">
                 Why should you choose Ennovate?
               </p>
-              <dl className="mt-6 max-w-xl space-y-8 text-base leading-7 text-gray-500 lg:max-w-none">
+              <dl className="mt-6 max-w-xl space-y-8 text-base font-medium leading-7 text-gray-500 lg:max-w-none">
                 <div className="relative pl-9">
-                  <dt className="inline font-semibold text-ennovate-dark-blue">
+                  <dt className="inline font-bold text-ennovate-dark-blue">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -37,7 +37,7 @@ const About = () => {
                   </dd>
                 </div>
                 <div className="relative pl-9">
-                  <dt className="inline font-semibold text-ennovate-dark-blue">
+                  <dt className="inline font-bold text-ennovate-dark-blue">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -58,7 +58,7 @@ const About = () => {
                   </dd>
                 </div>
                 <div className="relative pl-9">
-                  <dt className="inline font-semibold text-ennovate-dark-blue">
+                  <dt className="inline font-bold text-ennovate-dark-blue">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
