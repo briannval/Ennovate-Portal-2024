@@ -1,7 +1,10 @@
 "use client";
 
 import { createTeamMember } from "@/actions/db";
+import { storage } from "@/lib/firebase";
+import { getImageExtensionFromBase64, urlizeString } from "@/utils/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
@@ -47,10 +50,23 @@ export default function Comp() {
   const onSubmit = async (data: TeamMemberFormData) => {
     try {
       setIsSubmitting(true);
-      await createTeamMember(data);
+      const { name, email, title, image } = data;
+      const urlizedName = urlizeString(name);
+      const fileExtension = getImageExtensionFromBase64(image);
+      const imagePath = `team-members/${urlizedName}.${fileExtension}`;
+      const storageRef = ref(storage, imagePath);
+      await uploadString(storageRef, image, "data_url");
+      const imageUrl = await getDownloadURL(storageRef);
+      await createTeamMember({
+        name: name,
+        email: email,
+        title: title,
+        image: imageUrl,
+      });
       setIsSubmitting(false);
     } catch (e) {
-      //
+      console.log(e);
+      setIsSubmitting(false);
     }
   };
 

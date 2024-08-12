@@ -1,7 +1,10 @@
 "use server";
 
+import { storage } from "@/lib/firebase";
 import { connectToDatabase } from "@/lib/mongoose";
 import TeamMember, { ITeamMember } from "@/models/TeamMember";
+import { getImageExtensionFromBase64, urlizeString } from "@/utils/utils";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { FilterQuery } from "mongoose";
 
 export async function createTeamMember(data: ITeamMember) {
