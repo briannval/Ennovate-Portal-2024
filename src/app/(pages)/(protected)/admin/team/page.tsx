@@ -18,6 +18,7 @@ type TeamMemberFormData = z.infer<typeof teamMemberSchema>;
 
 export default function Comp() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -45,7 +46,9 @@ export default function Comp() {
 
   const onSubmit = async (data: TeamMemberFormData) => {
     try {
+      setIsSubmitting(true);
       await createTeamMember(data);
+      setIsSubmitting(false);
     } catch (e) {
       //
     }
@@ -144,8 +147,9 @@ export default function Comp() {
       <button
         type="submit"
         className="text-white text-lg font-bold bg-ennovate-main rounded-lg w-full px-5 py-2.5 text-center"
+        style={{ opacity: isSubmitting ? 0.7 : 1 }}
       >
-        Submit
+        {isSubmitting ? "Submitting..." : "Submit"}
       </button>
     </form>
   );
