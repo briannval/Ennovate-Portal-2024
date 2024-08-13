@@ -2,9 +2,9 @@ import Image from "next/image";
 import Marquee from "react-fast-marquee";
 
 const AFFILIATION_IMAGES = [
-  "/ams-logo.png",
-  "/enactus-logo.png",
-  "/ubc-logo.png",
+  { src: "/ams-logo.png", name: "AMS" },
+  { src: "/enactus-logo.png", name: "Enactus" },
+  { src: "/ubc-logo.png", name: "UBC" },
 ];
 
 const Affiliations = () => {
@@ -26,21 +26,25 @@ const Affiliations = () => {
         className="mt-16"
         autoFill={true}
       >
-        {[...AFFILIATION_IMAGES].map((img, index) => {
-          return (
-            <div
-              key={index}
-              className="flex items-center justify-center mr-24 bg-white"
-            >
+        {AFFILIATION_IMAGES.map((img, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center justify-center mr-24 group"
+          >
+            <div className="w-48 h-56 bg-white flex items-center justify-center hover:bg-ennovate-main hover:bg-opacity-5">
               <Image
-                src={img}
+                src={img.src}
                 alt={`Affiliation ${index}`}
                 width={100}
                 height={100}
+                className="object-contain"
               />
             </div>
-          );
-        })}
+            <p className="mt-2 text-center text-ennovate-main font-extrabold text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {img.name.toUpperCase()}
+            </p>
+          </div>
+        ))}
       </Marquee>
     </section>
   );
