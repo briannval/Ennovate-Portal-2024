@@ -34,8 +34,8 @@ const Landing = () => {
             <Image
               src="/ennovate-w.png"
               alt="Logo"
-              layout="fill"
-              objectFit="contain"
+              fill
+              className="object-contain"
             />
           </div>
         </div>

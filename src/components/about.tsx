@@ -85,9 +85,8 @@ const About = () => {
             <Image
               src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
               alt="Product screenshot"
-              layout="fill"
-              objectFit="cover"
-              className="rounded-xl shadow-xl ring-1 ring-gray-400/10"
+              fill
+              className="rounded-xl shadow-xl ring-1 ring-gray-400/10 object-cover"
             />
           </div>
         </div>

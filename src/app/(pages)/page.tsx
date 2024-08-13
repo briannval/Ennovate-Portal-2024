@@ -1,3 +1,5 @@
+"use client";
+
 import About from "@/components/about";
 import Affiliations from "@/components/affiliations";
 import Landing from "@/components/landing";
