@@ -1,5 +1,6 @@
 import About from "@/components/about";
 import Landing from "@/components/landing";
+import Stats from "@/components/stats";
 import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <PageCenteringWrapper>
       <Landing />
       <About />
+      <Stats />
     </PageCenteringWrapper>
   );
 }

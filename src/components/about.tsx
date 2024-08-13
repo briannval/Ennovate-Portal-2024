@@ -2,12 +2,12 @@ import Image from "next/image";
 
 const About = () => {
   return (
-    <div className="overflow-hidden bg-white py-24 sm:py-32" id="about">
+    <div className="overflow-hidden bg-white py-24" id="about">
       <div className="mx-auto max-w-screen-xl ">
         <div className="mx-auto grid max-w-screen-xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:pr-8 lg:pt-4">
             <div className="lg:max-w-lg">
-              <p className="mt-2 text-3xl font-extrabold tracking-tight text-ennovate-dark-blue sm:text-4xl">
+              <p className="mt-2 text-4xl font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl">
                 About Us
               </p>
               <p className="mt-2 text-xl font-bold leading-8 text-ennovate-dark-blue opacity-70">
