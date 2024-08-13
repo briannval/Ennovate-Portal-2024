@@ -11,7 +11,7 @@ const About = () => {
                 About Us
               </p>
               <p className="mt-2 text-xl font-bold leading-8 text-ennovate-dark-blue opacity-70">
-                Why should you choose Ennovate?
+                Why be a part of Ennovate?
               </p>
               <dl className="mt-6 max-w-xl space-y-8 text-base font-medium leading-7 text-gray-500 lg:max-w-none">
                 <div className="relative pl-9">
