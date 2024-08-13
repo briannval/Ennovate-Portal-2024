@@ -1,11 +1,39 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useTransition, animated } from "react-spring";
+
+const ABOUT_ENNOVATE_IMAGES = [
+  "/about-ennovate-1.jpeg",
+  "/about-ennovate-2.jpeg",
+  "/about-ennovate-3.jpeg",
+];
 
 const About = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+
+  useEffect(() => {
+    const intervalId: NodeJS.Timeout = setInterval(() => {
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex + 1) % ABOUT_ENNOVATE_IMAGES.length
+      );
+    }, 4000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const transitions = useTransition(currentImageIndex, {
+    key: currentImageIndex,
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: { duration: 1000 },
+  });
+
   return (
     <div className="overflow-hidden bg-white py-24 scroll-mt-20" id="about">
       <div className="mx-auto max-w-screen-xl ">
         <div className="mx-auto grid max-w-screen-xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-          <div className="lg:pr-8 lg:pt-4">
+          <div className="lg:pr-8 lg:pt-4 mx-8">
             <div className="lg:max-w-lg">
               <p className="mt-2 text-4xl font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl">
                 About Us
@@ -82,12 +110,19 @@ const About = () => {
             </div>
           </div>
           <div className="relative w-full h-64 sm:h-[34rem] md:-ml-4 lg:-ml-0">
-            <Image
-              src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
-              alt="Product screenshot"
-              fill
-              className="rounded-xl shadow-xl ring-1 ring-gray-400/10 object-cover"
-            />
+            {transitions((style, index) => (
+              <animated.div
+                style={style}
+                className="absolute inset-0 mx-8 lg:mx-0"
+              >
+                <Image
+                  src={ABOUT_ENNOVATE_IMAGES[index]}
+                  alt="Product screenshot"
+                  fill
+                  className="rounded-xl shadow-xl ring-1 ring-gray-400/10 object-cover"
+                />
+              </animated.div>
+            ))}
           </div>
         </div>
       </div>
