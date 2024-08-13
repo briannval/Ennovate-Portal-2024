@@ -1,6 +1,36 @@
+"use client";
+
+import { ReactElement } from "react";
+import { useSpring, animated, useInView } from "react-spring";
+
 const STAT_ICON_CLASSNAME = "w-[35px] h-[35px] md:w-[50px] md:h-[50px] mr-2";
 
-const statsData = [
+const AnimatedNumber = ({ n }: { n: number }) => {
+  const [ref, inView] = useInView({
+    once: true,
+  });
+
+  const { number } = useSpring({
+    from: { number: 0 },
+    number: inView ? n : 0,
+    delay: 100,
+    config: { mass: 1, tension: 20, friction: 20 },
+  });
+
+  return (
+    <animated.span ref={ref}>{number.to((n) => n.toFixed(0))}</animated.span>
+  );
+};
+
+interface IStatsData {
+  id: number;
+  icon: ReactElement;
+  value: number;
+  label: string;
+  pre?: string;
+}
+
+const statsData: IStatsData[] = [
   {
     id: 1,
     icon: (
@@ -26,7 +56,7 @@ const statsData = [
         ></path>
       </svg>
     ),
-    value: "275",
+    value: 275,
     label: "High School Students Impacted",
   },
   {
@@ -41,7 +71,7 @@ const statsData = [
         <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5" />
       </svg>
     ),
-    value: "25",
+    value: 25,
     label: "Student-Led Businesses",
   },
   {
@@ -57,8 +87,9 @@ const statsData = [
         <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2z" />
       </svg>
     ),
-    value: "$6500",
+    value: 6500,
     label: "Net Income Generated",
+    pre: "$",
   },
   {
     id: 4,
@@ -85,7 +116,7 @@ const statsData = [
         ></path>
       </svg>
     ),
-    value: "500",
+    value: 500,
     label: "Members Influenced",
   },
 ];
@@ -108,7 +139,8 @@ const Stats = () => {
             <div className="flex flex-row justify-center items-center">
               {stat.icon}
               <p className="font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-9 text-primary ml-2">
-                {stat.value}
+                {stat.pre ?? stat.pre}
+                <AnimatedNumber n={stat.value} />
               </p>
             </div>
             <p className="font-semibold text-base sm:text-md leading-6 mt-3 md:mt-6 text-center">
