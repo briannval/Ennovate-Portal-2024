@@ -90,8 +90,8 @@ export default function Team({
 
   return (
     <PageCenteringWrapper>
-      <h1 className="text-center font-bold text-4xl mt-8 text-ennovate-dark-blue">
-        Get to know us!
+      <h1 className="text-center font-extrabold text-5xl mt-8 text-ennovate-dark-blue">
+        Get to know the team!
       </h1>
       <Search />
       {loading ? (
