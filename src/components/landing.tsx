@@ -70,7 +70,7 @@ const Landing = () => {
           <button
             onClick={() =>
               document
-                .querySelector("#about")
+                .querySelector("#stats")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
             className="md:ml-8 text-ennovate-dark-blue mt-4 md:mt-0 text-md md:text-xl font-extrabold bg-ennovate-yellow hover:bg-white rounded-xl px-4 py-2 text-center"
