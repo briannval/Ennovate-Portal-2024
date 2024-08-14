@@ -72,6 +72,16 @@ const Navbar = () => {
           id="navbar-sticky"
         >
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-ennovate-main md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+            {isAuthenticated && (
+              <li key={navbarLinks.length}>
+                <Link
+                  href="/admin"
+                  className="block py-2 px-2 font-bold text-xl text-white rounded hover:text-ennovate-gray"
+                >
+                  DASHBOARD
+                </Link>
+              </li>
+            )}
             {navbarLinks.map((navbarLink, index) => (
               <li key={index}>
                 <Link
