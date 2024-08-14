@@ -1,6 +1,7 @@
 "use server";
 
 import { connectToDatabase } from "@/lib/mongoose";
+import { redis } from "@/lib/redis";
 import TeamMember, { ITeamMember } from "@/models/TeamMember";
 import { FilterQuery } from "mongoose";
 
@@ -9,6 +10,10 @@ export async function createTeamMember(data: ITeamMember) {
     await connectToDatabase();
     const { name, email, image, title } = data;
     await TeamMember.create({ name, email, image, title });
+    const cachedKeys = await redis.keys("teamMember?*");
+    if (cachedKeys.length > 0) {
+      await redis.del(cachedKeys);
+    }
   } catch (e) {
     throw new Error("Failed to create team member");
   }
@@ -18,10 +23,18 @@ const TEAM_MEMBERS_PER_PAGE = 12;
 
 export async function fetchTeamMembers(
   query: string = "",
-  currentPage: number = 1,
+  currentPage: number = 1
 ) {
   await connectToDatabase();
   let queryObject: FilterQuery<ITeamMember> = {};
+
+  const cacheKey = `teamMember?currentPage=${currentPage}&query=${query}`;
+
+  const cachedValue = await redis.get(cacheKey);
+
+  if (cachedValue) {
+    return JSON.parse(cachedValue);
+  }
 
   if (query) {
     queryObject.$text = { $search: query };
@@ -40,10 +53,16 @@ export async function fetchTeamMembers(
       name: member.name,
       email: member.email,
       title: member.title,
-      image: member.image, // Assuming `image` is a URL or base64 string
+      image: member.image,
     })),
     totalPages: Math.ceil(total / TEAM_MEMBERS_PER_PAGE),
   };
+
+  await redis
+    .pipeline()
+    .set(cacheKey, JSON.stringify(res))
+    .expire(cacheKey, 300)
+    .exec();
 
   return res;
 }
