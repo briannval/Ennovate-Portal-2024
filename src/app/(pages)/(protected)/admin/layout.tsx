@@ -2,6 +2,7 @@
 import { ReactNode, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/auth"; // Adjust the import path as necessary
+import Loading from "@/components/loading";
 
 interface ProtectedLayoutProps {
   children: ReactNode;
@@ -18,7 +19,7 @@ export default function ProtectedLayout({ children }: ProtectedLayoutProps) {
   }, [isLoading, isAuthenticated, router]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return <>{children}</>;
