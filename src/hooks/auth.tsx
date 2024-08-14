@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface AuthContextType {
@@ -34,6 +35,7 @@ export function useAuth() {
 export default function AuthProvider({ children }: AuthProviderProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     const checkAuth = () => {
@@ -61,6 +63,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     try {
       await signOut(auth);
       setIsAuthenticated(false);
+      window.location.href = "/";
     } finally {
       setIsLoading(false);
     }

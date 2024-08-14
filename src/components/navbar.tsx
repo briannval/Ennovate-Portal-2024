@@ -3,12 +3,24 @@
 import { useState } from "react";
 import { navbarLinks } from "@/constants/navbar";
 import Link from "next/link";
+import { useAuth } from "@/hooks/auth";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
+  const router = useRouter();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleAuthAction = () => {
+    if (isAuthenticated) {
+      logout();
+    } else {
+      router.push("/login");
+    }
   };
 
   return (
@@ -21,8 +33,11 @@ const Navbar = () => {
           <img src="/ennovate-w.png" className="h-16" alt="Logo" />
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <button className="text-ennovate-dark-blue text-xl font-extrabold bg-ennovate-yellow hover:bg-white rounded-3xl px-4 py-2 text-center">
-            ADMIN
+          <button
+            onClick={handleAuthAction}
+            className="text-ennovate-dark-blue text-xl font-extrabold bg-ennovate-yellow hover:bg-white rounded-3xl px-4 py-2 text-center"
+          >
+            {isAuthenticated ? "LOGOUT" : "ADMIN"}
           </button>
           <button
             onClick={toggleMenu}

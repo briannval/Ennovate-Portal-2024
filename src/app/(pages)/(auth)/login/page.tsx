@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAuth } from "@/hooks/auth";
+import { useRouter } from "next/navigation";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -14,7 +16,12 @@ type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isAuthenticated, login } = useAuth();
+  const router = useRouter();
 
+  if (isAuthenticated) {
+    router.push("/admin");
+  }
   const {
     register,
     handleSubmit,
@@ -26,7 +33,7 @@ export default function LoginForm() {
   const onSubmit = async (data: LoginFormData) => {
     try {
       setIsSubmitting(true);
-      console.log(data);
+      await login(data.email, data.password);
       setIsSubmitting(false);
     } catch (e) {
       setIsSubmitting(false);
