@@ -1,10 +1,7 @@
 "use server";
 
-import { storage } from "@/lib/firebase";
 import { connectToDatabase } from "@/lib/mongoose";
 import TeamMember, { ITeamMember } from "@/models/TeamMember";
-import { getImageExtensionFromBase64, urlizeString } from "@/utils/utils";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { FilterQuery } from "mongoose";
 
 export async function createTeamMember(data: ITeamMember) {
@@ -21,7 +18,7 @@ const TEAM_MEMBERS_PER_PAGE = 12;
 
 export async function fetchTeamMembers(
   query: string = "",
-  currentPage: number = 1,
+  currentPage: number = 1
 ) {
   await connectToDatabase();
   let queryObject: FilterQuery<ITeamMember> = {};
