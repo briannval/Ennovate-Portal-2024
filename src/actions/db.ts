@@ -20,10 +20,11 @@ export async function createTeamMember(data: ITeamMember) {
 }
 
 const TEAM_MEMBERS_PER_PAGE = 12;
+const CACHE_KEY_EXPIRY_TIME = 60 * 60 * 24;
 
 export async function fetchTeamMembers(
   query: string = "",
-  currentPage: number = 1,
+  currentPage: number = 1
 ) {
   await connectToDatabase();
   let queryObject: FilterQuery<ITeamMember> = {};
@@ -61,7 +62,7 @@ export async function fetchTeamMembers(
   await redis
     .pipeline()
     .set(cacheKey, JSON.stringify(res))
-    .expire(cacheKey, 300)
+    .expire(cacheKey, CACHE_KEY_EXPIRY_TIME)
     .exec();
 
   return res;
