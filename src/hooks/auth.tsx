@@ -9,7 +9,7 @@ import {
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
-interface AuthContextType {
+interface IAuthContext {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
@@ -20,7 +20,7 @@ interface AuthProviderProps {
   children: React.ReactNode;
 }
 
-const AuthContext = createContext<AuthContextType | null>(null);
+const AuthContext = createContext<IAuthContext | null>(null);
 
 export function useAuth() {
   const context = useContext(AuthContext);
