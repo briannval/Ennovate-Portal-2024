@@ -24,6 +24,9 @@ export default function RootLayout({
           style={{
             minHeight: "calc(100vh - 5rem)",
             marginTop: "5rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           {children}

@@ -86,89 +86,97 @@ export default function Comp() {
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl mx-auto p-8">
-      <div className="mb-5">
-        <label
-          htmlFor="name"
-          className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
-        >
-          Member Name
-        </label>
-        <input
-          id="name"
-          {...register("name")}
-          className={`bg-white border ${
-            errors.name ? "border-red-500" : "border-ennovate-gray"
-          } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
-          placeholder="Ennovate Member"
-        />
-      </div>
-      <div className="mb-5">
-        <label
-          htmlFor="email"
-          className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
-        >
-          Member Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          {...register("email")}
-          className={`bg-white border ${
-            errors.email ? "border-red-500" : "border-ennovate-gray"
-          } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
-          placeholder="ennovateteam@gmail.com"
-        />
-      </div>
-      <div className="mb-5">
-        <label
-          htmlFor="title"
-          className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
-        >
-          Member Title
-        </label>
-        <input
-          id="title"
-          {...register("title")}
-          className={`bg-white border ${
-            errors.title ? "border-red-500" : "border-ennovate-gray"
-          } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
-          placeholder="Project Director"
-        />
-      </div>
-      <div className="mb-5">
-        <label
-          htmlFor="image"
-          className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
-        >
-          Member Image
-        </label>
-        <div
-          {...getRootProps()}
-          className={`bg-white border ${
-            errors.image ? "border-red-500" : "border-ennovate-gray"
-          } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full h-64 flex items-center justify-center cursor-pointer`}
-        >
-          <input {...getInputProps()} />
-          {imagePreview ? (
-            <img
-              src={imagePreview}
-              alt="Preview"
-              className="h-full w-full object-contain rounded-md"
-            />
-          ) : (
-            <CameraIcon />
-          )}
-        </div>
-      </div>
-      <button
-        type="submit"
-        className="text-white text-lg font-bold bg-ennovate-main rounded-lg w-full px-5 py-2.5 text-center"
-        style={{ opacity: isSubmitting ? 0.7 : 1 }}
-        disabled={isSubmitting}
+    <div className="h-full flex items-center justify-center bg-white">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="max-w-xl w-full bg-white p-8 border-2 border-ennovate-gray shadow-xl rounded-lg m-20"
       >
-        {isSubmitting ? "Submitting..." : "Submit"}
-      </button>
-    </form>
+        <p className="mt-2 text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl mb-6">
+          Member Registration
+        </p>
+        <div className="mb-5">
+          <label
+            htmlFor="name"
+            className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
+          >
+            Member Name
+          </label>
+          <input
+            id="name"
+            {...register("name")}
+            className={`bg-white border ${
+              errors.name ? "border-red-500" : "border-ennovate-gray"
+            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            placeholder="Ennovate Member"
+          />
+        </div>
+        <div className="mb-5">
+          <label
+            htmlFor="email"
+            className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
+          >
+            Member Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            {...register("email")}
+            className={`bg-white border ${
+              errors.email ? "border-red-500" : "border-ennovate-gray"
+            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            placeholder="ennovateteam@gmail.com"
+          />
+        </div>
+        <div className="mb-5">
+          <label
+            htmlFor="title"
+            className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
+          >
+            Member Title
+          </label>
+          <input
+            id="title"
+            {...register("title")}
+            className={`bg-white border ${
+              errors.title ? "border-red-500" : "border-ennovate-gray"
+            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            placeholder="Project Director"
+          />
+        </div>
+        <div className="mb-5">
+          <label
+            htmlFor="image"
+            className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
+          >
+            Member Image
+          </label>
+          <div
+            {...getRootProps()}
+            className={`bg-white border ${
+              errors.image ? "border-red-500" : "border-ennovate-gray"
+            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full h-64 flex items-center justify-center cursor-pointer`}
+          >
+            <input {...getInputProps()} />
+            {imagePreview ? (
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="h-full w-full object-contain rounded-md"
+              />
+            ) : (
+              <CameraIcon />
+            )}
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="text-white text-lg font-bold bg-ennovate-main rounded-lg w-full px-5 py-2.5 text-center"
+          style={{ opacity: isSubmitting ? 0.7 : 1 }}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Submitting..." : "Submit"}
+        </button>
+      </form>
+    </div>
   );
 }

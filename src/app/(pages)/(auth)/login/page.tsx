@@ -1,0 +1,98 @@
+"use client";
+
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const loginSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
+});
+
+type LoginFormData = z.infer<typeof loginSchema>;
+
+export default function LoginForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      setIsSubmitting(true);
+      console.log(data);
+      setIsSubmitting(false);
+    } catch (e) {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="h-full flex items-center justify-center bg-white">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="max-w-xl w-full bg-white p-8 border-2 border-ennovate-gray shadow-xl rounded-lg"
+      >
+        <p className="mt-2 text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl mb-6">
+          Admin Portal Login
+        </p>
+        <div className="mb-5 place-self-center">
+          <label
+            htmlFor="email"
+            className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            {...register("email")}
+            className={`bg-white border ${
+              errors.email ? "border-red-500" : "border-ennovate-gray"
+            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            placeholder="Enter your email"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-2">{errors.email.message}</p>
+          )}
+        </div>
+        <div className="mb-5">
+          <label
+            htmlFor="password"
+            className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
+          >
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            {...register("password")}
+            className={`bg-white border ${
+              errors.password ? "border-red-500" : "border-ennovate-gray"
+            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            placeholder="Enter your password"
+          />
+          {errors.password && (
+            <p className="text-red-500 text-sm mt-2">
+              {errors.password.message}
+            </p>
+          )}
+        </div>
+        <button
+          type="submit"
+          className="text-white text-lg font-bold bg-ennovate-main rounded-lg w-full px-5 py-2.5 text-center"
+          style={{ opacity: isSubmitting ? 0.7 : 1 }}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Logging in..." : "Login"}
+        </button>
+      </form>
+    </div>
+  );
+}
