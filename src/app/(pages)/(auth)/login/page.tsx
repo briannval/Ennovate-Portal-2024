@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "@/hooks/auth";
 import { useRouter } from "next/navigation";
+import { sleep } from "@/utils/utils";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -17,6 +18,7 @@ type LoginFormData = z.infer<typeof loginSchema>;
 export default function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { isAuthenticated, login } = useAuth();
+  const [isIncorrect, setIsInCorrect] = useState(false);
   const router = useRouter();
 
   if (isAuthenticated) {
@@ -37,6 +39,9 @@ export default function LoginForm() {
       setIsSubmitting(false);
     } catch (e) {
       setIsSubmitting(false);
+      setIsInCorrect(true);
+      await sleep(4000);
+      setIsInCorrect(false);
     }
   };
 
@@ -99,6 +104,11 @@ export default function LoginForm() {
         >
           {isSubmitting ? "Logging in..." : "Login"}
         </button>
+        {isIncorrect && (
+          <p className="text-red-500 text-sm mt-2">
+            Incorrect email or password.
+          </p>
+        )}
       </form>
     </div>
   );
