@@ -16,10 +16,12 @@ const Navbar = () => {
   };
 
   const handleAuthAction = () => {
-    if (isAuthenticated) {
-      logout();
-    } else {
-      router.push("/login");
+    if (!isLoading) {
+      if (isAuthenticated) {
+        logout();
+      } else {
+        router.push("/login");
+      }
     }
   };
 
@@ -33,14 +35,12 @@ const Navbar = () => {
           <img src="/ennovate-w.png" className="h-16" alt="Logo" />
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {!isLoading && (
-            <button
-              onClick={handleAuthAction}
-              className="text-ennovate-dark-blue text-xl font-extrabold bg-ennovate-yellow hover:bg-white rounded-3xl px-4 py-2 text-center"
-            >
-              {isAuthenticated ? "LOGOUT" : "ADMIN"}
-            </button>
-          )}
+          <button
+            onClick={handleAuthAction}
+            className="text-ennovate-dark-blue text-xl font-extrabold bg-ennovate-yellow hover:bg-white rounded-3xl px-4 py-2 text-center"
+          >
+            {isAuthenticated ? "LOGOUT" : "ADMIN"}
+          </button>
           <button
             onClick={toggleMenu}
             type="button"
