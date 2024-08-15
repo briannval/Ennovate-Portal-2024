@@ -18,7 +18,7 @@ async function resetTeamMemberCache() {
 
 export async function fetchTeamMembers(
   query: string = "",
-  currentPage: number = 1,
+  currentPage: number = 1
 ) {
   await connectToDatabase();
   let queryObject: FilterQuery<ITeamMember> = {};
@@ -87,10 +87,45 @@ export async function getTeamMemberId(data: ITeamMember) {
   }
 }
 
+export async function getTeamMemberById(id: string) {
+  try {
+    await connectToDatabase();
+    const teamMember = await TeamMember.findById(id);
+    if (!teamMember) {
+      throw new Error("Invalid id");
+    }
+    return {
+      name: teamMember.name,
+      email: teamMember.email,
+      image: teamMember.image,
+      title: teamMember.title,
+    };
+  } catch (e) {
+    console.log(e);
+    throw new Error("Failed to get team member by id");
+  }
+}
+
 export async function deleteTeamMember(id: string) {
   try {
     await connectToDatabase();
     await TeamMember.findByIdAndDelete(id);
+    await resetTeamMemberCache(); // sequential
+  } catch (e) {
+    throw new Error("Failed to delete team member");
+  }
+}
+
+export async function updateTeamMember(id: string, data: ITeamMember) {
+  try {
+    await connectToDatabase();
+    const { name, email, image, title } = data;
+    await TeamMember.findByIdAndUpdate(id, {
+      name,
+      email,
+      image,
+      title,
+    });
     await resetTeamMemberCache(); // sequential
   } catch (e) {
     throw new Error("Failed to delete team member");

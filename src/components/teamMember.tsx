@@ -7,6 +7,7 @@ import { ref, deleteObject } from "firebase/storage";
 import Image from "next/image";
 import { useReducer } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 interface TeamMemberState {
   isHovered: boolean;
@@ -33,7 +34,7 @@ const initialState: TeamMemberState = {
 
 const teamMemberReducer = (
   state: TeamMemberState,
-  action: TeamMemberAction,
+  action: TeamMemberAction
 ): TeamMemberState => {
   switch (action.type) {
     case "IMAGE_LOADED":
@@ -68,6 +69,8 @@ const TeamMember = ({
 }) => {
   const [state, dispatch] = useReducer(teamMemberReducer, initialState);
 
+  const router = useRouter();
+
   const { isHovered, isLoaded, toDelete, isDeleting } = state;
 
   const { isAuthenticated } = useAuth();
@@ -81,6 +84,21 @@ const TeamMember = ({
   const handleMouseLeave = () => {
     if (isLoaded) {
       dispatch({ type: "UNHOVER" });
+    }
+  };
+
+  const handleUpdate = async () => {
+    try {
+      const id = await getTeamMemberId({
+        name: name,
+        title: title,
+        image: image,
+        email: email,
+      });
+
+      router.push(`/admin/team?update=${id}`);
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -130,12 +148,20 @@ const TeamMember = ({
           <p className="font-light text-[14px]">{isHovered ? email : title}</p>
         </div>
         {isAuthenticated && (
-          <button
-            onClick={() => dispatch({ type: "OPEN_DELETE_MODAL" })}
-            className="absolute rounded-2xl font-extrabold text-xl top-2 right-2 bg-ennovate-yellow text-white py-2 px-4 rounded"
-          >
-            -
-          </button>
+          <>
+            <button
+              onClick={() => dispatch({ type: "OPEN_DELETE_MODAL" })}
+              className="absolute rounded-2xl font-extrabold text-xl top-2 right-2 bg-ennovate-yellow text-white py-2 px-4 rounded"
+            >
+              -
+            </button>
+            <button
+              onClick={handleUpdate}
+              className="absolute rounded-2xl font-extrabold text-xl top-2 right-14 bg-ennovate-yellow text-white py-2 px-4 rounded"
+            >
+              ?
+            </button>
+          </>
         )}
         {/* Loading State */}
         <div className={isLoaded ? "hidden" : "block"}>

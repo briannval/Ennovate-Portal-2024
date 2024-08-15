@@ -1,11 +1,20 @@
 "use client";
 
-import { createTeamMember } from "@/actions/db";
+import {
+  createTeamMember,
+  getTeamMemberById,
+  updateTeamMember,
+} from "@/actions/db";
 import { storage } from "@/lib/firebase";
-import { getImageExtensionFromBase64, urlizeString } from "@/utils/utils";
+import {
+  getImageExtensionFromBase64,
+  urlizeString,
+  validateFirebaseImageLink,
+} from "@/utils/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -19,9 +28,18 @@ const teamMemberSchema = z.object({
 
 type TeamMemberFormData = z.infer<typeof teamMemberSchema>;
 
-export default function Comp() {
+export default function Comp({
+  searchParams,
+}: {
+  searchParams?: {
+    update?: string;
+  };
+}) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const updateId: string = searchParams?.update || "";
+
+  const router = useRouter();
 
   const {
     register,
@@ -33,6 +51,26 @@ export default function Comp() {
     resolver: zodResolver(teamMemberSchema),
   });
 
+  useEffect(() => {
+    const setUpdateDefault = async () => {
+      if (updateId) {
+        console.log(updateId);
+        const teamMember = await getTeamMemberById(updateId);
+
+        reset({
+          name: teamMember.name,
+          image: teamMember.image,
+          title: teamMember.title,
+          email: teamMember.email,
+        });
+
+        setImagePreview(teamMember.image);
+      }
+    };
+
+    setUpdateDefault();
+  }, [reset, updateId]);
+
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       const reader = new FileReader();
@@ -43,7 +81,7 @@ export default function Comp() {
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue],
+    [setValue]
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -52,20 +90,38 @@ export default function Comp() {
     try {
       setIsSubmitting(true);
       const { name, email, title, image } = data;
-      const urlizedName = urlizeString(name);
-      const fileExtension = getImageExtensionFromBase64(image);
-      const imagePath = `team-members/${urlizedName}.${fileExtension}`;
-      const storageRef = ref(storage, imagePath);
-      await uploadString(storageRef, image, "data_url");
-      const imageUrl = await getDownloadURL(storageRef);
-      await createTeamMember({
+      let imageUrl;
+
+      if (updateId && validateFirebaseImageLink(image)) {
+        imageUrl = image;
+      } else {
+        const urlizedName = urlizeString(name);
+        const fileExtension = getImageExtensionFromBase64(image);
+        const imagePath = `team-members/${urlizedName}.${fileExtension}`;
+        const storageRef = ref(storage, imagePath);
+        await uploadString(storageRef, image, "data_url");
+        imageUrl = await getDownloadURL(storageRef);
+      } // handle update case where image is not base64 but firebase link (MUST be update case)
+
+      const body = {
         name: name,
         email: email,
         title: title,
         image: imageUrl,
-      });
+      };
+
+      if (updateId) {
+        await updateTeamMember(updateId, body);
+      } else {
+        await createTeamMember(body);
+      }
       setIsSubmitting(false);
       reset();
+      setImagePreview(null);
+
+      if (updateId) {
+        router.push("/team");
+      }
     } catch (e) {
       setIsSubmitting(false);
     }
@@ -92,7 +148,7 @@ export default function Comp() {
         className="max-w-xl w-full bg-white p-8 border-2 border-ennovate-gray shadow-xl rounded-lg m-20"
       >
         <p className="mt-2 text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl mb-6">
-          Member Registration
+          Member {updateId ? "Updates" : "Registration"}
         </p>
         <div className="mb-5">
           <label
@@ -174,7 +230,13 @@ export default function Comp() {
           style={{ opacity: isSubmitting ? 0.7 : 1 }}
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Submitting..." : "Submit"}
+          {isSubmitting
+            ? updateId
+              ? "Updating..."
+              : "Submitting..."
+            : updateId
+              ? "Update"
+              : "Submit"}
         </button>
       </form>
     </div>

@@ -14,3 +14,10 @@ export const getImageExtensionFromFirebaseLink = (firebaseLink: string) => {
 
 export const sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
+
+export const validateFirebaseImageLink = (firebaseLink: string) => {
+  return (
+    firebaseLink.includes("firebasestorage.googleapis.com") &&
+    firebaseLink.includes("ennovate-portal-2024.appspot.com")
+  );
+};
