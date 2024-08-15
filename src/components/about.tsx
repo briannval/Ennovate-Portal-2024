@@ -1,12 +1,7 @@
+import { ABOUT_ENNOVATE_IMAGES } from "@/constants/about";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useTransition, animated } from "react-spring";
-
-const ABOUT_ENNOVATE_IMAGES = [
-  "/about-ennovate-1.jpeg",
-  "/about-ennovate-2.jpeg",
-  "/about-ennovate-3.jpeg",
-];
 
 const About = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
@@ -14,7 +9,7 @@ const About = () => {
   useEffect(() => {
     const intervalId: NodeJS.Timeout = setInterval(() => {
       setCurrentImageIndex(
-        (prevIndex) => (prevIndex + 1) % ABOUT_ENNOVATE_IMAGES.length,
+        (prevIndex) => (prevIndex + 1) % ABOUT_ENNOVATE_IMAGES.length
       );
     }, 4000);
 

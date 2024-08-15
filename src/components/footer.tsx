@@ -1,6 +1,6 @@
 "use client";
 
-import { footerSocialsLinks } from "@/constants/footer";
+import { FOOTER_SOCIALS_LINKS } from "@/constants/footer";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,7 +19,7 @@ const Footer = () => {
         </h2>
         <div className="flex justify-between w-full max-w-screen-xl px-4">
           <div className="flex">
-            {footerSocialsLinks.map((footerSocialsLink, index) => (
+            {FOOTER_SOCIALS_LINKS.map((footerSocialsLink, index) => (
               <Link
                 key={index}
                 href={footerSocialsLink.href}

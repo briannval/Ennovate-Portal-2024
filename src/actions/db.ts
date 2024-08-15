@@ -1,5 +1,9 @@
 "use server";
 
+import {
+  CACHE_KEY_EXPIRY_TIME,
+  TEAM_MEMBERS_PER_PAGE,
+} from "@/constants/actions";
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
 import TeamMember, { ITeamMember } from "@/models/TeamMember";
@@ -12,34 +16,9 @@ async function resetTeamMemberCache() {
   }
 }
 
-export async function createTeamMember(data: ITeamMember) {
-  try {
-    await connectToDatabase();
-    const { name, email, image, title } = data;
-    await TeamMember.create({ name, email, image, title });
-    await resetTeamMemberCache(); // sequential
-  } catch (e) {
-    throw new Error("Failed to create team member");
-  }
-}
-
-export async function deleteTeamMember(data: ITeamMember) {
-  try {
-    await connectToDatabase();
-    const { name, email, image, title } = data;
-    await TeamMember.findOneAndDelete({ name, email, image, title });
-    await resetTeamMemberCache(); // sequential
-  } catch (e) {
-    throw new Error("Failed to delete team member");
-  }
-}
-
-const TEAM_MEMBERS_PER_PAGE = 12;
-const CACHE_KEY_EXPIRY_TIME = 60 * 60 * 24;
-
 export async function fetchTeamMembers(
   query: string = "",
-  currentPage: number = 1,
+  currentPage: number = 1
 ) {
   await connectToDatabase();
   let queryObject: FilterQuery<ITeamMember> = {};
@@ -81,4 +60,26 @@ export async function fetchTeamMembers(
     .exec();
 
   return res;
+}
+
+export async function createTeamMember(data: ITeamMember) {
+  try {
+    await connectToDatabase();
+    const { name, email, image, title } = data;
+    await TeamMember.create({ name, email, image, title });
+    await resetTeamMemberCache(); // sequential
+  } catch (e) {
+    throw new Error("Failed to create team member");
+  }
+}
+
+export async function deleteTeamMember(data: ITeamMember) {
+  try {
+    await connectToDatabase();
+    const { name, email, image, title } = data;
+    await TeamMember.findOneAndDelete({ name, email, image, title });
+    await resetTeamMemberCache(); // sequential
+  } catch (e) {
+    throw new Error("Failed to delete team member");
+  }
 }

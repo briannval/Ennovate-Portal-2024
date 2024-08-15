@@ -1,4 +1,4 @@
-export const footerSocialsLinks = [
+export const FOOTER_SOCIALS_LINKS = [
   {
     img: "/email-logo.png",
     href: "mailto:admin@ennovateubc.org",
