@@ -13,7 +13,7 @@ export async function createTeamMember(data: ITeamMember) {
     const cachedKeys = await redis.keys("teamMember?*");
     if (cachedKeys.length > 0) {
       await redis.del(cachedKeys);
-    }
+    } // dependent operations
   } catch (e) {
     throw new Error("Failed to create team member");
   }
@@ -24,7 +24,7 @@ const CACHE_KEY_EXPIRY_TIME = 60 * 60 * 24;
 
 export async function fetchTeamMembers(
   query: string = "",
-  currentPage: number = 1,
+  currentPage: number = 1
 ) {
   await connectToDatabase();
   let queryObject: FilterQuery<ITeamMember> = {};
@@ -43,11 +43,11 @@ export async function fetchTeamMembers(
 
   const skip = (currentPage - 1) * TEAM_MEMBERS_PER_PAGE;
   const limit = TEAM_MEMBERS_PER_PAGE;
-  const total = await TeamMember.countDocuments(queryObject);
-  const teamMembers = await TeamMember.find(queryObject)
-    .skip(skip)
-    .limit(limit)
-    .exec();
+  const [total, teamMembers] = await Promise.all([
+    await TeamMember.countDocuments(queryObject),
+    await TeamMember.find(queryObject).skip(skip).limit(limit).exec(),
+  ]); // independent operations
+
   const res = {
     teamMembers: teamMembers.map((member) => ({
       id: member._id.toString(),

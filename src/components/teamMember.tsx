@@ -51,6 +51,7 @@ const TeamMember = ({
         <h1 className="font-semibold text-[20px]">{name}</h1>
         <p className="font-light text-[14px]">{isHovered ? email : title}</p>
       </div>
+      <button></button>
       {/* Loading State */}
       <div className={isLoaded ? "hidden" : "block"}>
         <div className="absolute w-full h-full object-cover rounded-[25px] bg-gray-300"></div>
