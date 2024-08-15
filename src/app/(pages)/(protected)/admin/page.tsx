@@ -70,7 +70,7 @@ function AdminAction({
         </h5>
         <p className="mb-3 font-normal text-gray-700">{subheading}</p>
         <a
-          href={addHref}
+          href={viewHref}
           className="inline-flex items-center px-3 py-2 text-md font-medium text-center text-white bg-ennovate-main rounded-lg hover:bg-ennovate-dark-blue"
         >
           View
@@ -108,7 +108,7 @@ export default function Admin() {
                 key={index}
               />
             );
-          },
+          }
         )}
       </div>
     </div>

@@ -5,8 +5,55 @@ import { storage } from "@/lib/firebase";
 import { getImageExtensionFromFirebaseLink, urlizeString } from "@/utils/utils";
 import { ref, deleteObject } from "firebase/storage";
 import Image from "next/image";
-import { useState } from "react";
+import { useReducer } from "react";
 import { useAuth } from "@/hooks/useAuth";
+
+interface TeamMemberState {
+  isHovered: boolean;
+  isLoaded: boolean;
+  toDelete: boolean;
+  isDeleting: boolean;
+}
+
+type TeamMemberAction =
+  | { type: "IMAGE_LOADED" }
+  | { type: "HOVER" }
+  | { type: "UNHOVER" }
+  | { type: "OPEN_DELETE_MODAL" }
+  | { type: "CLOSE_DELETE_MODAL" }
+  | { type: "DELETING_MEMBER" }
+  | { type: "DELETED_MEMBER" };
+
+const initialState: TeamMemberState = {
+  isHovered: false,
+  isLoaded: false,
+  toDelete: false,
+  isDeleting: false,
+};
+
+const teamMemberReducer = (
+  state: TeamMemberState,
+  action: TeamMemberAction
+): TeamMemberState => {
+  switch (action.type) {
+    case "IMAGE_LOADED":
+      return { ...state, isLoaded: true };
+    case "HOVER":
+      return { ...state, isHovered: true };
+    case "UNHOVER":
+      return { ...state, isHovered: false };
+    case "OPEN_DELETE_MODAL":
+      return { ...state, toDelete: true };
+    case "CLOSE_DELETE_MODAL":
+      return { ...state, toDelete: false };
+    case "DELETING_MEMBER":
+      return { ...state, isDeleting: true };
+    case "DELETED_MEMBER":
+      return { ...state, isDeleting: false };
+    default:
+      return state;
+  }
+};
 
 const TeamMember = ({
   name,
@@ -19,28 +66,27 @@ const TeamMember = ({
   email: string;
   img: string;
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [toDelete, setToDelete] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [state, dispatch] = useReducer(teamMemberReducer, initialState);
+
+  const { isHovered, isLoaded, toDelete, isDeleting } = state;
 
   const { isAuthenticated } = useAuth();
 
   const handleMouseEnter = () => {
     if (isLoaded) {
-      setIsHovered(true);
+      dispatch({ type: "HOVER" });
     }
   };
 
   const handleMouseLeave = () => {
     if (isLoaded) {
-      setIsHovered(false);
+      dispatch({ type: "UNHOVER" });
     }
   };
 
   const handleDelete = async () => {
     try {
-      setIsDeleting(true);
+      dispatch({ type: "DELETING_MEMBER" });
       const urlizedName = urlizeString(name);
       const fileExtension = getImageExtensionFromFirebaseLink(img);
       const imagePath = `team-members/${urlizedName}.${fileExtension}`;
@@ -54,11 +100,11 @@ const TeamMember = ({
           image: img,
         }),
       ]);
-      setIsDeleting(false);
-      setToDelete(false);
+      dispatch({ type: "DELETED_MEMBER" });
+      dispatch({ type: "CLOSE_DELETE_MODAL" });
       window.location.href = "/team"; // hard refresh
     } catch (e) {
-      setIsDeleting(false);
+      dispatch({ type: "DELETED_MEMBER" });
     }
   };
 
@@ -75,7 +121,7 @@ const TeamMember = ({
           src={img}
           alt={`${name}'s picture`}
           fill={true}
-          onLoad={() => setIsLoaded(true)}
+          onLoad={() => dispatch({ type: "IMAGE_LOADED" })}
         />
         <div
           className="absolute inset-0 bg-gradient-to-t from-blue-600 via-transparent to-transparent transition-opacity duration-300 ease-in-out"
@@ -87,7 +133,7 @@ const TeamMember = ({
         </div>
         {isAuthenticated && (
           <button
-            onClick={() => setToDelete(true)}
+            onClick={() => dispatch({ type: "OPEN_DELETE_MODAL" })}
             className="absolute rounded-2xl font-extrabold text-xl top-2 right-2 bg-ennovate-yellow text-white py-2 px-4 rounded"
           >
             -
@@ -110,7 +156,7 @@ const TeamMember = ({
                 type="button"
                 className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                 data-modal-hide="popup-modal"
-                onClick={() => setToDelete(false)}
+                onClick={() => dispatch({ type: "CLOSE_DELETE_MODAL" })}
               >
                 <svg
                   className="w-3 h-3"
@@ -161,7 +207,7 @@ const TeamMember = ({
                   data-modal-hide="popup-modal"
                   type="button"
                   className="py-2.5 px-5 ms-3 text-sm font-semibold text-ennovate-dark-blue bg-white rounded-lg border border-gray-200 hover:bg-gray-100"
-                  onClick={() => setToDelete(false)}
+                  onClick={() => dispatch({ type: "CLOSE_DELETE_MODAL" })}
                   disabled={isDeleting}
                   style={{ opacity: isDeleting ? 0.7 : 1 }}
                 >
