@@ -39,7 +39,7 @@ const CACHE_KEY_EXPIRY_TIME = 60 * 60 * 24;
 
 export async function fetchTeamMembers(
   query: string = "",
-  currentPage: number = 1
+  currentPage: number = 1,
 ) {
   await connectToDatabase();
   let queryObject: FilterQuery<ITeamMember> = {};

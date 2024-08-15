@@ -32,7 +32,7 @@ const initialState: TeamMembersState = {
 
 const teamMembersReducer = (
   state: TeamMembersState,
-  action: TeamMembersAction
+  action: TeamMembersAction,
 ): TeamMembersState => {
   switch (action.type) {
     case "FETCH_START":
@@ -70,7 +70,7 @@ export default function Team({
       try {
         const { teamMembers, totalPages } = await fetchTeamMembers(
           query,
-          currentPage
+          currentPage,
         );
         console.log(teamMembers, totalPages);
         dispatch({
