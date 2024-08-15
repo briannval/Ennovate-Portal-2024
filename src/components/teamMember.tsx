@@ -6,6 +6,7 @@ import { getImageExtensionFromFirebaseLink, urlizeString } from "@/utils/utils";
 import { ref, deleteObject } from "firebase/storage";
 import Image from "next/image";
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 const TeamMember = ({
   name,
@@ -22,6 +23,8 @@ const TeamMember = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [toDelete, setToDelete] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const { isAuthenticated } = useAuth();
 
   const handleMouseEnter = () => {
     if (isLoaded) {
@@ -53,7 +56,7 @@ const TeamMember = ({
       ]);
       setIsDeleting(false);
       setToDelete(false);
-      window.location.href = "/team";
+      window.location.href = "/team"; // hard refresh
     } catch (e) {
       setIsDeleting(false);
     }
@@ -82,12 +85,14 @@ const TeamMember = ({
           <h1 className="font-semibold text-[20px]">{name}</h1>
           <p className="font-light text-[14px]">{isHovered ? email : title}</p>
         </div>
-        <button
-          onClick={() => setToDelete(true)}
-          className="absolute rounded-2xl font-extrabold text-xl top-2 right-2 bg-ennovate-yellow text-white py-2 px-4 rounded"
-        >
-          -
-        </button>
+        {isAuthenticated && (
+          <button
+            onClick={() => setToDelete(true)}
+            className="absolute rounded-2xl font-extrabold text-xl top-2 right-2 bg-ennovate-yellow text-white py-2 px-4 rounded"
+          >
+            -
+          </button>
+        )}
         {/* Loading State */}
         <div className={isLoaded ? "hidden" : "block"}>
           <div className="absolute w-full h-full object-cover rounded-[25px] bg-gray-300"></div>
