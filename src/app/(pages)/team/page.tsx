@@ -1,8 +1,6 @@
 "use client";
 
 import Search from "@/components/search";
-import TeamMember from "@/components/teamMember";
-import TeamMemberSkeleton from "@/components/teamMemberSkeleton";
 import TeamMemberSkeletonGrid from "@/components/teamMemberSkeletonGrid";
 import Pagination from "@/components/pagination";
 import { fetchTeamMembers } from "@/actions/db";
@@ -34,7 +32,7 @@ const initialState: TeamMembersState = {
 
 const teamMembersReducer = (
   state: TeamMembersState,
-  action: TeamMembersAction,
+  action: TeamMembersAction
 ): TeamMembersState => {
   switch (action.type) {
     case "FETCH_START":
@@ -72,7 +70,7 @@ export default function Team({
       try {
         const { teamMembers, totalPages } = await fetchTeamMembers(
           query,
-          currentPage,
+          currentPage
         );
         console.log(teamMembers, totalPages);
         dispatch({

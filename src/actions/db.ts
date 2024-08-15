@@ -5,17 +5,32 @@ import { redis } from "@/lib/redis";
 import TeamMember, { ITeamMember } from "@/models/TeamMember";
 import { FilterQuery } from "mongoose";
 
+async function resetTeamMemberCache() {
+  const cachedKeys = await redis.keys("teamMember?*");
+  if (cachedKeys.length > 0) {
+    await redis.del(cachedKeys);
+  }
+}
+
 export async function createTeamMember(data: ITeamMember) {
   try {
     await connectToDatabase();
     const { name, email, image, title } = data;
     await TeamMember.create({ name, email, image, title });
-    const cachedKeys = await redis.keys("teamMember?*");
-    if (cachedKeys.length > 0) {
-      await redis.del(cachedKeys);
-    } // dependent operations
+    await resetTeamMemberCache(); // sequential
   } catch (e) {
     throw new Error("Failed to create team member");
+  }
+}
+
+export async function deleteTeamMember(data: ITeamMember) {
+  try {
+    await connectToDatabase();
+    const { name, email, image, title } = data;
+    await TeamMember.findOneAndDelete({ name, email, image, title });
+    await resetTeamMemberCache(); // sequential
+  } catch (e) {
+    throw new Error("Failed to delete team member");
   }
 }
 

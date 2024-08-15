@@ -7,5 +7,10 @@ export const getImageExtensionFromBase64 = (base64Str: string) => {
   return match ? match[1] : "";
 };
 
+export const getImageExtensionFromFirebaseLink = (firebaseLink: string) => {
+  const match = firebaseLink.match(/\.(png|jpeg|jpg)(?=\?alt=media)/);
+  return match ? match[1] : "";
+};
+
 export const sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
