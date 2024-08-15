@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { navbarLinks } from "@/constants/navbar";
 import Link from "next/link";
-import { useAuth } from "@/hooks/auth";
+import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
