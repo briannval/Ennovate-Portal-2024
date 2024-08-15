@@ -1,6 +1,9 @@
 "use client";
 
-import { sleep } from "@/utils/utils";
+import { deleteTeamMember } from "@/actions/db";
+import { storage } from "@/lib/firebase";
+import { getImageExtensionFromFirebaseLink, urlizeString } from "@/utils/utils";
+import { ref, deleteObject } from "firebase/storage";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -35,7 +38,19 @@ const TeamMember = ({
   const handleDelete = async () => {
     try {
       setIsDeleting(true);
-      await sleep(5000);
+      const urlizedName = urlizeString(name);
+      const fileExtension = getImageExtensionFromFirebaseLink(img);
+      const imagePath = `team-members/${urlizedName}.${fileExtension}`;
+      const storageRef = ref(storage, imagePath);
+      await Promise.all([
+        deleteObject(storageRef),
+        deleteTeamMember({
+          name: name,
+          email: email,
+          title: title,
+          image: img,
+        }),
+      ]);
       setIsDeleting(false);
       setToDelete(false);
       window.location.href = "/team";
@@ -101,9 +116,9 @@ const TeamMember = ({
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                   />
                 </svg>
@@ -118,9 +133,9 @@ const TeamMember = ({
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                   />
                 </svg>
