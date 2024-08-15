@@ -17,6 +17,7 @@ const Navbar = () => {
 
   const handleAuthAction = () => {
     if (!isLoading) {
+      setIsMenuOpen(false);
       if (isAuthenticated) {
         logout();
       } else {
@@ -29,6 +30,7 @@ const Navbar = () => {
     <nav className="bg-ennovate-main fixed w-full h-20 z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl h-max flex flex-wrap items-center justify-between mx-auto px-4 py-2">
         <Link
+          onClick={() => setIsMenuOpen(false)}
           href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
@@ -75,6 +77,7 @@ const Navbar = () => {
             {isAuthenticated && (
               <li key={navbarLinks.length}>
                 <Link
+                  onClick={() => setIsMenuOpen(false)}
                   href="/admin"
                   className="block py-2 px-2 font-bold text-xl text-white rounded hover:text-ennovate-gray"
                 >
@@ -85,6 +88,7 @@ const Navbar = () => {
             {navbarLinks.map((navbarLink, index) => (
               <li key={index}>
                 <Link
+                  onClick={() => setIsMenuOpen(false)}
                   href={navbarLink.href}
                   className="block py-2 px-2 font-bold text-xl text-white rounded hover:text-ennovate-gray"
                 >
