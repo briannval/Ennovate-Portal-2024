@@ -81,7 +81,7 @@ export default function Comp({
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue]
+    [setValue],
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
