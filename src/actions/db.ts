@@ -18,7 +18,7 @@ async function resetTeamMemberCache() {
 
 export async function fetchTeamMembers(
   query: string = "",
-  currentPage: number = 1,
+  currentPage: number = 1
 ) {
   await connectToDatabase();
   let queryObject: FilterQuery<ITeamMember> = {};
@@ -73,11 +73,24 @@ export async function createTeamMember(data: ITeamMember) {
   }
 }
 
-export async function deleteTeamMember(data: ITeamMember) {
+export async function getTeamMemberId(data: ITeamMember) {
   try {
     await connectToDatabase();
     const { name, email, image, title } = data;
-    await TeamMember.findOneAndDelete({ name, email, image, title });
+    const teamMember = await TeamMember.findOne({ name, email, image, title });
+    if (!teamMember) {
+      throw new Error("No such team member");
+    }
+    return teamMember._id.toString();
+  } catch (e) {
+    throw new Error("An unexpected error occured");
+  }
+}
+
+export async function deleteTeamMember(id: string) {
+  try {
+    await connectToDatabase();
+    await TeamMember.findByIdAndDelete(id);
     await resetTeamMemberCache(); // sequential
   } catch (e) {
     throw new Error("Failed to delete team member");

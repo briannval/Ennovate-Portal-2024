@@ -8,7 +8,7 @@ const TeamMemberGrid = ({ teamMembers }: { teamMembers: ITeamMember[] }) => {
         <TeamMember
           name={teamMember.name}
           email={teamMember.email}
-          img={teamMember.image}
+          image={teamMember.image}
           title={teamMember.title}
         />
       ))}

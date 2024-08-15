@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteTeamMember } from "@/actions/db";
+import { deleteTeamMember, getTeamMemberId } from "@/actions/db";
 import { storage } from "@/lib/firebase";
 import { getImageExtensionFromFirebaseLink, urlizeString } from "@/utils/utils";
 import { ref, deleteObject } from "firebase/storage";
@@ -33,7 +33,7 @@ const initialState: TeamMemberState = {
 
 const teamMemberReducer = (
   state: TeamMemberState,
-  action: TeamMemberAction,
+  action: TeamMemberAction
 ): TeamMemberState => {
   switch (action.type) {
     case "IMAGE_LOADED":
@@ -59,12 +59,12 @@ const TeamMember = ({
   name,
   title,
   email,
-  img,
+  image,
 }: {
   name: string;
   title: string;
   email: string;
-  img: string;
+  image: string;
 }) => {
   const [state, dispatch] = useReducer(teamMemberReducer, initialState);
 
@@ -87,19 +87,17 @@ const TeamMember = ({
   const handleDelete = async () => {
     try {
       dispatch({ type: "DELETING_MEMBER" });
+      const id = await getTeamMemberId({
+        name: name,
+        title: title,
+        image: image,
+        email: email,
+      });
       const urlizedName = urlizeString(name);
-      const fileExtension = getImageExtensionFromFirebaseLink(img);
+      const fileExtension = getImageExtensionFromFirebaseLink(image);
       const imagePath = `team-members/${urlizedName}.${fileExtension}`;
       const storageRef = ref(storage, imagePath);
-      await Promise.all([
-        deleteObject(storageRef),
-        deleteTeamMember({
-          name: name,
-          email: email,
-          title: title,
-          image: img,
-        }),
-      ]);
+      await Promise.all([deleteObject(storageRef), deleteTeamMember(id)]);
       dispatch({ type: "DELETED_MEMBER" });
       dispatch({ type: "CLOSE_DELETE_MODAL" });
       window.location.href = "/team"; // hard refresh
@@ -118,7 +116,7 @@ const TeamMember = ({
         {/* Loaded State */}
         <Image
           className="absolute w-full h-full object-cover object-top rounded-[25px] transition-transform duration-300 ease-in-out transform hover:scale-105"
-          src={img}
+          src={image}
           alt={`${name}'s picture`}
           fill={true}
           onLoad={() => dispatch({ type: "IMAGE_LOADED" })}
