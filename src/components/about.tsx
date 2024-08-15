@@ -9,7 +9,7 @@ const About = () => {
   useEffect(() => {
     const intervalId: NodeJS.Timeout = setInterval(() => {
       setCurrentImageIndex(
-        (prevIndex) => (prevIndex + 1) % ABOUT_ENNOVATE_IMAGES.length
+        (prevIndex) => (prevIndex + 1) % ABOUT_ENNOVATE_IMAGES.length,
       );
     }, 4000);
 

@@ -18,7 +18,7 @@ async function resetTeamMemberCache() {
 
 export async function fetchTeamMembers(
   query: string = "",
-  currentPage: number = 1
+  currentPage: number = 1,
 ) {
   await connectToDatabase();
   let queryObject: FilterQuery<ITeamMember> = {};
