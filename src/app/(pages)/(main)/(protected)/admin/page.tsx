@@ -1,50 +1,5 @@
+import { ADMIN_ACTIONS, IAdminAction } from "@/constants/admin";
 import Image from "next/image";
-
-interface IAdminAction {
-  heading: string;
-  subheading: string;
-  image: string;
-  viewHref: string;
-  addHref: string;
-}
-
-const adminActions: IAdminAction[] = [
-  {
-    heading: "Team Members",
-    subheading: "The great individuals keeping Ennovate running",
-    image: "/team-members.jpg",
-    viewHref: "/team",
-    addHref: "/admin/team",
-  },
-  {
-    heading: "Workshops",
-    subheading: "Interactive workshops to prepare students' careers",
-    image: "/workshops.jpg",
-    viewHref: "#",
-    addHref: "#",
-  },
-  {
-    heading: "Previous Business Proposals",
-    subheading: "Proposals from Ennovate's future entrepreneurs",
-    image: "/previous-business-proposals.jpg",
-    viewHref: "#",
-    addHref: "#",
-  },
-  {
-    heading: "Previous Projects",
-    subheading: "High quality, presentable projects from students",
-    image: "/previous-projects.jpg",
-    viewHref: "#",
-    addHref: "#",
-  },
-  {
-    heading: "Blog",
-    subheading: "Read more and keep up with the latest from Ennovate!",
-    image: "/blogs.jpg",
-    viewHref: "#",
-    addHref: "#",
-  },
-];
 
 function AdminAction({
   image,
@@ -96,7 +51,7 @@ export default function Admin() {
         Update teachers and students with one click.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-        {[...adminActions].map(
+        {[...ADMIN_ACTIONS].map(
           ({ image, heading, subheading, viewHref, addHref }, index) => {
             return (
               <AdminAction
