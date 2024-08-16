@@ -1,3 +1,3 @@
 export default function BusinessProposals() {
-  return <p>Business Proposals</p>;
+  return <p>Specific Business Proposal</p>;
 }
