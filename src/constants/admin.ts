@@ -1,4 +1,3 @@
-
 export interface IAdminAction {
   heading: string;
   subheading: string;
