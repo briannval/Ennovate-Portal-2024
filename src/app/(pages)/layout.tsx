@@ -22,17 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
           <Navbar />
-          <div
-            style={{
-              minHeight: "calc(100vh - 5rem)",
-              marginTop: "5rem",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            {children}
-          </div>
+          {children}
           <Footer />
         </AuthProvider>
       </body>

@@ -1,15 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { navbarLinks } from "@/constants/navbar";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, logout, isLoading } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const handleScroll = () => {
+    const position = window.scrollY;
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -27,7 +42,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-ennovate-main fixed w-full h-20 z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+    <nav
+      className={`fixed w-full h-20 z-50 top-0 start-0`}
+      style={{
+        backgroundColor:
+          pathname === "/"
+            ? `rgba(63, 107, 180, ${scrollPosition * 0.01})`
+            : "#3f6bb4", // this is ennovate-main
+      }}
+    >
       <div className="max-w-screen-xl h-max flex flex-wrap items-center justify-between mx-auto px-4 py-2">
         <Link
           onClick={() => setIsMenuOpen(false)}
@@ -73,7 +96,7 @@ const Navbar = () => {
           }`}
           id="navbar-sticky"
         >
-          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-ennovate-main md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
             {isAuthenticated && (
               <li key={navbarLinks.length}>
                 <Link

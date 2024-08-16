@@ -5,10 +5,7 @@ import { Typewriter } from "react-simple-typewriter";
 
 const Landing = () => {
   return (
-    <div
-      style={{ height: "calc(100vh - 5rem)", width: "100vw" }}
-      className="relative"
-    >
+    <div style={{ height: "100vh", width: "100vw" }} className="relative">
       {/* Background Image */}
       <div className="h-full">
         <Image
