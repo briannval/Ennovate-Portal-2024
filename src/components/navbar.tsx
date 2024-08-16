@@ -48,7 +48,7 @@ const Navbar = () => {
         backgroundColor:
           pathname === "/"
             ? `rgba(63, 107, 180, ${scrollPosition * 0.01})`
-            : "#3f6bb4", // this is ennovate-main
+            : "#3f6bb4", // this is ennovate-main in tailwind.config.ts
       }}
     >
       <div className="max-w-screen-xl h-max flex flex-wrap items-center justify-between mx-auto px-4 py-2">
@@ -102,7 +102,7 @@ const Navbar = () => {
                 <Link
                   onClick={() => setIsMenuOpen(false)}
                   href="/admin"
-                  className="block py-2 px-2 font-bold text-xl text-white rounded hover:text-ennovate-gray"
+                  className="block py-2 px-2 font-bold text-xl text-white rounded hover:underline hover:underline-offset-4"
                 >
                   DASHBOARD
                 </Link>
@@ -113,7 +113,7 @@ const Navbar = () => {
                 <Link
                   onClick={() => setIsMenuOpen(false)}
                   href={navbarLink.href}
-                  className="block py-2 px-2 font-bold text-xl text-white rounded hover:text-ennovate-gray"
+                  className="block py-2 px-2 font-bold text-xl text-white rounded hover:underline hover:underline-offset-4"
                 >
                   {navbarLink.name}
                 </Link>
