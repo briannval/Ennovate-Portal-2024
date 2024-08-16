@@ -17,14 +17,14 @@ const Breadcrumb = () => {
     p
       .split("-")
       .map((c) => c.charAt(0).toUpperCase() + c.slice(1))
-      .join(" ")
+      .join(" "),
   );
 
   const pathnameObj: PathNameObjProps[] = pathnameSplitHumanized.map(
     (p, i) => ({
       label: p,
       href: "/" + pathnameSplit.slice(0, i + 1).join("/"),
-    })
+    }),
   );
 
   if (initPathnameSplit.length > 3) {
