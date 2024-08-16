@@ -13,7 +13,7 @@ function AdminAction({
       <div className="relative w-full h-48">
         <Image
           src={image}
-          alt="Noteworthy technology acquisitions 2021"
+          alt={`image for ${heading}`}
           layout="fill"
           objectFit="cover"
           className="rounded-t-lg"
