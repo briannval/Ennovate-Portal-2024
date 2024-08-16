@@ -90,7 +90,7 @@ export default function Admin() {
   return (
     <div className="flex flex-col p-20">
       <p className="text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl">
-        Admin Panel
+        Admin Dashboard 
       </p>
       <p className="mt-2 text-xl text-center font-bold leading-8 text-ennovate-dark-blue opacity-70 mb-8">
         Update teachers and students with one click.
