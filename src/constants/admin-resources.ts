@@ -1,4 +1,4 @@
-export interface IAdminAction {
+export interface IAdminResourcesAction {
   heading: string;
   subheading: string;
   image: string;
@@ -6,7 +6,7 @@ export interface IAdminAction {
   addHref: string;
 }
 
-export const ADMIN_ACTIONS: IAdminAction[] = [
+export const ADMIN_RESOURCES_ACTIONS: IAdminResourcesAction[] = [
   {
     heading: "Team Members",
     subheading: "The great individuals keeping Ennovate running",
@@ -18,28 +18,28 @@ export const ADMIN_ACTIONS: IAdminAction[] = [
     heading: "Workshops",
     subheading: "Interactive workshops to prepare students' careers",
     image: "/workshops.jpg",
-    viewHref: "#",
+    viewHref: "/resources/workshops",
     addHref: "#",
   },
   {
     heading: "Previous Business Proposals",
     subheading: "Proposals from Ennovate's future entrepreneurs",
     image: "/previous-business-proposals.jpg",
-    viewHref: "#",
+    viewHref: "/resources/business-proposals",
     addHref: "#",
   },
   {
     heading: "Previous Projects",
     subheading: "High quality, presentable projects from students",
     image: "/previous-projects.jpg",
-    viewHref: "#",
+    viewHref: "/resources/projects",
     addHref: "#",
   },
   {
     heading: "Blog",
     subheading: "Read more and keep up with the latest from Ennovate!",
     image: "/blogs.jpg",
-    viewHref: "#",
+    viewHref: "/resources/blog",
     addHref: "#",
   },
 ];

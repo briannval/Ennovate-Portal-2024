@@ -1,4 +1,7 @@
-import { ADMIN_ACTIONS, IAdminAction } from "@/constants/admin";
+import {
+  ADMIN_RESOURCES_ACTIONS,
+  IAdminResourcesAction,
+} from "@/constants/admin-resources";
 import Image from "next/image";
 
 function AdminAction({
@@ -7,7 +10,7 @@ function AdminAction({
   subheading,
   viewHref,
   addHref,
-}: IAdminAction) {
+}: IAdminResourcesAction) {
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
       <div className="relative w-full h-48">
@@ -51,7 +54,7 @@ export default function Admin() {
         Update teachers and students with one click.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-        {[...ADMIN_ACTIONS].map(
+        {[...ADMIN_RESOURCES_ACTIONS].map(
           ({ image, heading, subheading, viewHref, addHref }, index) => {
             return (
               <AdminAction
@@ -63,7 +66,7 @@ export default function Admin() {
                 key={index}
               />
             );
-          },
+          }
         )}
       </div>
     </div>
