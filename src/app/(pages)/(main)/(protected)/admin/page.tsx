@@ -66,7 +66,7 @@ export default function Admin() {
                 key={index}
               />
             );
-          }
+          },
         )}
       </div>
     </div>
