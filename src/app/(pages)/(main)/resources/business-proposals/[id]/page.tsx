@@ -1,3 +1,5 @@
+import UnderConstruction from "@/components/underConstruction";
+
 export default function BusinessProposals() {
-  return <p>Specific Business Proposal</p>;
+  return <UnderConstruction />;
 }

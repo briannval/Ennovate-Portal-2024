@@ -1,3 +1,5 @@
+import UnderConstruction from "@/components/underConstruction";
+
 export default function Blog() {
-  return <p>Blog</p>;
+  return <UnderConstruction />;
 }
