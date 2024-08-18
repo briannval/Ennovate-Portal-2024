@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     await connectToDatabase();
@@ -26,7 +26,7 @@ export async function PUT(
   } catch (e) {
     return NextResponse.json(
       { message: "Failed to update team member" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

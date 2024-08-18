@@ -50,7 +50,7 @@ export default function AdminBusinessProposal({
       if (updateId) {
         console.log(updateId);
         const res = await axios.get(
-          `/api/business-proposals/query/${updateId}`
+          `/api/business-proposals/query/${updateId}`,
         );
         const businessProposal = res.data;
 
@@ -78,7 +78,7 @@ export default function AdminBusinessProposal({
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue]
+    [setValue],
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -95,7 +95,7 @@ export default function AdminBusinessProposal({
         imageUrl = await uploadBase64ImageToFirebase(
           image,
           name,
-          "business-proposals"
+          "business-proposals",
         );
       }
 
