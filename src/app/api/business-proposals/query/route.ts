@@ -20,7 +20,7 @@ export async function GET() {
   } catch (e) {
     return NextResponse.json(
       { message: "Failed to fetch business proposals" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
