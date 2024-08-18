@@ -6,7 +6,7 @@ import { CACHE_KEY_EXPIRY_TIME } from "@/constants/actions";
 
 export async function GET(
   _: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     await connectToDatabase();
@@ -24,7 +24,7 @@ export async function GET(
     if (!businessProposal) {
       return NextResponse.json(
         { message: "Business Proposal not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -39,7 +39,7 @@ export async function GET(
     console.log(e);
     return NextResponse.json(
       { message: "Failed to fetch business proposal" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
