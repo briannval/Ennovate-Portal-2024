@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
   _: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     await connectToDatabase();
@@ -24,7 +24,7 @@ export async function DELETE(
   } catch (e) {
     return NextResponse.json(
       { message: "Failed to delete team member" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

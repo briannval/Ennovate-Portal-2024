@@ -35,7 +35,7 @@ const initialState: TeamMemberState = {
 
 const teamMemberReducer = (
   state: TeamMemberState,
-  action: TeamMemberAction
+  action: TeamMemberAction,
 ): TeamMemberState => {
   switch (action.type) {
     case "IMAGE_LOADED":
