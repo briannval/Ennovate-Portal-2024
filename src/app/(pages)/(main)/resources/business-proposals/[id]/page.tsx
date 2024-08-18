@@ -1,9 +1,9 @@
 "use client";
 
-import { getBusinessProposalById } from "@/actions/db";
 import Loading from "@/components/loading";
 import { IBusinessProposal } from "@/models/BusinessProposal";
 import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function BusinessProposals({
@@ -14,13 +14,15 @@ export default function BusinessProposals({
   const [businessProposal, setBusinessProposal] =
     useState<IBusinessProposal | null>(null);
 
+  const { id } = params;
+
   useEffect(() => {
     const setData = async () => {
-      const data = await getBusinessProposalById(params.id);
-      //setBusinessProposal(data);
+      const res = await axios.get(`/api/business-proposals/query/${id}`);
+      setBusinessProposal(res.data);
     };
     setData();
-  }, [params.id]);
+  }, [id]);
 
   return (
     <PageCenteringWrapper>

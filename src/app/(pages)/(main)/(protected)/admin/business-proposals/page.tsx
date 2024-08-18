@@ -1,16 +1,13 @@
 "use client";
 
-import {
-  createBusinessProposal,
-  getBusinessProposalById,
-  updateBusinessProposal,
-} from "@/actions/db";
+import { createBusinessProposal, updateBusinessProposal } from "@/actions/db";
 import {
   generateDrivePreviewURL,
   uploadBase64ImageToFirebase,
   validateFirebaseImageLink,
 } from "@/utils/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
@@ -53,7 +50,10 @@ export default function AdminBusinessProposal({
     const setUpdateDefault = async () => {
       if (updateId) {
         console.log(updateId);
-        const businessProposal = await getBusinessProposalById(updateId);
+        const res = await axios.get(
+          `/api/business-proposals/query/${updateId}`
+        );
+        const businessProposal = res.data;
 
         reset({
           name: businessProposal.name,
@@ -79,7 +79,7 @@ export default function AdminBusinessProposal({
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue],
+    [setValue]
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -96,7 +96,7 @@ export default function AdminBusinessProposal({
         imageUrl = await uploadBase64ImageToFirebase(
           image,
           name,
-          "business-proposals",
+          "business-proposals"
         );
       }
 

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongoose";
 import BusinessProposal from "@/models/BusinessProposal";
 import { redis } from "@/lib/redis";
+import { CACHE_KEY_EXPIRY_TIME } from "@/constants/actions";
 
 export async function GET() {
   try {
@@ -16,11 +17,17 @@ export async function GET() {
 
     const businessProposals = await BusinessProposal.find({});
 
+    await redis
+      .pipeline()
+      .set(cacheKey, JSON.stringify(businessProposals))
+      .expire(cacheKey, CACHE_KEY_EXPIRY_TIME)
+      .exec();
+
     return NextResponse.json(businessProposals);
   } catch (e) {
     return NextResponse.json(
       { message: "Failed to fetch business proposals" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
