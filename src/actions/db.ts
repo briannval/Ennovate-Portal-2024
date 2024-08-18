@@ -5,20 +5,6 @@ import { redis } from "@/lib/redis";
 import BusinessProposal, { IBusinessProposal } from "@/models/BusinessProposal";
 import TeamMember, { ITeamMember } from "@/models/TeamMember";
 
-export async function createTeamMember(data: ITeamMember) {
-  try {
-    await connectToDatabase();
-    const { name, email, image, title } = data;
-    await TeamMember.create({ name, email, image, title });
-    const cachedKeys = await redis.keys("teamMember?*");
-    if (cachedKeys.length > 0) {
-      await redis.del(cachedKeys);
-    }
-  } catch (e) {
-    throw new Error("Failed to create team member");
-  }
-}
-
 export async function createBusinessProposal(data: IBusinessProposal) {
   try {
     await connectToDatabase();
@@ -61,7 +47,7 @@ export async function updateTeamMember(id: string, data: ITeamMember) {
 
 export async function updateBusinessProposal(
   id: string,
-  data: IBusinessProposal,
+  data: IBusinessProposal
 ) {
   try {
     await connectToDatabase();

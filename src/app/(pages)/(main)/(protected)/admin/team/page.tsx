@@ -1,6 +1,6 @@
 "use client";
 
-import { createTeamMember, updateTeamMember } from "@/actions/db";
+import { updateTeamMember } from "@/actions/db";
 import { storage } from "@/lib/firebase";
 import {
   getImageExtensionFromBase64,
@@ -78,7 +78,7 @@ export default function AdminTeamMember({
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue],
+    [setValue]
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -110,7 +110,7 @@ export default function AdminTeamMember({
       if (updateId) {
         // await updateTeamMember(updateId, body);
       } else {
-        // await createTeamMember(body);
+        await axios.post("/api/team/create", body);
       }
       setIsSubmitting(false);
       reset();

@@ -4,7 +4,7 @@ import TeamMember from "@/models/TeamMember";
 
 export async function GET(
   _: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: { id: string } }
 ) {
   try {
     await connectToDatabase();
@@ -16,16 +16,15 @@ export async function GET(
     if (!teamMember) {
       return NextResponse.json(
         { message: "Team Member not found" },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
     return NextResponse.json(teamMember);
   } catch (e) {
-    console.log(e);
     return NextResponse.json(
       { message: "Failed to fetch team member" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
