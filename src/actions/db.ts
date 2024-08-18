@@ -30,20 +30,6 @@ export async function createBusinessProposal(data: IBusinessProposal) {
   }
 }
 
-export async function getTeamMemberId(data: ITeamMember) {
-  try {
-    await connectToDatabase();
-    const { name, email, image, title } = data;
-    const teamMember = await TeamMember.findOne({ name, email, image, title });
-    if (!teamMember) {
-      throw new Error("No such team member");
-    }
-    return teamMember._id.toString();
-  } catch (e) {
-    throw new Error("An unexpected error occured");
-  }
-}
-
 export async function getTeamMemberById(id: string) {
   try {
     await connectToDatabase();
@@ -94,7 +80,7 @@ export async function updateTeamMember(id: string, data: ITeamMember) {
 
 export async function updateBusinessProposal(
   id: string,
-  data: IBusinessProposal,
+  data: IBusinessProposal
 ) {
   try {
     await connectToDatabase();

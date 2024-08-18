@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 export interface ITeamMember {
+  _id: string;
   name: string;
   email: string;
   title: string;

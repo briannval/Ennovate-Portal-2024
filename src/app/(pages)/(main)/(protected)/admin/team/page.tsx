@@ -81,7 +81,7 @@ export default function AdminTeamMember({
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue],
+    [setValue]
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -111,9 +111,9 @@ export default function AdminTeamMember({
       };
 
       if (updateId) {
-        await updateTeamMember(updateId, body);
+        // await updateTeamMember(updateId, body);
       } else {
-        await createTeamMember(body);
+        // await createTeamMember(body);
       }
       setIsSubmitting(false);
       reset();

@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteTeamMember, getTeamMemberId } from "@/actions/db";
+import { deleteTeamMember } from "@/actions/db";
 import { storage } from "@/lib/firebase";
 import { getImageExtensionFromFirebaseLink, urlizeString } from "@/utils/utils";
 import { ref, deleteObject } from "firebase/storage";
@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useReducer } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+import { ITeamMember } from "@/models/TeamMember";
 
 interface TeamMemberState {
   isHovered: boolean;
@@ -34,7 +35,7 @@ const initialState: TeamMemberState = {
 
 const teamMemberReducer = (
   state: TeamMemberState,
-  action: TeamMemberAction,
+  action: TeamMemberAction
 ): TeamMemberState => {
   switch (action.type) {
     case "IMAGE_LOADED":
@@ -56,17 +57,7 @@ const teamMemberReducer = (
   }
 };
 
-const TeamMember = ({
-  name,
-  title,
-  email,
-  image,
-}: {
-  name: string;
-  title: string;
-  email: string;
-  image: string;
-}) => {
+const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
   const [state, dispatch] = useReducer(teamMemberReducer, initialState);
 
   const router = useRouter();
@@ -89,14 +80,7 @@ const TeamMember = ({
 
   const handleUpdate = async () => {
     try {
-      const id = await getTeamMemberId({
-        name: name,
-        title: title,
-        image: image,
-        email: email,
-      });
-
-      router.push(`/admin/team?update=${id}`);
+      router.push(`/admin/team?update=${teamMember._id}`);
     } catch (e) {
       console.log(e);
     }
@@ -105,17 +89,14 @@ const TeamMember = ({
   const handleDelete = async () => {
     try {
       dispatch({ type: "DELETING_MEMBER" });
-      const id = await getTeamMemberId({
-        name: name,
-        title: title,
-        image: image,
-        email: email,
-      });
-      const urlizedName = urlizeString(name);
-      const fileExtension = getImageExtensionFromFirebaseLink(image);
+      const urlizedName = urlizeString(teamMember.name);
+      const fileExtension = getImageExtensionFromFirebaseLink(teamMember.image);
       const imagePath = `team-members/${urlizedName}.${fileExtension}`;
       const storageRef = ref(storage, imagePath);
-      await Promise.all([deleteObject(storageRef), deleteTeamMember(id)]);
+      await Promise.all([
+        deleteObject(storageRef),
+        deleteTeamMember(teamMember._id),
+      ]);
       dispatch({ type: "DELETED_MEMBER" });
       dispatch({ type: "CLOSE_DELETE_MODAL" });
       window.location.href = "/team"; // hard refresh
@@ -134,7 +115,7 @@ const TeamMember = ({
         {/* Loaded State */}
         <Image
           className="absolute w-full h-full object-cover object-top rounded-[25px] transition-transform duration-300 ease-in-out transform hover:scale-105"
-          src={image}
+          src={teamMember.image}
           alt={`${name}'s picture`}
           fill={true}
           onLoad={() => dispatch({ type: "IMAGE_LOADED" })}
@@ -144,8 +125,10 @@ const TeamMember = ({
           style={{ opacity: isHovered ? 1 : 0.7 }}
         />
         <div className="absolute bottom-0 left-0 px-6 py-4 text-white z-10">
-          <h1 className="font-semibold text-[20px]">{name}</h1>
-          <p className="font-light text-[14px]">{isHovered ? email : title}</p>
+          <h1 className="font-semibold text-[20px]">{teamMember.name}</h1>
+          <p className="font-light text-[14px]">
+            {isHovered ? teamMember.email : teamMember.title}
+          </p>
         </div>
         {isAuthenticated && (
           <>
@@ -215,7 +198,7 @@ const TeamMember = ({
                   />
                 </svg>
                 <h3 className="mb-5 text-xl font-bold text-ennovate-dark-blue">
-                  Remove {name}?
+                  Remove {teamMember.name}?
                 </h3>
                 <button
                   data-modal-hide="popup-modal"
