@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
   } catch (e) {
     return NextResponse.json(
       { message: "Failed to fetch team members" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

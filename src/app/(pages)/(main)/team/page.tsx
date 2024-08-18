@@ -32,7 +32,7 @@ const initialState: TeamMembersState = {
 
 const teamMembersReducer = (
   state: TeamMembersState,
-  action: TeamMembersAction
+  action: TeamMembersAction,
 ): TeamMembersState => {
   switch (action.type) {
     case "FETCH_START":
