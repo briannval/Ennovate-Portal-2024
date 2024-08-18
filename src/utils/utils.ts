@@ -1,3 +1,11 @@
+import { storage } from "@/lib/firebase";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadString,
+} from "firebase/storage";
+
 export const urlizeString = (str: string) => {
   return str.replace(/\s+/g, "-").toLowerCase();
 };
@@ -21,3 +29,37 @@ export const validateFirebaseImageLink = (firebaseLink: string) => {
     firebaseLink.includes("ennovate-portal-2024.appspot.com")
   );
 };
+
+export async function uploadBase64ImageToFirebase(
+  image: string,
+  name: string,
+  folder: string
+) {
+  try {
+    const urlizedName = urlizeString(name);
+    const fileExtension = getImageExtensionFromBase64(image);
+    const imagePath = `${folder}/${urlizedName}.${fileExtension}`;
+    const storageRef = ref(storage, imagePath);
+    await uploadString(storageRef, image, "data_url");
+    const imageUrl = await getDownloadURL(storageRef);
+    return imageUrl;
+  } catch (error) {
+    throw new Error("Failed to upload image");
+  }
+}
+
+export async function deleteBase64ImageFromFirebase(
+  image: string,
+  name: string,
+  folder: string
+) {
+  try {
+    const urlizedName = urlizeString(name);
+    const fileExtension = getImageExtensionFromFirebaseLink(image);
+    const imagePath = `${folder}/${urlizedName}.${fileExtension}`;
+    const storageRef = ref(storage, imagePath);
+    await deleteObject(storageRef);
+  } catch (error) {
+    throw new Error("Failed to delete image");
+  }
+}
