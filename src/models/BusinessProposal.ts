@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 export interface IBusinessProposal {
+  _id: string;
   name: string;
   description: string;
   drive: string;

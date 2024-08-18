@@ -15,18 +15,18 @@ export const ADMIN_RESOURCES_ACTIONS: IAdminResourcesAction[] = [
     addHref: "/admin/team",
   },
   {
-    heading: "Workshops",
-    subheading: "Interactive workshops to prepare students' careers",
-    image: "/workshops.jpg",
-    viewHref: "/resources/workshops",
-    addHref: "/admin/workshops",
-  },
-  {
     heading: "Previous Business Proposals",
     subheading: "Proposals from Ennovate's future entrepreneurs",
     image: "/previous-business-proposals.jpg",
     viewHref: "/resources/business-proposals",
     addHref: "/admin/business-proposals",
+  },
+  {
+    heading: "Workshops",
+    subheading: "Interactive workshops to prepare students' careers",
+    image: "/workshops.jpg",
+    viewHref: "/resources/workshops",
+    addHref: "/admin/workshops",
   },
   {
     heading: "Previous Projects",

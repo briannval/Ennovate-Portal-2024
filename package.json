@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
+    "axios": "^1.7.4",
     "firebase": "^10.12.5",
     "ioredis": "^5.4.1",
     "mongoose": "^8.5.2",

@@ -17,7 +17,7 @@ export default function BusinessProposals({
   useEffect(() => {
     const setData = async () => {
       const data = await getBusinessProposalById(params.id);
-      setBusinessProposal(data);
+      //setBusinessProposal(data);
     };
     setData();
   }, [params.id]);

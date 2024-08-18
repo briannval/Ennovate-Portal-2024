@@ -79,7 +79,7 @@ export default function AdminBusinessProposal({
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue],
+    [setValue]
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -96,7 +96,7 @@ export default function AdminBusinessProposal({
         imageUrl = await uploadBase64ImageToFirebase(
           image,
           name,
-          "business-proposals",
+          "business-proposals"
         );
       }
 
@@ -110,9 +110,9 @@ export default function AdminBusinessProposal({
       };
 
       if (updateId) {
-        await updateBusinessProposal(updateId, body);
+        // await updateBusinessProposal(updateId, body);
       } else {
-        await createBusinessProposal(body);
+        // await createBusinessProposal(body);
       }
       setIsSubmitting(false);
       reset();
