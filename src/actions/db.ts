@@ -5,17 +5,6 @@ import { redis } from "@/lib/redis";
 import BusinessProposal, { IBusinessProposal } from "@/models/BusinessProposal";
 import TeamMember, { ITeamMember } from "@/models/TeamMember";
 
-export async function createBusinessProposal(data: IBusinessProposal) {
-  try {
-    await connectToDatabase();
-    const { name, description, drive, image } = data;
-    await BusinessProposal.create({ name, description, drive, image });
-    await redis.del("businessProposal");
-  } catch (e) {
-    throw new Error("Failed to create team member");
-  }
-}
-
 export async function deleteTeamMember(id: string) {
   try {
     await connectToDatabase();
@@ -47,7 +36,7 @@ export async function updateTeamMember(id: string, data: ITeamMember) {
 
 export async function updateBusinessProposal(
   id: string,
-  data: IBusinessProposal,
+  data: IBusinessProposal
 ) {
   try {
     await connectToDatabase();
