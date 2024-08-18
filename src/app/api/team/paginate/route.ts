@@ -39,7 +39,6 @@ export async function POST(request: NextRequest) {
       teamMembers: teamMembers,
       totalPages: Math.ceil(total / TEAM_MEMBERS_PER_PAGE),
     };
-    console.log(res);
 
     await redis
       .pipeline()
@@ -51,7 +50,7 @@ export async function POST(request: NextRequest) {
   } catch (e) {
     return NextResponse.json(
       { message: "Failed to fetch team members" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: { id: string } }
 ) {
   try {
     await connectToDatabase();
@@ -14,15 +14,16 @@ export async function PUT(
 
     const body = await request.json();
 
-    await BusinessProposal.findByIdAndUpdate(id, body);
-
-    await redis.del([`businessProposal:${id}`, "businessProposal"]);
+    await Promise.all([
+      BusinessProposal.findByIdAndUpdate(id, body),
+      redis.del([`businessProposal:${id}`, "businessProposal"]),
+    ]);
 
     return NextResponse.json("Success");
   } catch (e) {
     return NextResponse.json(
       { message: "Failed to update team member" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
