@@ -28,7 +28,7 @@ const teamMemberSchema = z.object({
 
 type TeamMemberFormData = z.infer<typeof teamMemberSchema>;
 
-export default function AdminTeam({
+export default function AdminTeamMember({
   searchParams,
 }: {
   searchParams?: {
@@ -81,7 +81,7 @@ export default function AdminTeam({
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue],
+    [setValue]
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });

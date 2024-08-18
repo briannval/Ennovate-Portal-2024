@@ -6,6 +6,7 @@ import {
 } from "@/constants/actions";
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
+import BusinessProposal, { IBusinessProposal } from "@/models/BusinessProposal";
 import TeamMember, { ITeamMember } from "@/models/TeamMember";
 import { FilterQuery } from "mongoose";
 
@@ -18,7 +19,7 @@ async function resetTeamMemberCache() {
 
 export async function fetchTeamMembers(
   query: string = "",
-  currentPage: number = 1,
+  currentPage: number = 1
 ) {
   await connectToDatabase();
   let queryObject: FilterQuery<ITeamMember> = {};
@@ -73,6 +74,17 @@ export async function createTeamMember(data: ITeamMember) {
   }
 }
 
+export async function createBusinessProposal(data: IBusinessProposal) {
+  try {
+    await connectToDatabase();
+    const { name, description, drive, image } = data;
+    await BusinessProposal.create({ name, description, drive, image });
+    await redis.del("businessProposal");
+  } catch (e) {
+    throw new Error("Failed to create team member");
+  }
+}
+
 export async function getTeamMemberId(data: ITeamMember) {
   try {
     await connectToDatabase();
@@ -106,6 +118,25 @@ export async function getTeamMemberById(id: string) {
   }
 }
 
+export async function getBusinessProposalById(id: string) {
+  try {
+    await connectToDatabase();
+    const businessProposal = await BusinessProposal.findById(id);
+    if (!businessProposal) {
+      throw new Error("Invalid id");
+    }
+    return {
+      name: businessProposal.name,
+      drive: businessProposal.drive,
+      description: businessProposal.description,
+      image: businessProposal.image,
+    };
+  } catch (e) {
+    console.log(e);
+    throw new Error("Failed to get team member by id");
+  }
+}
+
 export async function deleteTeamMember(id: string) {
   try {
     await connectToDatabase();
@@ -126,7 +157,26 @@ export async function updateTeamMember(id: string, data: ITeamMember) {
       image,
       title,
     });
-    await resetTeamMemberCache(); // sequential
+    await redis.del("businessProposal");
+  } catch (e) {
+    throw new Error("Failed to delete team member");
+  }
+}
+
+export async function updateBusinessProposal(
+  id: string,
+  data: IBusinessProposal
+) {
+  try {
+    await connectToDatabase();
+    const { name, drive, description, image } = data;
+    await BusinessProposal.findByIdAndUpdate(id, {
+      name,
+      drive,
+      description,
+      image,
+    });
+    await redis.del("businessProposal");
   } catch (e) {
     throw new Error("Failed to delete team member");
   }
