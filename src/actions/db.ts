@@ -6,7 +6,7 @@ import BusinessProposal, { IBusinessProposal } from "@/models/BusinessProposal";
 
 export async function updateBusinessProposal(
   id: string,
-  data: IBusinessProposal
+  data: IBusinessProposal,
 ) {
   try {
     await connectToDatabase();
