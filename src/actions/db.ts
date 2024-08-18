@@ -30,25 +30,6 @@ export async function createBusinessProposal(data: IBusinessProposal) {
   }
 }
 
-export async function getTeamMemberById(id: string) {
-  try {
-    await connectToDatabase();
-    const teamMember = await TeamMember.findById(id);
-    if (!teamMember) {
-      throw new Error("Invalid id");
-    }
-    return {
-      name: teamMember.name,
-      email: teamMember.email,
-      image: teamMember.image,
-      title: teamMember.title,
-    };
-  } catch (e) {
-    console.log(e);
-    throw new Error("Failed to get team member by id");
-  }
-}
-
 export async function deleteTeamMember(id: string) {
   try {
     await connectToDatabase();
@@ -80,7 +61,7 @@ export async function updateTeamMember(id: string, data: ITeamMember) {
 
 export async function updateBusinessProposal(
   id: string,
-  data: IBusinessProposal,
+  data: IBusinessProposal
 ) {
   try {
     await connectToDatabase();

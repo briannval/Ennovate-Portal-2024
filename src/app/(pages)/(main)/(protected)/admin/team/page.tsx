@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  createTeamMember,
-  getTeamMemberById,
-  updateTeamMember,
-} from "@/actions/db";
+import { createTeamMember, updateTeamMember } from "@/actions/db";
 import { storage } from "@/lib/firebase";
 import {
   getImageExtensionFromBase64,
@@ -12,6 +8,7 @@ import {
   validateFirebaseImageLink,
 } from "@/utils/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -54,8 +51,8 @@ export default function AdminTeamMember({
   useEffect(() => {
     const setUpdateDefault = async () => {
       if (updateId) {
-        console.log(updateId);
-        const teamMember = await getTeamMemberById(updateId);
+        const res = await axios.get(`/api/team/query/${updateId}`);
+        const teamMember = res.data;
 
         reset({
           name: teamMember.name,
@@ -81,7 +78,7 @@ export default function AdminTeamMember({
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue],
+    [setValue]
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
