@@ -47,7 +47,7 @@ export async function updateTeamMember(id: string, data: ITeamMember) {
 
 export async function updateBusinessProposal(
   id: string,
-  data: IBusinessProposal
+  data: IBusinessProposal,
 ) {
   try {
     await connectToDatabase();

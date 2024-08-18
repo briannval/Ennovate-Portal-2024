@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   } catch (e) {
     return NextResponse.json(
       { message: "Failed to create team member" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
