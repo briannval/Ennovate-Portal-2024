@@ -1,6 +1,5 @@
 "use client";
 
-import { deleteTeamMember } from "@/actions/db";
 import { storage } from "@/lib/firebase";
 import { getImageExtensionFromFirebaseLink, urlizeString } from "@/utils/utils";
 import { ref, deleteObject } from "firebase/storage";
@@ -9,6 +8,7 @@ import { useReducer } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { ITeamMember } from "@/models/TeamMember";
+import axios from "axios";
 
 interface TeamMemberState {
   isHovered: boolean;
@@ -35,7 +35,7 @@ const initialState: TeamMemberState = {
 
 const teamMemberReducer = (
   state: TeamMemberState,
-  action: TeamMemberAction,
+  action: TeamMemberAction
 ): TeamMemberState => {
   switch (action.type) {
     case "IMAGE_LOADED":
@@ -95,7 +95,7 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
       const storageRef = ref(storage, imagePath);
       await Promise.all([
         deleteObject(storageRef),
-        deleteTeamMember(teamMember._id),
+        axios.delete(`/api/team/delete/${teamMember._id}`),
       ]);
       dispatch({ type: "DELETED_MEMBER" });
       dispatch({ type: "CLOSE_DELETE_MODAL" });

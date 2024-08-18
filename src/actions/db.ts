@@ -5,19 +5,6 @@ import { redis } from "@/lib/redis";
 import BusinessProposal, { IBusinessProposal } from "@/models/BusinessProposal";
 import TeamMember, { ITeamMember } from "@/models/TeamMember";
 
-export async function deleteTeamMember(id: string) {
-  try {
-    await connectToDatabase();
-    await TeamMember.findByIdAndDelete(id);
-    const cachedKeys = await redis.keys("teamMember?*");
-    if (cachedKeys.length > 0) {
-      await redis.del(cachedKeys);
-    }
-  } catch (e) {
-    throw new Error("Failed to delete team member");
-  }
-}
-
 export async function updateTeamMember(id: string, data: ITeamMember) {
   try {
     await connectToDatabase();
@@ -36,7 +23,7 @@ export async function updateTeamMember(id: string, data: ITeamMember) {
 
 export async function updateBusinessProposal(
   id: string,
-  data: IBusinessProposal,
+  data: IBusinessProposal
 ) {
   try {
     await connectToDatabase();
