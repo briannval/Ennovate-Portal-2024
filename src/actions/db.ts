@@ -19,7 +19,7 @@ async function resetTeamMemberCache() {
 
 export async function fetchTeamMembers(
   query: string = "",
-  currentPage: number = 1
+  currentPage: number = 1,
 ) {
   await connectToDatabase();
   let queryObject: FilterQuery<ITeamMember> = {};
@@ -165,7 +165,7 @@ export async function updateTeamMember(id: string, data: ITeamMember) {
 
 export async function updateBusinessProposal(
   id: string,
-  data: IBusinessProposal
+  data: IBusinessProposal,
 ) {
   try {
     await connectToDatabase();
