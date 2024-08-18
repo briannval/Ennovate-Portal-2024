@@ -3,12 +3,12 @@
 import Search from "@/components/search";
 import TeamMemberSkeletonGrid from "@/components/teamMemberSkeletonGrid";
 import Pagination from "@/components/pagination";
-import { fetchTeamMembers } from "@/actions/db";
 import { ITeamMember } from "@/models/TeamMember";
 import { useEffect, useReducer } from "react";
 import TeamMemberGrid from "@/components/teamMemberGrid";
 import NoTeam from "@/components/noTeam";
 import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
+import axios from "axios";
 
 interface TeamMembersState {
   teamMembers: ITeamMember[];
@@ -32,7 +32,7 @@ const initialState: TeamMembersState = {
 
 const teamMembersReducer = (
   state: TeamMembersState,
-  action: TeamMembersAction,
+  action: TeamMembersAction
 ): TeamMembersState => {
   switch (action.type) {
     case "FETCH_START":
@@ -68,16 +68,17 @@ export default function Team({
     const fetchData = async () => {
       dispatch({ type: "FETCH_START" });
       try {
-        const { teamMembers, totalPages } = await fetchTeamMembers(
+        const res = await axios.post("/api/team/paginate", {
           query,
           currentPage,
-        );
+        });
+        const { teamMembers, totalPages } = await res.data;
         dispatch({
           type: "FETCH_SUCCESS",
           payload: { teamMembers, totalPages },
         });
       } catch (error) {
-        console.error(error);
+        console.log(error);
         dispatch({ type: "FETCH_FAILURE" });
       }
     };
