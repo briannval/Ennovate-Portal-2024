@@ -1,6 +1,6 @@
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
-import TeamMember from "@/models/TeamMember";
+import BusinessProposal from "@/models/BusinessProposal";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
@@ -14,13 +14,9 @@ export async function PUT(
 
     const body = await request.json();
 
-    await TeamMember.findByIdAndUpdate(id, body);
+    await BusinessProposal.findByIdAndUpdate(id, body);
 
-    const cachedKeys = await redis.keys("teamMember?*");
-
-    if (cachedKeys.length > 0) {
-      await redis.del(cachedKeys);
-    }
+    await redis.del([`businessProposal:${id}`, "businessProposal"]);
 
     return NextResponse.json("Success");
   } catch (e) {

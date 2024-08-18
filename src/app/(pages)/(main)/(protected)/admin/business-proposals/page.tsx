@@ -1,6 +1,5 @@
 "use client";
 
-import { updateBusinessProposal } from "@/actions/db";
 import {
   generateDrivePreviewURL,
   uploadBase64ImageToFirebase,
@@ -51,7 +50,7 @@ export default function AdminBusinessProposal({
       if (updateId) {
         console.log(updateId);
         const res = await axios.get(
-          `/api/business-proposals/query/${updateId}`,
+          `/api/business-proposals/query/${updateId}`
         );
         const businessProposal = res.data;
 
@@ -79,7 +78,7 @@ export default function AdminBusinessProposal({
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue],
+    [setValue]
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -96,7 +95,7 @@ export default function AdminBusinessProposal({
         imageUrl = await uploadBase64ImageToFirebase(
           image,
           name,
-          "business-proposals",
+          "business-proposals"
         );
       }
 
@@ -110,7 +109,7 @@ export default function AdminBusinessProposal({
       };
 
       if (updateId) {
-        // await updateBusinessProposal(updateId, body);
+        await axios.put(`/api/business-proposals/update/${updateId}`, body);
       } else {
         await axios.post("/api/business-proposals/create", body);
       }
@@ -119,7 +118,7 @@ export default function AdminBusinessProposal({
       setImagePreview(null);
 
       if (updateId) {
-        router.push("/business-proposals");
+        router.push("/resources/business-proposals");
       }
     } catch (e) {
       setIsSubmitting(false);
