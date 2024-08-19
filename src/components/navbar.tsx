@@ -59,7 +59,7 @@ const Navbar = () => {
         >
           <img src="/ennovate-w.png" className="h-16" alt="Logo" />
         </Link>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex lg:order-2 space-x-3 lg:space-x-0 rtl:space-x-reverse">
           <button
             onClick={handleAuthAction}
             className="text-ennovate-dark-blue text-xl font-extrabold bg-ennovate-yellow hover:bg-white rounded-3xl px-4 py-2 text-center"
@@ -69,7 +69,7 @@ const Navbar = () => {
           <button
             onClick={toggleMenu}
             type="button"
-            className="inline-flex items-center bg-transparent p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden"
+            className="inline-flex items-center bg-transparent p-2 w-10 h-10 justify-center text-sm rounded-lg lg:hidden"
             aria-controls="navbar-sticky"
             aria-expanded={isMenuOpen}
           >
@@ -91,12 +91,12 @@ const Navbar = () => {
           </button>
         </div>
         <div
-          className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${
+          className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${
             isMenuOpen ? "block" : "hidden"
           }`}
           id="navbar-sticky"
         >
-          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+          <ul className="flex flex-col p-4 lg:p-0 mt-4 bg-ennovate-main font-medium border border-gray-100 rounded-lg lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-transparent">
             {isAuthenticated && (
               <li key={navbarLinks.length}>
                 <Link
