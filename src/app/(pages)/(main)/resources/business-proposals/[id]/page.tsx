@@ -31,7 +31,7 @@ const initialState: BusinessProposalState = {
 
 function businessProposalReducer(
   state: BusinessProposalState,
-  action: BusinessProposalAction
+  action: BusinessProposalAction,
 ): BusinessProposalState {
   switch (action.type) {
     case "SET_DATA":
@@ -75,7 +75,7 @@ export default function BusinessProposals({
         deleteBase64ImageFromFirebase(
           businessProposal!.image,
           businessProposal!.name,
-          "business-proposals"
+          "business-proposals",
         ),
       ]);
       dispatch({ type: "DELETE_SUCCESS" });
