@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 const AddBusinessProposalCTA = () => {
   return (
     <Link href="/admin/business-proposals">
-      <div className="max-w-sm h-96 bg-ennovate-main border border-ennovate-main rounded-lg bg-opacity-70 hover:bg-opacity-100 group flex items-center justify-center">
+      <div className="max-w-sm h-[22rem] bg-ennovate-main border border-ennovate-main rounded-lg bg-opacity-70 hover:bg-opacity-100 group flex items-center justify-center">
         <span className="text-white text-6xl font-bold group-hover:font-extrabold">
           +
         </span>
