@@ -8,6 +8,7 @@ import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 import { IBusinessProposal } from "@/models/BusinessProposal";
 import { useRouter } from "next/navigation";
 import { deleteBase64ImageFromFirebase } from "@/utils/utils";
+import { useAuth } from "@/hooks/useAuth";
 
 type BusinessProposalState = {
   businessProposal: IBusinessProposal | null;
@@ -30,7 +31,7 @@ const initialState: BusinessProposalState = {
 
 function businessProposalReducer(
   state: BusinessProposalState,
-  action: BusinessProposalAction,
+  action: BusinessProposalAction
 ): BusinessProposalState {
   switch (action.type) {
     case "SET_DATA":
@@ -74,7 +75,7 @@ export default function BusinessProposals({
         deleteBase64ImageFromFirebase(
           businessProposal!.image,
           businessProposal!.name,
-          "business-proposals",
+          "business-proposals"
         ),
       ]);
       dispatch({ type: "DELETE_SUCCESS" });
@@ -86,6 +87,8 @@ export default function BusinessProposals({
     }
   };
 
+  const { isAuthenticated } = useAuth();
+
   return (
     <PageCenteringWrapper>
       {businessProposal ? (
@@ -96,25 +99,27 @@ export default function BusinessProposals({
           <p className="mt-2 text-xl text-center font-bold leading-8 text-ennovate-dark-blue opacity-70 mb-2">
             {businessProposal.description}
           </p>
-          <div>
-            <Link
-              href={`/admin/business-proposals?update=${businessProposal._id}`}
-            >
-              <button className="inline-flex mt-2 mb-4 py-2 px-4 bg-ennovate-main hover:bg-ennovate-dark-blue hover:font-extrabold text-white rounded-xl font-bold">
-                UPDATE
+          {isAuthenticated && (
+            <div>
+              <Link
+                href={`/admin/business-proposals?update=${businessProposal._id}`}
+              >
+                <button className="inline-flex mt-2 mb-4 py-2 px-4 bg-ennovate-main hover:bg-ennovate-dark-blue hover:font-extrabold text-white rounded-xl font-bold">
+                  UPDATE
+                </button>
+              </Link>
+              <button
+                className="ml-4 inline-flex mt-2 mb-4 py-2 px-4 bg-ennovate-main hover:bg-ennovate-dark-blue hover:font-extrabold text-white rounded-xl font-bold"
+                onClick={() => dispatch({ type: "OPEN_DELETE_MODAL" })}
+              >
+                DELETE
               </button>
-            </Link>
-            <button
-              className="ml-4 inline-flex mt-2 mb-4 py-2 px-4 bg-ennovate-main hover:bg-ennovate-dark-blue hover:font-extrabold text-white rounded-xl font-bold"
-              onClick={() => dispatch({ type: "OPEN_DELETE_MODAL" })}
-            >
-              DELETE
-            </button>
-          </div>
+            </div>
+          )}
           <embed
             src={businessProposal.drive}
             type="application/pdf"
-            className="w-screen max-w-screen-md h-[600px] rounded-lg mx-8"
+            className="w-screen max-w-screen-md h-[600px] rounded-lg mx-8 mt-4"
           />
         </>
       ) : (
