@@ -37,7 +37,7 @@ function AdminAction({
           href={addHref}
           className="inline-flex items-center px-3 py-2 text-md font-medium text-center text-white bg-ennovate-main rounded-lg hover:bg-ennovate-dark-blue ml-2"
         >
-          Add More
+          Add
         </a>
       </div>
     </div>
@@ -66,7 +66,7 @@ export default function Admin() {
                 key={index}
               />
             );
-          },
+          }
         )}
       </div>
     </div>

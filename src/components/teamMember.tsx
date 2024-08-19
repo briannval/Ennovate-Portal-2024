@@ -35,7 +35,7 @@ const initialState: TeamMemberState = {
 
 const teamMemberReducer = (
   state: TeamMemberState,
-  action: TeamMemberAction,
+  action: TeamMemberAction
 ): TeamMemberState => {
   switch (action.type) {
     case "IMAGE_LOADED":
@@ -134,13 +134,13 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
           <>
             <button
               onClick={() => dispatch({ type: "OPEN_DELETE_MODAL" })}
-              className="absolute rounded-2xl font-extrabold text-xl top-2 right-2 bg-ennovate-yellow text-white py-2 px-4 rounded"
+              className="absolute rounded-2xl font-bold hover:font-extrabold text-xl top-2 right-2 bg-ennovate-yellow bg-opacity-70 hover:bg-opacity-100 text-white py-2 px-4 rounded"
             >
               -
             </button>
             <button
               onClick={handleUpdate}
-              className="absolute rounded-2xl font-extrabold text-xl top-2 right-14 bg-ennovate-yellow text-white py-2 px-4 rounded"
+              className="absolute rounded-2xl font-bold hover:font-extrabold text-xl top-2 right-14 bg-ennovate-yellow bg-opacity-70 hover:bg-opacity-100 text-white py-2 px-4 rounded"
             >
               ?
             </button>
