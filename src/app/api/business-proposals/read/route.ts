@@ -4,7 +4,7 @@ import BusinessProposal from "@/models/BusinessProposal";
 import { redis } from "@/lib/redis";
 import { CACHE_KEY_EXPIRY_TIME } from "@/constants/actions";
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
     await connectToDatabase();
 

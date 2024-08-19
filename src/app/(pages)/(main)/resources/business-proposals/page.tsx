@@ -28,7 +28,7 @@ export default function BusinessProposals() {
 
   useEffect(() => {
     const initializeData = async () => {
-      const res = await axios.get("/api/business-proposals/read");
+      const res = await axios.post("/api/business-proposals/read");
       setBusinessProposals(res.data);
     };
 
