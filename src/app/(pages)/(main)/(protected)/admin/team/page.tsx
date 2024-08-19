@@ -9,7 +9,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
@@ -24,16 +24,11 @@ const teamMemberSchema = z.object({
 
 type TeamMemberFormData = z.infer<typeof teamMemberSchema>;
 
-export default function AdminTeamMember({
-  searchParams,
-}: {
-  searchParams?: {
-    update?: string;
-  };
-}) {
+export default function AdminTeamMember() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const updateId: string = searchParams?.update || "";
+  const searchParams = useSearchParams();
+  const updateId: string = searchParams.get("update") || "";
 
   const router = useRouter();
 
@@ -77,7 +72,7 @@ export default function AdminTeamMember({
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue],
+    [setValue]
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
