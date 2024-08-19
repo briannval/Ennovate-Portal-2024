@@ -46,7 +46,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="h-full flex items-center justify-center bg-white">
+    <div className="h-full flex items-center justify-center bg-white mx-8">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-xl w-full bg-white p-8 border-2 border-ennovate-gray shadow-xl rounded-lg"
