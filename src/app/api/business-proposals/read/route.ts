@@ -6,20 +6,16 @@ import { CACHE_KEY_EXPIRY_TIME } from "@/constants/actions";
 
 export async function GET(_: NextRequest) {
   try {
-    console.log("test");
-
     await connectToDatabase();
 
     const cacheKey = "businessProposal";
     const cachedValue = await redis.get(cacheKey);
 
     if (cachedValue) {
-      console.log("cache");
       return NextResponse.json(JSON.parse(cachedValue));
     }
 
     const businessProposals = await BusinessProposal.find({});
-    console.log(businessProposals);
 
     await redis
       .pipeline()

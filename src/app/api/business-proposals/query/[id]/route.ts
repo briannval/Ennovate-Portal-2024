@@ -9,7 +9,6 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    console.log("test");
     await connectToDatabase();
 
     const { id } = params;
