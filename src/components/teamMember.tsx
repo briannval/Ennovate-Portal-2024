@@ -13,6 +13,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { ITeamMember } from "@/models/TeamMember";
 import axios from "axios";
+import Link from "next/link";
 
 interface TeamMemberState {
   isHovered: boolean;
@@ -39,7 +40,7 @@ const initialState: TeamMemberState = {
 
 const teamMemberReducer = (
   state: TeamMemberState,
-  action: TeamMemberAction,
+  action: TeamMemberAction
 ): TeamMemberState => {
   switch (action.type) {
     case "IMAGE_LOADED":
@@ -82,14 +83,6 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
     }
   };
 
-  const handleUpdate = async () => {
-    try {
-      router.push(`/admin/team?update=${teamMember._id}`);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   const handleDelete = async () => {
     try {
       dispatch({ type: "DELETING_MEMBER" });
@@ -97,7 +90,7 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
         deleteBase64ImageFromFirebase(
           teamMember.image,
           teamMember.name,
-          "team-members",
+          "team-members"
         ),
         axios.delete(`/api/team/delete/${teamMember._id}`),
       ]);
@@ -142,12 +135,11 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
             >
               -
             </button>
-            <button
-              onClick={handleUpdate}
-              className="absolute rounded-2xl font-bold hover:font-extrabold text-xl top-2 right-14 bg-ennovate-yellow bg-opacity-70 hover:bg-opacity-100 text-white py-2 px-4 rounded"
-            >
-              ?
-            </button>
+            <Link href={`/admin/team?update=${teamMember._id}`}>
+              <button className="absolute rounded-2xl font-bold hover:font-extrabold text-xl top-2 right-14 bg-ennovate-yellow bg-opacity-70 hover:bg-opacity-100 text-white py-2 px-4 rounded">
+                ?
+              </button>
+            </Link>
           </>
         )}
         {/* Loading State */}
