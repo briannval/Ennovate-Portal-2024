@@ -8,10 +8,10 @@ function TimeUnit({ value, label }: { value: number; label: string }) {
   return (
     <div className="timer flex-1">
       <div className="rounded-xl border-2 border-ennovate-dark-blue flex items-center justify-center flex-col gap-0 aspect-square p-2 sm:p-4 md:p-8 h-64 w-64">
-        <h3 className="countdown-element font-manrope font-extrabold text-6xl sm:text-7xl md:text-9xl text-ennovate-dark-blue text-center">
+        <h3 className="countdown-element font-manrope font-extrabold text-7xl md:text-9xl text-ennovate-dark-blue text-center">
           {value}
         </h3>
-        <p className="text-xs sm:text-sm md:text-xl capitalize font-normal text-ennovate-dark-blue text-center w-full">
+        <p className="text-sm md:text-xl capitalize font-normal text-ennovate-dark-blue text-center w-full">
           {label}
         </p>
       </div>
@@ -40,7 +40,7 @@ export default function Comp() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col items-center justify-center w-full max-w-screen-sm gap-1.5 md:gap-4 md:flex-row count-down-main md:max-w-screen-xl">
+      <div className="flex flex-col items-center justify-center w-full max-w-screen-sm gap-1.5 lg:gap-4 lg:flex-row count-down-main lg:max-w-screen-xl py-16 lg:py-0">
         <TimeUnit value={days} label="DAYS" />
         <TimeUnit value={hours} label="HOURS" />
         <TimeUnit value={minutes} label="MINUTES" />
