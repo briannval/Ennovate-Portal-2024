@@ -9,7 +9,7 @@ const About = () => {
   useEffect(() => {
     const intervalId: NodeJS.Timeout = setInterval(() => {
       setCurrentImageIndex(
-        (prevIndex) => (prevIndex + 1) % ABOUT_ENNOVATE_IMAGES.length,
+        (prevIndex) => (prevIndex + 1) % ABOUT_ENNOVATE_IMAGES.length
       );
     }, 4000);
 
@@ -25,7 +25,10 @@ const About = () => {
   });
 
   return (
-    <div className="overflow-hidden bg-white py-24 scroll-mt-20" id="about">
+    <div
+      className="overflow-hidden bg-white py-24 scroll-mt-20 mx-8"
+      id="about"
+    >
       <div className="mx-auto max-w-screen-xl ">
         <div className="mx-auto grid max-w-screen-xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:pr-8 lg:pt-4 mx-8">

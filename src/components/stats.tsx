@@ -22,7 +22,7 @@ const AnimatedNumber = ({ n }: { n: number }) => {
 
 const Stats = () => {
   return (
-    <section className="flex flex-col my-20 scroll-mt-20" id="stats">
+    <section className="flex flex-col my-20 scroll-mt-20 mx-8" id="stats">
       <p className="mt-2 text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl">
         Our Impact
       </p>

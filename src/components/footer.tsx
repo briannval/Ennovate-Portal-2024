@@ -6,8 +6,8 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-ennovate-main py-8 w-full">
-      <div className="flex flex-col items-center">
+    <footer className="bg-ennovate-main py-8 w-screen">
+      <div className="flex flex-col items-center px-8">
         <h2 className="font-bold text-xl md:text-2xl mb-6 text-center text-white">
           Interested in bringing Ennovate to your class?
         </h2>

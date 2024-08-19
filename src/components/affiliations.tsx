@@ -5,7 +5,7 @@ import Marquee from "react-fast-marquee";
 const Affiliations = () => {
   return (
     <section
-      className="flex flex-col my-20 scroll-mt-20 max-w-screen-xl"
+      className="flex flex-col my-20 scroll-mt-20 max-w-screen-xl w-5/6 mx-8"
       id="stats"
     >
       <p className="mt-2 text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl">
