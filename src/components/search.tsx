@@ -17,7 +17,7 @@ const Search = () => {
       params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
-  }, 300);
+  }, 150);
 
   return (
     <form className="max-w-xl w-full mx-auto mt-4">
