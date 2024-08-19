@@ -72,7 +72,7 @@ export default function AdminTeamMember() {
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue]
+    [setValue],
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
