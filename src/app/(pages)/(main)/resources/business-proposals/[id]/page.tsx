@@ -31,7 +31,7 @@ const initialState: BusinessProposalState = {
 
 function businessProposalReducer(
   state: BusinessProposalState,
-  action: BusinessProposalAction,
+  action: BusinessProposalAction
 ): BusinessProposalState {
   switch (action.type) {
     case "SET_DATA":
@@ -75,7 +75,7 @@ export default function BusinessProposals({
         deleteBase64ImageFromFirebase(
           businessProposal!.image,
           businessProposal!.name,
-          "business-proposals",
+          "business-proposals"
         ),
       ]);
       dispatch({ type: "DELETE_SUCCESS" });
@@ -119,7 +119,7 @@ export default function BusinessProposals({
           <embed
             src={businessProposal.drive}
             type="application/pdf"
-            className="w-screen max-w-screen-md h-[600px] rounded-lg mx-8 mt-4"
+            className="w-5/6 max-w-screen-md h-[600px] rounded-lg mx-8 mt-4"
           />
         </>
       ) : (
