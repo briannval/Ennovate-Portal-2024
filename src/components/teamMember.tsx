@@ -1,7 +1,11 @@
 "use client";
 
 import { storage } from "@/lib/firebase";
-import { getImageExtensionFromFirebaseLink, urlizeString } from "@/utils/utils";
+import {
+  deleteBase64ImageFromFirebase,
+  getImageExtensionFromFirebaseLink,
+  urlizeString,
+} from "@/utils/utils";
 import { ref, deleteObject } from "firebase/storage";
 import Image from "next/image";
 import { useReducer } from "react";
@@ -35,7 +39,7 @@ const initialState: TeamMemberState = {
 
 const teamMemberReducer = (
   state: TeamMemberState,
-  action: TeamMemberAction,
+  action: TeamMemberAction
 ): TeamMemberState => {
   switch (action.type) {
     case "IMAGE_LOADED":
@@ -89,12 +93,12 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
   const handleDelete = async () => {
     try {
       dispatch({ type: "DELETING_MEMBER" });
-      const urlizedName = urlizeString(teamMember.name);
-      const fileExtension = getImageExtensionFromFirebaseLink(teamMember.image);
-      const imagePath = `team-members/${urlizedName}.${fileExtension}`;
-      const storageRef = ref(storage, imagePath);
       await Promise.all([
-        deleteObject(storageRef),
+        deleteBase64ImageFromFirebase(
+          teamMember.image,
+          teamMember.name,
+          "team-members"
+        ),
         axios.delete(`/api/team/delete/${teamMember._id}`),
       ]);
       dispatch({ type: "DELETED_MEMBER" });
@@ -116,7 +120,7 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
         <Image
           className="absolute w-full h-full object-cover object-top rounded-[25px] transition-transform duration-300 ease-in-out transform hover:scale-105"
           src={teamMember.image}
-          alt={`${name}'s picture`}
+          alt={`${teamMember.name}'s picture`}
           fill={true}
           onLoad={() => dispatch({ type: "IMAGE_LOADED" })}
         />
