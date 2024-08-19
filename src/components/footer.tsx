@@ -23,6 +23,7 @@ const Footer = () => {
               <Link
                 key={index}
                 href={footerSocialsLink.href}
+                target="_blank"
                 className="max-w-[20px] md:max-w-[30px] m-[5px]"
               >
                 <Image
