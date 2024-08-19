@@ -72,7 +72,7 @@ export default function AdminTeamMember() {
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue],
+    [setValue]
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -111,7 +111,7 @@ export default function AdminTeamMember() {
       setImagePreview(null);
 
       if (updateId) {
-        router.push("/team");
+        window.location.href = "/team";
       }
     } catch (e) {
       setIsSubmitting(false);
