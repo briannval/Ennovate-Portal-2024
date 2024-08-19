@@ -12,7 +12,7 @@ function AdminAction({
   addHref,
 }: IAdminResourcesAction) {
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+    <div className="w-full bg-white border border-gray-200 rounded-lg shadow">
       <div className="relative w-full h-48">
         <Image
           src={image}
@@ -46,14 +46,14 @@ function AdminAction({
 
 export default function Admin() {
   return (
-    <div className="flex flex-col p-20">
+    <div className="flex flex-col px-8 py-8 max-w-screen-xl w-screen">
       <p className="text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl">
         Admin Dashboard
       </p>
       <p className="mt-2 text-xl text-center font-bold leading-8 text-ennovate-dark-blue opacity-70 mb-8">
         Update teachers and students with one click.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {[...ADMIN_RESOURCES_ACTIONS].map(
           ({ image, heading, subheading, viewHref, addHref }, index) => {
             return (
@@ -66,7 +66,7 @@ export default function Admin() {
                 key={index}
               />
             );
-          },
+          }
         )}
       </div>
     </div>
