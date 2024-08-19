@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import useBreakpoint from "@/hooks/useBreakpoint";
 
 interface PathNameObjProps {
   label: string;
@@ -34,8 +33,6 @@ const Breadcrumb = () => {
     });
   } // for the drive embed page
 
-  const breakpoint = useBreakpoint();
-
   return (
     <nav className="flex mx-8" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-3">
@@ -43,12 +40,11 @@ const Breadcrumb = () => {
           <li key={index} className="inline-flex items-center">
             {index !== pathnameObj.length - 1 ? (
               <div className="flex items-center space-x-3 text-ennovate-dark-blue">
-                <span className="text-base text-ennovate-dark-blue font-semibold text-lg md:text-xl">
-                  <Link href={item.href!}>
-                    {["2xl", "xl", "lg"].includes(breakpoint)
-                      ? item.label
-                      : `${item.label.slice(0, 5)}..`}
-                  </Link>
+                <span className="text-base text-ennovate-dark-blue font-semibold text-lg md:text-xl block md:hidden">
+                  <Link href={item.href!}>{`${item.label.slice(0, 4)}..`}</Link>
+                </span>
+                <span className="text-base text-ennovate-dark-blue font-semibold text-lg md:text-xl hidden md:block">
+                  <Link href={item.href!}>{item.label}</Link>
                 </span>
                 <ArrowIcon />
               </div>
