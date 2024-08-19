@@ -7,7 +7,7 @@ import {
 } from "@/utils/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
@@ -22,16 +22,11 @@ const businessProposalSchema = z.object({
 
 type BusinessProposalFormData = z.infer<typeof businessProposalSchema>;
 
-export default function AdminBusinessProposal({
-  searchParams,
-}: {
-  searchParams?: {
-    update?: string;
-  };
-}) {
+export default function AdminBusinessProposal() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const updateId: string = searchParams?.update || "";
+  const searchParams = useSearchParams();
+  const updateId: string = searchParams.get("update") || "";
 
   const router = useRouter();
 
@@ -50,7 +45,7 @@ export default function AdminBusinessProposal({
       if (updateId) {
         console.log(updateId);
         const res = await axios.get(
-          `/api/business-proposals/query/${updateId}`,
+          `/api/business-proposals/query/${updateId}`
         );
         const businessProposal = res.data;
 
@@ -78,7 +73,7 @@ export default function AdminBusinessProposal({
       };
       reader.readAsDataURL(acceptedFiles[acceptedFiles.length - 1]);
     },
-    [setValue],
+    [setValue]
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -95,7 +90,7 @@ export default function AdminBusinessProposal({
         imageUrl = await uploadBase64ImageToFirebase(
           image,
           name,
-          "business-proposals",
+          "business-proposals"
         );
       }
 
