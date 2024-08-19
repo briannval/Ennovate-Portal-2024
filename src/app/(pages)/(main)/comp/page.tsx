@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 const FINAL_COMP_DATE = new Date("2025-01-25T00:00:00-08:00");
+const FINAL_COMP_DATE_STR = "January 25th";
 
 function TimeUnit({ value, label }: { value: number; label: string }) {
   return (
@@ -40,12 +41,16 @@ export default function Comp() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col items-center justify-center w-full max-w-screen-sm gap-1.5 lg:gap-4 lg:flex-row count-down-main lg:max-w-screen-xl py-16 lg:py-0">
+      <div className="flex flex-col items-center justify-center w-full max-w-screen-sm gap-1.5 lg:gap-4 lg:flex-row count-down-main lg:max-w-screen-xl pt-16 lg:pt-0">
         <TimeUnit value={days} label="DAYS" />
         <TimeUnit value={hours} label="HOURS" />
         <TimeUnit value={minutes} label="MINUTES" />
         <TimeUnit value={seconds} label="SECONDS" />
       </div>
+      <h3 className="text-center font-bold text-xl md:text-2xl lg:text-3xl text-ennovate-dark-blue my-4">
+        to final competition on{" "}
+        <span className="font-extrabold">{FINAL_COMP_DATE_STR}</span>!
+      </h3>
     </div>
   );
 }
