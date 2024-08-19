@@ -133,10 +133,10 @@ export default function AdminTeamMember() {
   );
 
   return (
-    <div className="h-full flex items-center justify-center bg-white">
+    <div className="h-full flex items-center justify-center bg-white m-8">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="max-w-xl w-full bg-white p-8 border-2 border-ennovate-gray shadow-xl rounded-lg m-20"
+        className="max-w-xl w-full bg-white p-8 border-2 border-ennovate-gray shadow-xl rounded-lg"
       >
         <p className="mt-2 text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl mb-6">
           Member {updateId ? "Updates" : "Registration"}
