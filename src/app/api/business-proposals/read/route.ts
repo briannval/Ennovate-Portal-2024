@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongoose";
 import BusinessProposal from "@/models/BusinessProposal";
 import { redis } from "@/lib/redis";
 import { CACHE_KEY_EXPIRY_TIME } from "@/constants/actions";
 
-export async function GET() {
+export async function GET(_: NextRequest) {
   try {
     await connectToDatabase();
 
