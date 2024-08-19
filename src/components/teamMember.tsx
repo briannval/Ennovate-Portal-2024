@@ -40,7 +40,7 @@ const initialState: TeamMemberState = {
 
 const teamMemberReducer = (
   state: TeamMemberState,
-  action: TeamMemberAction,
+  action: TeamMemberAction
 ): TeamMemberState => {
   switch (action.type) {
     case "IMAGE_LOADED":
@@ -90,7 +90,7 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
         deleteBase64ImageFromFirebase(
           teamMember.image,
           teamMember.name,
-          "team-members",
+          "team-members"
         ),
         axios.delete(`/api/team/delete/${teamMember._id}`),
       ]);
@@ -116,6 +116,7 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
           alt={`${teamMember.name}'s picture`}
           fill={true}
           onLoad={() => dispatch({ type: "IMAGE_LOADED" })}
+          priority
         />
         <div
           className="absolute inset-0 bg-gradient-to-t from-blue-600 via-transparent to-transparent transition-opacity duration-300 ease-in-out"

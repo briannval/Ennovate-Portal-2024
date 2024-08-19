@@ -17,6 +17,7 @@ const BusinessProposal = ({
             alt="Noteworthy technology acquisitions 2021"
             layout="fill"
             objectFit="cover"
+            priority
           />
         </div>
         <div className="p-5">
