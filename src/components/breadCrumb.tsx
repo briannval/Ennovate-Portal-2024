@@ -17,14 +17,14 @@ const Breadcrumb = () => {
     p
       .split("-")
       .map((c) => c.charAt(0).toUpperCase() + c.slice(1))
-      .join(" "),
+      .join(" ")
   );
 
   const pathnameObj: PathNameObjProps[] = pathnameSplitHumanized.map(
     (p, i) => ({
       label: p,
       href: "/" + pathnameSplit.slice(0, i + 1).join("/"),
-    }),
+    })
   );
 
   if (initPathnameSplit.length > 3) {
@@ -40,14 +40,18 @@ const Breadcrumb = () => {
           <li key={index} className="inline-flex items-center">
             {index !== pathnameObj.length - 1 ? (
               <div className="flex items-center space-x-3 text-ennovate-dark-blue">
-                <span className="text-base text-ennovate-dark-blue font-semibold text-xl">
-                  <Link href={item.href!}>{item.label}</Link>
+                <span className="text-base text-ennovate-dark-blue font-semibold text-lg md:text-xl">
+                  <Link href={item.href!}>
+                    {window.innerWidth >= 768 // md in tailwind
+                      ? item.label
+                      : `${item.label.slice(0, 5)}..`}
+                  </Link>
                 </span>
                 <ArrowIcon />
               </div>
             ) : (
               <div className="flex items-center space-x-3 text-ennovate-dark-blue">
-                <span className="text-base text-ennovate-dark-blue font-bold text-xl">
+                <span className="text-base text-ennovate-dark-blue font-bold text-lg md:text-xl">
                   {item.label}
                 </span>
                 {pathnameObj.length === 1 && <ArrowIcon />}
