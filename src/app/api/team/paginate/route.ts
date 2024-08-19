@@ -23,8 +23,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(JSON.parse(cachedValue));
     }
 
+    let finalQuery = query
+      .split(" ")
+      .map((t: string) => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase())
+      .join(" ");
+
+    console.log(finalQuery);
+
     if (query) {
-      queryObject.$text = { $search: query };
+      queryObject = {
+        $or: [
+          { name: { $regex: finalQuery, $options: "i" } },
+          { title: { $regex: finalQuery, $options: "i" } },
+        ],
+      };
     }
 
     const skip = (currentPage - 1) * TEAM_MEMBERS_PER_PAGE;
@@ -50,7 +62,7 @@ export async function POST(request: NextRequest) {
   } catch (e) {
     return NextResponse.json(
       { message: "Failed to fetch team members" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
