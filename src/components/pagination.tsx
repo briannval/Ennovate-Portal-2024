@@ -14,20 +14,26 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
     replace(`${pathname}?${params.toString()}`);
   };
 
+  const hasNoPrevious = currentPage === 1 || totalPages === 0;
+
+  const hasNoNext = currentPage === totalPages || totalPages === 0;
+
   return (
     <div className="flex mb-10">
       <button
         onClick={() => createPageUrl(currentPage - 1)}
-        disabled={currentPage === 1 || totalPages === 0}
-        className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-ennovate-main border border-gray-300 rounded-lg hover:text-ennovate-gray"
+        disabled={hasNoPrevious}
+        style={{ opacity: hasNoPrevious ? 0.7 : 1 }}
+        className="flex items-center justify-center px-4 py-2 text-lg font-bold text-white bg-ennovate-main border border-gray-300 rounded-lg hover:bg-ennovate-dark-blue"
       >
         Previous
       </button>
 
       <button
         onClick={() => createPageUrl(currentPage + 1)}
-        disabled={currentPage === totalPages || totalPages === 0}
-        className="flex items-center justify-center px-4 h-10 ms-3 text-base font-medium text-white bg-ennovate-main border border-gray-300 rounded-lg hover:text-ennovate-gray"
+        disabled={hasNoNext}
+        style={{ opacity: hasNoNext ? 0.7 : 1 }}
+        className="flex items-center justify-center px-4 py-2  ms-3 text-lg font-bold text-white bg-ennovate-main border border-gray-300 rounded-lg hover:bg-ennovate-dark-blue"
       >
         Next
       </button>

@@ -32,7 +32,7 @@ const initialState: TeamMembersState = {
 
 const teamMembersReducer = (
   state: TeamMembersState,
-  action: TeamMembersAction,
+  action: TeamMembersAction
 ): TeamMembersState => {
   switch (action.type) {
     case "FETCH_START":
@@ -88,7 +88,7 @@ export default function Team({
 
   return (
     <PageCenteringWrapper>
-      <h1 className="text-center font-extrabold text-5xl mt-8 text-ennovate-dark-blue">
+      <h1 className="text-center font-extrabold text-5xl mt-8 text-ennovate-dark-blue mx-8">
         Get to know the team!
       </h1>
       <Search />
