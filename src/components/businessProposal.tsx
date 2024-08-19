@@ -9,7 +9,7 @@ const BusinessProposal = ({
 }) => {
   return (
     <Link href={`/resources/business-proposals/${businessProposal._id}`}>
-      <div className="max-w-sm bg-white border border-ennovate-main rounded-lg hover:shadow hover:shadow-ennovate-main">
+      <div className="max-w-sm h-96 bg-white border border-ennovate-main rounded-lg hover:shadow hover:shadow-ennovate-main">
         <div className="relative w-full h-64">
           <Image
             className="rounded-t-lg"
