@@ -40,6 +40,7 @@ export default function Resources() {
             layout="fill"
             objectFit="cover"
             className="rounded-lg"
+            priority
           />
         </div>
         <Link href={ADMIN_RESOURCES_ACTIONS[activeTab].viewHref}>
