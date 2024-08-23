@@ -1,14 +1,14 @@
 export const FOOTER_SOCIALS_LINKS = [
   {
-    img: "/logos/email-logo.png",
+    img: "/logos/email-logo.webp",
     href: "mailto:admin@ennovateubc.org",
   },
   {
-    img: "/logos/ig-logo.png",
+    img: "/logos/ig-logo.webp",
     href: "https://www.instagram.com/ennovateubc/",
   },
   {
-    img: "/logos/fb-logo.png",
+    img: "/logos/fb-logo.webp",
     href: "https://www.facebook.com/ennovateubc/",
   },
 ];
