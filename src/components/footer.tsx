@@ -11,9 +11,11 @@ const Footer = () => {
         <h2 className="font-bold text-xl md:text-2xl mb-6 text-center text-white">
           Interested in bringing Ennovate to your class?
         </h2>
-        <button className="text-ennovate-dark-blue text-xl md:text-2xl font-extrabold bg-ennovate-yellow hover:bg-white rounded-3xl py-2 px-6 text-center mb-12">
-          CONTACT US
-        </button>
+        <Link href="mailto:ennovateubc@gmail.com">
+          <button className="text-ennovate-dark-blue text-xl md:text-2xl font-extrabold bg-ennovate-yellow hover:bg-white rounded-3xl py-2 px-6 text-center mb-12">
+            CONTACT US
+          </button>
+        </Link>
         <h2 className="font-extralight text-xl md:text-2xl mb-6 text-center text-white">
           Made with love from the Ennovate Team ♥
         </h2>
