@@ -1,5 +1,5 @@
 export const AFFILIATION_IMAGES = [
-  { src: "/ams-logo.png", name: "AMS" },
-  { src: "/enactus-logo.png", name: "Enactus" },
-  { src: "/ubc-logo.png", name: "UBC" },
+  { src: "/logos/ams-logo.webp", name: "AMS" },
+  { src: "/logos/enactus-logo.webp", name: "Enactus" },
+  { src: "/logos/ubc-logo.webp", name: "UBC" },
 ];

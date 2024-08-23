@@ -9,7 +9,7 @@ const Landing = () => {
       {/* Background Image */}
       <div className="h-full">
         <Image
-          src="/landing-banner.png"
+          src="/ennovate/landing-banner.webp"
           alt="Landing Banner Image"
           fill={true}
           className="object-cover"
@@ -29,7 +29,7 @@ const Landing = () => {
           {/* Logo Image */}
           <div className="relative h-36 w-36 md:h-52 md:w-52 ml-4">
             <Image
-              src="/ennovate-w.png"
+              src="/ennovate/ennovate-w.webp"
               alt="Logo"
               fill
               className="object-contain"
