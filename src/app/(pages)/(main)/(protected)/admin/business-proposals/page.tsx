@@ -7,7 +7,7 @@ import {
 } from "@/utils/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
@@ -27,8 +27,6 @@ export default function AdminBusinessProposal() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const searchParams = useSearchParams();
   const updateId: string = searchParams.get("update") || "";
-
-  const router = useRouter();
 
   const {
     register,

@@ -79,6 +79,7 @@ export default function BusinessProposals({
         ),
       ]);
       dispatch({ type: "DELETE_SUCCESS" });
+      dispatch({ type: "CLOSE_DELETE_MODAL" });
       router.push("/resources/business-proposals");
     } catch (error) {
       console.error("Failed to delete business proposal", error);

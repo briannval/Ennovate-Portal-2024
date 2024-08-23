@@ -1,15 +1,12 @@
 "use client";
 
-import { storage } from "@/lib/firebase";
 import {
-  getImageExtensionFromBase64,
-  urlizeString,
+  uploadBase64ImageToFirebase,
   validateFirebaseImageLink,
 } from "@/utils/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
@@ -29,8 +26,6 @@ export default function AdminTeamMember() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const searchParams = useSearchParams();
   const updateId: string = searchParams.get("update") || "";
-
-  const router = useRouter();
 
   const {
     register,
@@ -86,12 +81,11 @@ export default function AdminTeamMember() {
       if (updateId && validateFirebaseImageLink(image)) {
         imageUrl = image;
       } else {
-        const urlizedName = urlizeString(name);
-        const fileExtension = getImageExtensionFromBase64(image);
-        const imagePath = `team-members/${urlizedName}.${fileExtension}`;
-        const storageRef = ref(storage, imagePath);
-        await uploadString(storageRef, image, "data_url");
-        imageUrl = await getDownloadURL(storageRef);
+        imageUrl = await uploadBase64ImageToFirebase(
+          image,
+          name,
+          "team-members"
+        );
       } // handle update case where image is not base64 but firebase link (MUST be update case)
 
       const body = {
