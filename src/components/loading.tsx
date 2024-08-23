@@ -4,7 +4,7 @@ const Loading = () => {
   return (
     <div className="flex flex-col">
       <Image
-        src="/ennovate-sleep.gif"
+        src="/ennovate/ennovate-sleep.gif"
         alt="Loading State"
         width={300}
         height={300}

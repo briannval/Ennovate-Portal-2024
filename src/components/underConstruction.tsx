@@ -11,7 +11,7 @@ const UnderConstruction = () => {
     <div className="flex items-center justify-center w-full h-full">
       <div className="text-center">
         <Image
-          src="/ennovate-sleep.gif"
+          src="/ennovate/ennovate-sleep.gif"
           alt="Under Construction"
           width={350}
           height={350}

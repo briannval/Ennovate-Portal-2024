@@ -57,7 +57,7 @@ const Navbar = () => {
           href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <img src="/ennovate-w.png" className="h-16" alt="Logo" />
+          <img src="/ennovate/ennovate-w.png" className="h-16" alt="Logo" />
         </Link>
         <div className="flex lg:order-2 space-x-3 lg:space-x-0 rtl:space-x-reverse">
           <button
