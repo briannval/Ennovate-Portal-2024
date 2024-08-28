@@ -1,5 +1,5 @@
-import UnderConstruction from "@/components/underConstruction";
+import BlogSection from "@/components/blogSection";
 
 export default function Blog() {
-  return <UnderConstruction />;
+  return <BlogSection featured={false} />;
 }
