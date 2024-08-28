@@ -66,6 +66,7 @@ export async function POST(req: NextRequest) {
           subtitle,
           readingTime,
           dateUploaded,
+          mediumUrl: blog.mediumUrl,
           featured: blog.featured,
         };
       })
