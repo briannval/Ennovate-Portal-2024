@@ -1,56 +1,87 @@
+import { CACHE_KEY_EXPIRY_TIME } from "@/constants/actions";
+import { connectToDatabase } from "@/lib/mongoose";
+import { redis } from "@/lib/redis";
+import Blog from "@/models/Blog";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import { parse } from "node-html-parser";
 
-export async function POST(_: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const url =
-      "https://medium.com/@ennovateubc/alumni-spotlight-tidal-rings-ff66d0ea2b51";
+    await connectToDatabase();
 
-    const res = await axios.get(url);
+    const body = await req.json();
+    const cacheKey = body.featured ? "blog?featured" : "blog";
 
-    const html = res.data;
+    const cachedValue = await redis.get(cacheKey);
+    if (cachedValue) {
+      return NextResponse.json(JSON.parse(cachedValue));
+    }
 
-    const root = parse(html);
+    let blogs;
+    if (body.featured) {
+      blogs = await Blog.find({ featured: true });
+    } else {
+      blogs = await Blog.find();
+    }
 
-    const coverImage = root
-      .querySelector('meta[property="og:image"]')!
-      .getAttribute("content");
+    const blogData = await Promise.all(
+      blogs.map(async (blog) => {
+        const url = blog.mediumUrl;
 
-    const title = root
-      .querySelector('meta[property="og:title"]')!
-      .getAttribute("content");
+        const res = await axios.get(url);
+        const html = res.data;
+        const root = parse(html);
 
-    const subtitle = root
-      .querySelector('meta[property="og:description"]')!
-      .getAttribute("content");
+        const coverImage = root
+          .querySelector('meta[property="og:image"]')
+          ?.getAttribute("content");
 
-    const readingTime = root
-      .querySelector('meta[name="twitter:data1"]')!
-      .getAttribute("content");
+        const title = root
+          .querySelector('meta[property="og:title"]')
+          ?.getAttribute("content");
 
-    let dateUploaded = new Date(
-      root
-        .querySelector('meta[property="article:published_time"]')!
-        .getAttribute("content")
-        ?.split("T")[0]!
-    ).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
+        const subtitle = root
+          .querySelector('meta[property="og:description"]')
+          ?.getAttribute("content");
 
-    return NextResponse.json({
-      coverImage,
-      title,
-      subtitle,
-      readingTime,
-      dateUploaded,
-    });
+        const readingTime = root
+          .querySelector('meta[name="twitter:data1"]')
+          ?.getAttribute("content");
+
+        const dateUploaded = new Date(
+          root
+            .querySelector('meta[property="article:published_time"]')!
+            .getAttribute("content")
+            ?.split("T")[0]!
+        ).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
+
+        return {
+          coverImage,
+          title,
+          subtitle,
+          readingTime,
+          dateUploaded,
+          featured: blog.featured,
+        };
+      })
+    );
+
+    await redis
+      .pipeline()
+      .set(cacheKey, JSON.stringify(blogData))
+      .expire(cacheKey, CACHE_KEY_EXPIRY_TIME)
+      .exec();
+
+    return NextResponse.json(blogData);
   } catch (e) {
     console.log(e);
     return NextResponse.json(
-      { message: "Failed to fetch business proposal" },
+      { message: "Failed to fetch blog data" },
       { status: 500 }
     );
   }
