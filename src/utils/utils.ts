@@ -43,7 +43,7 @@ export const validateFirebaseImageLink = (firebaseLink: string) => {
 export async function uploadBase64ImageToFirebase(
   image: string,
   name: string,
-  folder: string,
+  folder: string
 ) {
   try {
     const urlizedName = urlizeString(name);
@@ -61,7 +61,7 @@ export async function uploadBase64ImageToFirebase(
 export async function deleteBase64ImageFromFirebase(
   image: string,
   name: string,
-  folder: string,
+  folder: string
 ) {
   try {
     const urlizedName = urlizeString(name);
@@ -73,3 +73,5 @@ export async function deleteBase64ImageFromFirebase(
     throw new Error("Failed to delete image");
   }
 }
+
+export async function parseMediumMetadata(html: string) {}

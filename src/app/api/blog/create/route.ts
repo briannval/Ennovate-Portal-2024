@@ -1,17 +1,17 @@
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
-import BusinessProposal from "@/models/BusinessProposal";
+import Blog from "@/models/Blog";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
     await connectToDatabase();
 
-    const { name, description, drive, image } = await request.json();
+    const { mediumUrl, featured } = await request.json();
 
-    await BusinessProposal.create({ name, description, drive, image });
+    await Blog.create({ mediumUrl, featured });
 
-    await redis.del(["businessProposal"]);
+    await redis.del(["blog", "blog?featured"]);
 
     return NextResponse.json("Success");
   } catch (e) {

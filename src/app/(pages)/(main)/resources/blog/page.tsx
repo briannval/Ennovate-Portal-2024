@@ -1,5 +1,11 @@
-import UnderConstruction from "@/components/underConstruction";
+import BlogSection from "@/components/blogSection";
+import Loading from "@/components/loading";
+import { Suspense } from "react";
 
 export default function Blog() {
-  return <UnderConstruction />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <BlogSection featured={false} />
+    </Suspense>
+  );
 }
