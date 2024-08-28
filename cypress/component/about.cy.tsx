@@ -1,6 +1,6 @@
 import About from "@/components/about";
 
-describe("<AboutPage />", () => {
+describe("<About />", () => {
   it("should render and display expected content", () => {
     cy.mount(<About />);
 
