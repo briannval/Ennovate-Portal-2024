@@ -3,6 +3,7 @@ import mongoose, { Schema } from "mongoose";
 export interface IBlog {
   _id: string;
   mediumUrl: string;
+  featured: boolean;
 }
 
 mongoose.Promise = global.Promise;
@@ -12,6 +13,10 @@ const BlogSchema: Schema<IBlog> = new Schema<IBlog>({
     type: String,
     required: true,
     unique: true,
+  },
+  featured: {
+    type: Boolean,
+    default: false,
   },
 });
 
