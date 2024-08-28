@@ -68,6 +68,7 @@ export async function POST(req: NextRequest) {
           dateUploaded,
           mediumUrl: blog.mediumUrl,
           featured: blog.featured,
+          id: blog._id,
         };
       })
     );

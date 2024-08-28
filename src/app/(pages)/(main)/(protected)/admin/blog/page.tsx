@@ -30,17 +30,15 @@ export default function AdminBlog() {
 
   useEffect(() => {
     const setUpdateDefault = async () => {
-      /*
       if (updateId) {
-        const res = await axios.get(`/api/blogs/query/${updateId}`);
+        const res = await axios.get(`/api/blog/query/${updateId}`);
         const blog = res.data;
 
         reset({
           mediumUrl: blog.mediumUrl,
-          featured: blog.featured, // Set the default value for featured
+          featured: blog.featured,
         });
       }
-      */
     };
 
     setUpdateDefault();
