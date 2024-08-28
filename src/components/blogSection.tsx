@@ -60,7 +60,7 @@ export default function BlogSection({ featured }: { featured: boolean }) {
                   />
                 </div>
                 <div className="p-4 lg:p-6 transition-all duration-300 rounded-b-2xl group-hover:bg-gray-50">
-                  <span className="text-ennovate-main font-medium mb-3 block">
+                  <span className="text-ennovate-main text-lg font-medium mb-3 block">
                     {blog.dateUploaded}
                   </span>
                   <h4 className="text-xl text-gray-900 font-medium leading-8 mb-2">
