@@ -1,12 +1,30 @@
+"use client";
+
 import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
+import axios from "axios";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Test() {
+  const [img, setImg] = useState("");
+
+  useEffect(() => {
+    const setData = async () => {
+      const res = await axios.get("/api/blog/query/1");
+      console.log(res.data);
+    };
+    setData();
+  }, []);
+
   return (
     <PageCenteringWrapper>
-      <embed
-        src="https://drive.google.com/file/d/1ULMfyRjO2Tv2wtXPEB72Lsr7HN2ih-Xn/preview"
-        type="application/pdf"
-        className="w-screen max-w-screen-md h-[600px] rounded-lg"
+      <Image
+        src={
+          "https://miro.medium.com/v2/resize:fit:1200/1*yOKEz9kDZLy91JK1KuRGIw.png"
+        }
+        alt="test"
+        width={1000}
+        height={1000}
       />
     </PageCenteringWrapper>
   );
