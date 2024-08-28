@@ -30,17 +30,15 @@ export default function AdminBlog() {
 
   useEffect(() => {
     const setUpdateDefault = async () => {
-      /*
       if (updateId) {
-        const res = await axios.get(`/api/blogs/query/${updateId}`);
+        const res = await axios.get(`/api/blog/query/${updateId}`);
         const blog = res.data;
 
         reset({
           mediumUrl: blog.mediumUrl,
-          featured: blog.featured, // Set the default value for featured
+          featured: blog.featured,
         });
       }
-      */
     };
 
     setUpdateDefault();
@@ -58,13 +56,16 @@ export default function AdminBlog() {
 
     try {
       if (updateId) {
-        // await axios.put(`/api/blogs/update/${updateId}`, data);
+        await axios.put(`/api/blog/update/${updateId}`, body);
       } else {
         await axios.post("/api/blog/create", body);
       }
 
       setIsSubmitting(false);
       reset();
+      if (updateId) {
+        window.location.href = "/resources/blog";
+      }
     } catch (error) {
       setIsSubmitting(false);
     }

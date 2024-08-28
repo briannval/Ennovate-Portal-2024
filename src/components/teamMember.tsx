@@ -1,16 +1,9 @@
 "use client";
 
-import { storage } from "@/lib/firebase";
-import {
-  deleteBase64ImageFromFirebase,
-  getImageExtensionFromFirebaseLink,
-  urlizeString,
-} from "@/utils/utils";
-import { ref, deleteObject } from "firebase/storage";
+import { deleteBase64ImageFromFirebase } from "@/utils/utils";
 import Image from "next/image";
 import { useReducer } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { useRouter } from "next/navigation";
 import { ITeamMember } from "@/models/TeamMember";
 import axios from "axios";
 import Link from "next/link";
@@ -64,8 +57,6 @@ const teamMemberReducer = (
 
 const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
   const [state, dispatch] = useReducer(teamMemberReducer, initialState);
-
-  const router = useRouter();
 
   const { isHovered, isLoaded, toDelete, isDeleting } = state;
 
