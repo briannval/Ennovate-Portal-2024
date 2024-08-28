@@ -10,7 +10,8 @@
     "prepare": "husky",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\"",
     "check": "prettier --check \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\"",
-    "convert-to-webp": "./scripts/convert-images.sh"
+    "convert-to-webp": "./scripts/convert-images.sh",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -37,6 +38,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cypress": "^13.14.0",
     "husky": "^9.1.4",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
