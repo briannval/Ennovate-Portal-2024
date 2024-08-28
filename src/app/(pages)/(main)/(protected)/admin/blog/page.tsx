@@ -9,6 +9,7 @@ import { z } from "zod";
 
 const blogSchema = z.object({
   mediumUrl: z.string().url("Invalid Medium URL"),
+  featured: z.boolean().optional(),
 });
 
 type BlogFormData = z.infer<typeof blogSchema>;
@@ -29,21 +30,44 @@ export default function AdminBlog() {
 
   useEffect(() => {
     const setUpdateDefault = async () => {
+      /*
       if (updateId) {
         const res = await axios.get(`/api/blogs/query/${updateId}`);
         const blog = res.data;
 
         reset({
           mediumUrl: blog.mediumUrl,
+          featured: blog.featured, // Set the default value for featured
         });
       }
+      */
     };
 
     setUpdateDefault();
   }, [updateId, reset]);
 
   const onSubmit = async (data: BlogFormData) => {
-    // Submission logic will go here
+    setIsSubmitting(true);
+
+    const { mediumUrl, featured } = data;
+
+    const body = {
+      mediumUrl: mediumUrl,
+      featured: featured,
+    };
+
+    try {
+      if (updateId) {
+        // await axios.put(`/api/blogs/update/${updateId}`, data);
+      } else {
+        await axios.post("/api/blog/create", body);
+      }
+
+      setIsSubmitting(false);
+      reset();
+    } catch (error) {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -77,6 +101,22 @@ export default function AdminBlog() {
             </p>
           )}
         </div>
+
+        <div className="mb-5 flex items-center">
+          <label
+            htmlFor="featured"
+            className="text-lg font-bold text-ennovate-dark-blue"
+          >
+            Featured
+          </label>
+          <input
+            type="checkbox"
+            id="featured"
+            {...register("featured")}
+            className="h-5 w-5 text-ennovate-main rounded focus:ring-blue-500 focus:border-ennovate-main ml-2"
+          />
+        </div>
+
         <button
           type="submit"
           className="text-white text-lg font-bold bg-ennovate-main rounded-lg w-full px-5 py-2.5 text-center"
