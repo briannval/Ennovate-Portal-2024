@@ -2,13 +2,8 @@ import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import { parse } from "node-html-parser";
 
-export async function GET(
-  _: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function POST(_: NextRequest) {
   try {
-    const { id } = params;
-
     const url =
       "https://medium.com/@ennovateubc/alumni-spotlight-tidal-rings-ff66d0ea2b51";
 

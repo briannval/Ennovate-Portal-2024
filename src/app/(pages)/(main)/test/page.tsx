@@ -10,7 +10,7 @@ export default function Test() {
 
   useEffect(() => {
     const setData = async () => {
-      const res = await axios.get("/api/blog/query/1");
+      const res = await axios.post("/api/blog/query");
       console.log(res.data);
     };
     setData();
