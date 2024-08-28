@@ -77,7 +77,7 @@ export default function AdminBlog() {
         className="max-w-xl w-full bg-white p-8 border-2 border-ennovate-gray shadow-xl rounded-lg"
       >
         <p className="mt-2 text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl mb-6">
-          {updateId ? "Update Blog" : "Register Blog"}
+          {updateId ? "Update Medium Blog" : "Register Medium Blog"}
         </p>
         <div className="mb-5">
           <label

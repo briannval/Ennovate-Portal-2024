@@ -45,21 +45,16 @@ export default function BlogSection({ featured }: { featured: boolean }) {
   return (
     <section className="py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-center gap-y-8 lg:gap-y-0 flex-wrap md:flex-wrap lg:flex-nowrap lg:flex-row lg:justify-between lg:gap-x-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogs.map((blog, index) => (
-            <Link href={blog.mediumUrl} target="_blank">
-              <div
-                key={index}
-                className="group w-full max-lg:max-w-xl lg:w-1/3 border border-gray-300 rounded-2xl"
-              >
-                <div className="flex items-center">
-                  <img
-                    src={blog.coverImage}
-                    alt={blog.title}
-                    className="rounded-t-2xl w-full"
-                  />
-                </div>
-                <div className="p-4 lg:p-6 transition-all duration-300 rounded-b-2xl group-hover:bg-gray-50">
+            <Link href={blog.mediumUrl} target="_blank" key={index}>
+              <div className="group border border-gray-300 h-[425px] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                <img
+                  src={blog.coverImage}
+                  alt={blog.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4 lg:p-6 bg-white">
                   <span className="text-ennovate-main text-lg font-medium mb-3 block">
                     {blog.dateUploaded}
                   </span>
