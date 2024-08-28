@@ -56,13 +56,16 @@ export default function AdminBlog() {
 
     try {
       if (updateId) {
-        // await axios.put(`/api/blogs/update/${updateId}`, data);
+        await axios.put(`/api/blog/update/${updateId}`, body);
       } else {
         await axios.post("/api/blog/create", body);
       }
 
       setIsSubmitting(false);
       reset();
+      if (updateId) {
+        window.location.href = "/resources/blog";
+      }
     } catch (error) {
       setIsSubmitting(false);
     }
