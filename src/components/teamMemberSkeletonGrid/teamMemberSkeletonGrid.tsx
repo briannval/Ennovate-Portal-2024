@@ -1,4 +1,4 @@
-import TeamMemberSkeleton from "./teamMemberSkeleton";
+import TeamMemberSkeleton from "../teamMemberSkeleton/teamMemberSkeleton";
 
 const TeamMemberSkeletonGrid = () => {
   return (
