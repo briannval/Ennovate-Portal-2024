@@ -1,13 +1,13 @@
 "use client";
 
-import BusinessProposal from "@/components/businessProposal";
-import Loading from "@/components/loading";
+import Loading from "@/components/loading/loading";
 import { useAuth } from "@/hooks/useAuth";
 import { IBusinessProposal } from "@/models/BusinessProposal";
 import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import BusinessProposal from "@/components/businessProposal/businessProposal";
 
 const AddBusinessProposalCTA = () => {
   return (

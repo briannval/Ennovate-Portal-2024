@@ -3,7 +3,7 @@
 import { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
-import Loading from "./loading";
+import Loading from "../loading/loading";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 

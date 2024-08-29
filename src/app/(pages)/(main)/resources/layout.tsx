@@ -1,4 +1,4 @@
-import Breadcrumb from "@/components/breadCrumb";
+import Breadcrumb from "@/components/breadCrumb/breadCrumb";
 import { ReactNode } from "react";
 
 interface ResourcesLayoutProps {

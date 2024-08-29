@@ -2,8 +2,7 @@
 import { ReactNode, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
-import Loading from "@/components/loading";
-import WithNavbarWrapper from "@/wrappers/withNavbarWrapper";
+import Loading from "@/components/loading/loading";
 
 interface ProtectedLayoutProps {
   children: ReactNode;

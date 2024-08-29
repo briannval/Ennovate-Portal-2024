@@ -72,6 +72,7 @@ const Navbar = () => {
             className="inline-flex items-center bg-transparent p-2 w-10 h-10 justify-center text-sm rounded-lg lg:hidden"
             aria-controls="navbar-sticky"
             aria-expanded={isMenuOpen}
+            data-cy="toggle-navbar-menu"
           >
             <svg
               className="w-5 h-5"

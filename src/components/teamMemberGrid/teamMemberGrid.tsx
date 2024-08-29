@@ -1,5 +1,5 @@
 import { ITeamMember } from "@/models/TeamMember";
-import TeamMember from "./teamMember";
+import TeamMember from "../teamMember/teamMember";
 import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 
