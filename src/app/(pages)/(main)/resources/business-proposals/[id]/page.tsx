@@ -3,7 +3,7 @@
 import { useReducer, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
-import Loading from "@/components/loading";
+import Loading from "@/components/loading/loading";
 import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 import { IBusinessProposal } from "@/models/BusinessProposal";
 import { useRouter } from "next/navigation";

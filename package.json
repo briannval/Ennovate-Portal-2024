@@ -11,6 +11,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\"",
     "check": "prettier --check \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\"",
     "convert-to-webp": "./scripts/convert-images.sh",
+    "regroup-components": "./scripts/regroup-components.sh",
     "cypress:open": "cypress open"
   },
   "dependencies": {

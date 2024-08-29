@@ -1,14 +1,14 @@
 "use client";
 
-import Search from "@/components/search";
-import TeamMemberSkeletonGrid from "@/components/teamMemberSkeletonGrid";
-import Pagination from "@/components/pagination";
+import Search from "@/components/search/search";
 import { ITeamMember } from "@/models/TeamMember";
 import { useEffect, useReducer } from "react";
-import TeamMemberGrid from "@/components/teamMemberGrid";
-import NoTeam from "@/components/noTeam";
 import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 import axios from "axios";
+import TeamMemberSkeletonGrid from "@/components/teamMemberSkeletonGrid/teamMemberSkeletonGrid";
+import NoTeam from "@/components/noTeam/noTeam";
+import TeamMemberGrid from "@/components/teamMemberGrid/teamMemberGrid";
+import Pagination from "@/components/pagination/pagination";
 
 interface TeamMembersState {
   teamMembers: ITeamMember[];
