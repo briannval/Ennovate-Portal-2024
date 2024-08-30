@@ -122,13 +122,17 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
         {isAuthenticated && (
           <>
             <button
+              data-cy="delete-button"
               onClick={() => dispatch({ type: "OPEN_DELETE_MODAL" })}
-              className="absolute rounded-2xl font-bold hover:font-extrabold text-xl top-2 right-2 bg-ennovate-yellow bg-opacity-70 hover:bg-opacity-100 text-white py-2 px-4 rounded"
+              className="z-20 absolute rounded-2xl font-bold hover:font-extrabold text-xl top-2 right-2 bg-ennovate-yellow bg-opacity-70 hover:bg-opacity-100 text-white py-2 px-4 rounded"
             >
               -
             </button>
             <Link href={`/admin/team?update=${teamMember._id}`}>
-              <button className="absolute rounded-2xl font-bold hover:font-extrabold text-xl top-2 right-14 bg-ennovate-yellow bg-opacity-70 hover:bg-opacity-100 text-white py-2 px-4 rounded">
+              <button
+                data-cy="update-button"
+                className="z-20 absolute rounded-2xl font-bold hover:font-extrabold text-xl top-2 right-14 bg-ennovate-yellow bg-opacity-70 hover:bg-opacity-100 text-white py-2 px-4 rounded"
+              >
                 ?
               </button>
             </Link>
@@ -136,7 +140,7 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
         )}
         {/* Loading State */}
         <div className={isLoaded ? "hidden" : "block"}>
-          <div className="absolute w-full h-full object-cover rounded-[25px] bg-gray-300"></div>
+          <div className="absolute w-full h-full object-cover rounded-[25px] bg-gray-300 z-10"></div>
           <div className="absolute bottom-0 left-0 px-6 py-4 text-white z-50">
             <div className="w-3/4 h-6 bg-gray-400 rounded-md mb-2"></div>
             <div className="w-1/2 h-4 bg-gray-400 rounded-md"></div>
@@ -145,13 +149,17 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
 
         {/* Confirm delete modal */}
         {toDelete && (
-          <div className="fixed inset-0 flex justify-center items-center w-full h-full z-50 bg-black bg-opacity-50">
+          <div
+            className="fixed inset-0 flex justify-center items-center w-full h-full z-50 bg-black bg-opacity-50"
+            data-cy="delete-modal"
+          >
             <div className="relative bg-white rounded-xl shadow p-8">
               <button
                 type="button"
                 className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                 data-modal-hide="popup-modal"
                 onClick={() => dispatch({ type: "CLOSE_DELETE_MODAL" })}
+                data-cy="close-modal-button"
               >
                 <svg
                   className="w-3 h-3"
@@ -205,6 +213,7 @@ const TeamMember = ({ teamMember }: { teamMember: ITeamMember }) => {
                   onClick={() => dispatch({ type: "CLOSE_DELETE_MODAL" })}
                   disabled={isDeleting}
                   style={{ opacity: isDeleting ? 0.7 : 1 }}
+                  data-cy="cancel-delete-button"
                 >
                   No, cancel
                 </button>

@@ -30,7 +30,10 @@ const About = () => {
       id="about"
     >
       <div className="mx-auto max-w-screen-xl ">
-        <div className="mx-auto grid max-w-screen-xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+        <div
+          className="mx-auto grid max-w-screen-xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2"
+          data-cy="about-grid"
+        >
           <div className="lg:pr-8 lg:pt-4 mx-8">
             <div className="lg:max-w-lg">
               <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl">
