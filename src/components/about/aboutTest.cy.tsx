@@ -18,10 +18,8 @@ describe("Responsive mobile", () => {
   });
 
   it("photo should go under", () => {
-    cy.get('[data-cy="about-grid"]')
-      .should("have.css", "grid-template-columns", "311px")
-      .children()
-      .should("have.length", 2);
+    cy.get('[data-cy="about-grid"]').children().should("have.length", 2);
+    cy.checkGridColumns("about-grid", 1);
   });
 });
 
@@ -32,9 +30,7 @@ describe("Responsive desktop", () => {
   });
 
   it("photo should go beside", () => {
-    cy.get('[data-cy="about-grid"]')
-      .should("have.css", "grid-template-columns", "624px 624px")
-      .children()
-      .should("have.length", 2);
+    cy.get('[data-cy="about-grid"]').children().should("have.length", 2);
+    cy.checkGridColumns("about-grid", 2);
   });
 });
