@@ -109,9 +109,7 @@ export default function BlogSection({ featured }: { featured: boolean }) {
           {blogs.map((blog, index) => (
             <div
               key={index}
-              className={`group border border-gray-300 h-[${
-                isAuthenticated ? "475px" : "425px"
-              }] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300`}
+              className={`group border border-gray-300 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300`}
             >
               <Link href={blog.mediumUrl} target="_blank">
                 <img
@@ -135,7 +133,7 @@ export default function BlogSection({ featured }: { featured: boolean }) {
                 </div>
               </Link>
               {!featured && isAuthenticated && (
-                <div className="px-4 lg:px-6 bg-white">
+                <div className="px-4 lg:px-6 bg-white mb-4">
                   <Link
                     href={`/admin/blog?update=${blog.id}`}
                     className="inline-flex items-center px-3 py-2 text-md font-medium text-center text-white bg-ennovate-main rounded-lg hover:bg-ennovate-dark-blue"
