@@ -61,10 +61,8 @@ describe("Responsiveness", () => {
         </MockAuthProvider>
       );
     });
-    cy.get('[data-cy="team-member-grid"]')
-      .should("have.css", "grid-template-columns", "311px")
-      .children()
-      .should("have.length", 12);
+    cy.get('[data-cy="team-member-grid"]').children().should("have.length", 12);
+    cy.checkGridColumns("team-member-grid", 1);
   });
   it("2 col md breakpoint", () => {
     cy.viewport("ipad-mini");
@@ -75,10 +73,8 @@ describe("Responsiveness", () => {
         </MockAuthProvider>
       );
     });
-    cy.get('[data-cy="team-member-grid"]')
-      .should("have.css", "grid-template-columns", "352px 352px")
-      .children()
-      .should("have.length", 12);
+    cy.get('[data-cy="team-member-grid"]').children().should("have.length", 12);
+    cy.checkGridColumns("team-member-grid", 2);
   });
   it("3 col lg breakpoint", () => {
     cy.viewport(1024, 800);
@@ -89,10 +85,8 @@ describe("Responsiveness", () => {
         </MockAuthProvider>
       );
     });
-    cy.get('[data-cy="team-member-grid"]')
-      .should("have.css", "grid-template-columns", "320px 320px 320px")
-      .children()
-      .should("have.length", 12);
+    cy.get('[data-cy="team-member-grid"]').children().should("have.length", 12);
+    cy.checkGridColumns("team-member-grid", 3);
   });
   it("4 col xl breakpoint", () => {
     cy.viewport("macbook-16");
@@ -103,9 +97,7 @@ describe("Responsiveness", () => {
         </MockAuthProvider>
       );
     });
-    cy.get('[data-cy="team-member-grid"]')
-      .should("have.css", "grid-template-columns", "368px 368px 368px 368px")
-      .children()
-      .should("have.length", 12);
+    cy.get('[data-cy="team-member-grid"]').children().should("have.length", 12);
+    cy.checkGridColumns("team-member-grid", 4);
   });
 });
