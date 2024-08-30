@@ -29,7 +29,9 @@ jobs:
           build: npm run build
           start: npm start
 
-      - name: Cypress run component
-        uses: ./
+      - name: Cypress run component tests
+        uses: cypress-io/github-action@v6
         with:
           component: true
+          working-directory: src/components
+
