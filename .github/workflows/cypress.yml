@@ -32,5 +32,4 @@ jobs:
       - name: Cypress run component
         uses: ./
         with:
-          working-directory: src/components
           component: true
