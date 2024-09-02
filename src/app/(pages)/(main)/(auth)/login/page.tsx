@@ -51,8 +51,11 @@ export default function LoginForm() {
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-xl w-full bg-white p-8 border-2 border-ennovate-gray shadow-xl rounded-lg"
       >
-        <p className="mt-2 text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl mb-6">
+        <p className="mt-2 text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl mb-2">
           Admin Portal Login
+        </p>
+        <p className="mt-2 text-md text-center italic font-semibold tracking-tight text-ennovate-dark-blue sm:text-lg mb-6">
+          WARNING: Ennovate & Enactus UBC members only
         </p>
         <div className="mb-5 place-self-center">
           <label

@@ -1,7 +1,7 @@
 export const FOOTER_SOCIALS_LINKS = [
   {
     img: "/logos/email-logo.webp",
-    href: "mailto:admin@ennovateubc.org",
+    href: "mailto:ennovateubc@gmail.com",
   },
   {
     img: "/logos/ig-logo.webp",
