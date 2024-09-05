@@ -1,9 +1,12 @@
-import React from 'react'
-import TeamMemberSkeletonGrid from './teamMemberSkeletonGrid'
+import React from "react";
+import TeamMemberSkeletonGrid from "./teamMemberSkeletonGrid";
 
-describe('<TeamMemberSkeletonGrid />', () => {
-  it('renders', () => {
-    // see: https://on.cypress.io/mounting-react
-    cy.mount(<TeamMemberSkeletonGrid />)
-  })
-})
+describe("<TeamMemberSkeletonGrid />", () => {
+  it("has 12 children", () => {
+    cy.mount(<TeamMemberSkeletonGrid />);
+
+    cy.get('[data-cy="team-member-skeleton-grid"]')
+      .children()
+      .should("have.length", 12);
+  });
+});
