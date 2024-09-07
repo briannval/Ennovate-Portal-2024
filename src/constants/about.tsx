@@ -9,7 +9,11 @@ export const ABOUT_CAREER_WORKSHOPS_TITLE = "About Career Workshops";
 export const ABOUT_CAREER_WORKSHOPS_SUBTITLE =
   "Why partner with Ennovate's Career Workshops?";
 
-export const ABOUT_CAREER_WORKSHOPS_IMAGES = [];
+export const ABOUT_CAREER_WORKSHOPS_IMAGES = [
+  "/career-workshops/career-workshops-1.webp",
+  "/career-workshops/career-workshops-2.webp",
+  "/career-workshops/career-workshops-3.webp",
+];
 
 export const ABOUT_CAREER_WORKSHOPS_CONTENT = [
   {
@@ -49,7 +53,7 @@ export const ABOUT_CAREER_WORKSHOPS_CONTENT = [
   {
     heading: "Mentorship",
     content:
-      "Participants will receive direct mentorship from our volunteer presenters – all University of British Columbia students with varying work experience. Our presenters have had part-time service jobs, prestigious internships, and scholarships, and they are more than happy to share their experiences!",
+      "Participants will receive direct mentorship from our volunteer presenters – all UBC students with varying work experience.",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -60,24 +64,6 @@ export const ABOUT_CAREER_WORKSHOPS_CONTENT = [
         viewBox="0 0 16 16"
       >
         <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1zm2.73 4.73a.75.75 0 1 0-1.06-1.06L8 5.94 6.33 4.67a.75.75 0 1 0-1.06 1.06L6.94 7l-1.67 1.67a.75.75 0 1 0 1.06 1.06L8 8.06l1.67 1.67a.75.75 0 1 0 1.06-1.06L9.06 7l1.67-1.67z" />
-      </svg>
-    ),
-  },
-  {
-    heading: "Impact",
-    content:
-      "On February 27th, 2024, the Ennovate Career Workshop was piloted in the RayCam Community Centre. Three of our volunteers presented to 17 secondary school students and assisted them in crafting their resumes and cover letters through worksheets.",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        className="absolute left-1 top-1 h-5 w-5 text-ennovate-dark-blue"
-        viewBox="0 0 16 16"
-      >
-        <path d="M7.293 14.707a1 1 0 0 1-1.414-1.414l7-7a1 1 0 0 1 1.414 1.414l-7 7zM4.5 2.5a2 2 0 1 0 3 0 2 2 0 0 0-3 0z" />
-        <path d="M1 9a2 2 0 1 1 2 2 2 2 0 0 1-2-2z" />
       </svg>
     ),
   },

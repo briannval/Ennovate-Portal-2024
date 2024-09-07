@@ -1,11 +1,24 @@
+"use client";
+
+import About from "@/components/about/about";
+import {
+  ABOUT_CAREER_WORKSHOPS_CONTENT,
+  ABOUT_CAREER_WORKSHOPS_IMAGES,
+  ABOUT_CAREER_WORKSHOPS_SUBTITLE,
+  ABOUT_CAREER_WORKSHOPS_TITLE,
+} from "@/constants/about";
 import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 
 export default function CareerWorkshops() {
   return (
     <PageCenteringWrapper>
-      <h1 className="text-center font-extrabold text-5xl mt-8 text-ennovate-dark-blue mx-8">
-        Career Workshops
-      </h1>
+      <About
+        title={ABOUT_CAREER_WORKSHOPS_TITLE}
+        subtitle={ABOUT_CAREER_WORKSHOPS_SUBTITLE}
+        content={ABOUT_CAREER_WORKSHOPS_CONTENT}
+        images={ABOUT_CAREER_WORKSHOPS_IMAGES}
+        flipped
+      />
     </PageCenteringWrapper>
   );
 }
