@@ -8,11 +8,13 @@ const About = ({
   subtitle,
   content,
   images,
+  flipped = false,
 }: {
   title: string;
   subtitle: string;
   content: IAboutContent[];
   images: string[];
+  flipped?: boolean;
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
@@ -32,6 +34,52 @@ const About = ({
     config: { duration: 1000 },
   });
 
+  const Left = () => {
+    return (
+      <div className="lg:pr-8 lg:pt-4 mx-8">
+        <div className="lg:max-w-lg">
+          <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl">
+            {title}
+          </h1>
+          <h2 className="mt-2 text-xl font-bold leading-8 text-ennovate-dark-blue opacity-70">
+            {subtitle}
+          </h2>
+          <dl className="mt-6 max-w-xl space-y-8 text-base font-medium leading-7 text-gray-500 lg:max-w-none">
+            {content.map((c) => (
+              <div className="relative pl-9">
+                <dt className="inline font-bold text-ennovate-dark-blue">
+                  {c.icon}
+                  {c.heading}
+                </dt>
+                <br />
+                <dd className="inline text-ennovate-dark-blue opacity-60">
+                  {c.content}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    );
+  };
+
+  const Right = () => {
+    return (
+      <div className="relative w-full h-64 sm:h-[34rem] md:-ml-4 lg:-ml-0">
+        {transitions((style, index) => (
+          <animated.div style={style} className="absolute inset-0 mx-8 lg:mx-0">
+            <Image
+              src={images[index]}
+              alt="Product screenshot"
+              fill
+              className="rounded-xl shadow-xl ring-1 ring-gray-400/10 object-cover"
+            />
+          </animated.div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div
       className="overflow-hidden bg-white py-24 scroll-mt-20 mx-8"
@@ -42,45 +90,17 @@ const About = ({
           className="mx-auto grid max-w-screen-xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2"
           data-cy="about-grid"
         >
-          <div className="lg:pr-8 lg:pt-4 mx-8">
-            <div className="lg:max-w-lg">
-              <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl">
-                {title}
-              </h1>
-              <h2 className="mt-2 text-xl font-bold leading-8 text-ennovate-dark-blue opacity-70">
-                {subtitle}
-              </h2>
-              <dl className="mt-6 max-w-xl space-y-8 text-base font-medium leading-7 text-gray-500 lg:max-w-none">
-                {content.map((c) => (
-                  <div className="relative pl-9">
-                    <dt className="inline font-bold text-ennovate-dark-blue">
-                      {c.icon}
-                      {c.heading}
-                    </dt>
-                    <br />
-                    <dd className="inline text-ennovate-dark-blue opacity-60">
-                      {c.content}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </div>
-          <div className="relative w-full h-64 sm:h-[34rem] md:-ml-4 lg:-ml-0">
-            {transitions((style, index) => (
-              <animated.div
-                style={style}
-                className="absolute inset-0 mx-8 lg:mx-0"
-              >
-                <Image
-                  src={images[index]}
-                  alt="Product screenshot"
-                  fill
-                  className="rounded-xl shadow-xl ring-1 ring-gray-400/10 object-cover"
-                />
-              </animated.div>
-            ))}
-          </div>
+          {flipped ? (
+            <>
+              <Right />
+              <Left />
+            </>
+          ) : (
+            <>
+              <Left />
+              <Right />
+            </>
+          )}
         </div>
       </div>
     </div>
