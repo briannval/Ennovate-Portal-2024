@@ -46,9 +46,8 @@ const About = ({
           </h2>
           <dl className="mt-6 max-w-xl space-y-8 text-base font-medium leading-7 text-gray-500 lg:max-w-none">
             {content.map((c) => (
-              <div className="relative pl-9">
+              <div className="relative">
                 <dt className="inline font-bold text-ennovate-dark-blue">
-                  {c.icon}
                   {c.heading}
                 </dt>
                 <br />
