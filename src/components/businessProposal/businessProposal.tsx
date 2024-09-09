@@ -14,7 +14,7 @@ const BusinessProposal = ({
           <Image
             className="rounded-t-lg"
             src={businessProposal.image}
-            alt="Noteworthy technology acquisitions 2021"
+            alt={`${businessProposal.name} image`}
             layout="fill"
             objectFit="cover"
             priority
