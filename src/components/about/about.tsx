@@ -69,7 +69,7 @@ const About = ({
           <animated.div style={style} className="absolute inset-0 mx-8 lg:mx-0">
             <Image
               src={images[index]}
-              alt="Product screenshot"
+              alt={`About image ${index}`}
               fill
               className="rounded-xl shadow-xl ring-1 ring-gray-400/10 object-cover"
             />
