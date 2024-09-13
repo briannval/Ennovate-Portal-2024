@@ -1,31 +1,20 @@
 "use client";
 
+import { AuthContext } from "@/contexts/AuthContext";
 import { auth } from "@/lib/firebase";
 import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { useRouter } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
-
-interface IAuthContext {
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
-}
+import { useEffect, useState } from "react";
 
 interface AuthProviderProps {
   children: React.ReactNode;
 }
-
-export const AuthContext = createContext<IAuthContext | null>(null);
-
 export default function AuthProvider({ children }: AuthProviderProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const router = useRouter();
 
   useEffect(() => {
     const checkAuth = () => {

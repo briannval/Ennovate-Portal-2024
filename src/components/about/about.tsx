@@ -44,19 +44,19 @@ const About = ({
           <h2 className="mt-2 text-xl font-bold leading-8 text-ennovate-dark-blue opacity-70">
             {subtitle}
           </h2>
-          <dl className="mt-6 max-w-xl space-y-8 text-base font-medium leading-7 text-gray-500 lg:max-w-none">
-            {content.map((c) => (
-              <div className="relative">
-                <dt className="inline font-bold text-ennovate-dark-blue">
+          <div className="mt-6 max-w-xl space-y-8 text-base font-medium leading-7 text-gray-500 lg:max-w-none">
+            {content.map((c, index) => (
+              <div className="relative" key={index}>
+                <h1 className="inline font-bold text-ennovate-dark-blue">
                   {c.heading}
-                </dt>
+                </h1>
                 <br />
-                <dd className="inline text-ennovate-dark-blue opacity-60">
+                <p className="inline text-ennovate-dark-blue opacity-60">
                   {c.content}
-                </dd>
+                </p>
               </div>
             ))}
-          </dl>
+          </div>
         </div>
       </div>
     );
@@ -66,7 +66,11 @@ const About = ({
     return (
       <div className="relative w-full h-64 sm:h-[34rem] md:-ml-4 lg:-ml-0">
         {transitions((style, index) => (
-          <animated.div style={style} className="absolute inset-0 mx-8 lg:mx-0">
+          <animated.div
+            key={index}
+            style={style}
+            className="absolute inset-0 mx-8 lg:mx-0"
+          >
             <Image
               src={images[index]}
               alt={`About image ${index}`}
