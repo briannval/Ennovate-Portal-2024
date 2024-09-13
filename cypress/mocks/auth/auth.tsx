@@ -1,4 +1,4 @@
-import { AuthContext } from "@/contexts/auth";
+import { AuthContext } from "@/contexts/AuthContext";
 
 interface MockAuthProviderProps {
   children: React.ReactNode;
