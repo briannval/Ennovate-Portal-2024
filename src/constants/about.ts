@@ -3,7 +3,7 @@ export interface IAboutContent {
   content: string;
 }
 
-export const ABOUT_ENACTUS_TITLE = "About Enactus";
+export const ABOUT_ENACTUS_TITLE = "About Enactus UBC";
 
 export const ABOUT_ENACTUS_SUBTITLE = "What's Enactus all about?";
 
