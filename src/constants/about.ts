@@ -3,6 +3,33 @@ export interface IAboutContent {
   content: string;
 }
 
+export const ABOUT_ENACTUS_TITLE = "About Enactus UBC";
+
+export const ABOUT_ENACTUS_SUBTITLE = "What's Enactus all about?";
+
+export const ABOUT_ENACTUS_IMAGES = [
+  "/about-enactus/about-enactus-1.webp",
+  "/about-enactus/about-enactus-2.webp",
+];
+
+export const ABOUT_ENACTUS_CONTENT: IAboutContent[] = [
+  {
+    heading: "Entrepreneurship",
+    content:
+      "Enactus is a global, student-led organization dedicated to enacting positive social change through the lens of entrepreneurship.",
+  },
+  {
+    heading: "Making a difference",
+    content:
+      "We crave to see improvements in the community, and are passionate facilitators who help make them happen. We know that together, we can and will make a difference this year and in future years to come.",
+  },
+  {
+    heading: "Prestige",
+    content:
+      "Enactus UBC has won regionals and nationals in the TD Entrepreneurship Challenge for 3 years straight, 2022 to 2024.",
+  },
+];
+
 export const ABOUT_CAREER_WORKSHOPS_TITLE = "About Career Workshops";
 
 export const ABOUT_CAREER_WORKSHOPS_SUBTITLE =
@@ -14,7 +41,7 @@ export const ABOUT_CAREER_WORKSHOPS_IMAGES = [
   "/career-workshops/career-workshops-3.webp",
 ];
 
-export const ABOUT_CAREER_WORKSHOPS_CONTENT = [
+export const ABOUT_CAREER_WORKSHOPS_CONTENT: IAboutContent[] = [
   {
     heading: "Career Education",
     content:
