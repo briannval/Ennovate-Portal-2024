@@ -7,6 +7,11 @@ export const ABOUT_ENACTUS_TITLE = "About Ennovate";
 
 export const ABOUT_ENACTUS_SUBTITLE = "What's Enactus all about?";
 
+export const ABOUT_ENACTUS_IMAGES = [
+  "/about-enactus/about-enactus-1.webp",
+  "/about-enactus/about-enactus-2.webp",
+];
+
 export const ABOUT_CAREER_WORKSHOPS_TITLE = "About Career Workshops";
 
 export const ABOUT_CAREER_WORKSHOPS_SUBTITLE =
