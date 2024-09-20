@@ -1,5 +1,6 @@
 "use client";
 
+import { TYPEWRITER_ONE_LINERS } from "@/constants/landing";
 import Image from "next/image";
 import { Typewriter } from "react-simple-typewriter";
 
@@ -40,11 +41,7 @@ const Landing = () => {
         {/* Typewriter Effect */}
         <div className="text-white text-center text-xl md:text-3xl md:text-4xl">
           <Typewriter
-            words={[
-              "Develop business and soft skills",
-              "Intensive entrepreneurial program",
-              "Pitch to industry professionals",
-            ]}
+            words={TYPEWRITER_ONE_LINERS}
             loop={true}
             cursor
             cursorStyle="_"
