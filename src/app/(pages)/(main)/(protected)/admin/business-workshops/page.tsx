@@ -105,9 +105,8 @@ export default function AdminBusinessWorkshop() {
           <input
             id="name"
             {...register("name")}
-            className={`bg-white border ${
-              errors.name ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.name ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="Ennovate UBC Workshop"
           />
         </div>
@@ -122,9 +121,8 @@ export default function AdminBusinessWorkshop() {
             type="month"
             id="month"
             {...register("month")}
-            className={`bg-white border ${
-              errors.month ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.month ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             defaultValue={getCurrentMonthYear()}
           />
         </div>
@@ -139,9 +137,8 @@ export default function AdminBusinessWorkshop() {
             type="url"
             id="slides"
             {...register("slides")}
-            className={`bg-white border ${
-              errors.slides ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.slides ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="https://docs.google.com/presentation/d/FILE_ID/view?usp=sharing"
           />
         </div>
@@ -156,9 +153,8 @@ export default function AdminBusinessWorkshop() {
             type="url"
             id="worksheet"
             {...register("worksheet")}
-            className={`bg-white border ${
-              errors.worksheet ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.worksheet ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="https://docs.google.com/document/d/FILE_ID/view?usp=sharing"
           />
         </div>
