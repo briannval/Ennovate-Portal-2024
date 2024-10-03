@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 export interface IBusinessWorkshop {
   _id: string;
   name: string;
-  date: Date;
+  month: string;
   slides: string;
   worksheet: string;
 }
@@ -15,8 +15,8 @@ const BusinessWorkshopSchema: Schema<IBusinessWorkshop> = new Schema<IBusinessWo
     type: String,
     required: true,
   },
-  date: {
-    type: Date,
+  month: {
+    type: String,
     required: true,
   },
   slides: {

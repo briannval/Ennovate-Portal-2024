@@ -9,12 +9,19 @@ import { z } from "zod";
 
 const businessWorkshopSchema = z.object({
   name: z.string().min(1, "Name is required"),
-  date: z.string().min(1, "Date is required"),
+  month: z.string().min(1, "Month and Year are required"),
   slides: z.string().url("Invalid Google Drive link for slides"),
   worksheet: z.string().url("Invalid Google Drive link for worksheet"),
 });
 
 type BusinessWorkshopFormData = z.infer<typeof businessWorkshopSchema>;
+
+const getCurrentMonthYear = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  return `${year}-${month}`;
+};
 
 export default function AdminBusinessWorkshop() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,7 +47,7 @@ export default function AdminBusinessWorkshop() {
 
         reset({
           name: businessWorkshop.name,
-          date: businessWorkshop.date,
+          month: businessWorkshop.month,
           slides: businessWorkshop.slides,
           worksheet: businessWorkshop.worksheet,
         });
@@ -53,11 +60,11 @@ export default function AdminBusinessWorkshop() {
   const onSubmit = async (data: BusinessWorkshopFormData) => {
     try {
       setIsSubmitting(true);
-      const { name, date, slides, worksheet } = data;
+      const { name, month, slides, worksheet } = data;
 
       const body = {
         name,
-        date,
+        month,
         slides,
         worksheet,
       };
@@ -106,18 +113,19 @@ export default function AdminBusinessWorkshop() {
         </div>
         <div className="mb-5">
           <label
-            htmlFor="date"
+            htmlFor="month"
             className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
           >
-            Date
+            Month & Year
           </label>
           <input
-            type="date"
-            id="date"
-            {...register("date")}
+            type="month"
+            id="month"
+            {...register("month")}
             className={`bg-white border ${
-              errors.date ? "border-red-500" : "border-ennovate-gray"
+              errors.month ? "border-red-500" : "border-ennovate-gray"
             } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            defaultValue={getCurrentMonthYear()}
           />
         </div>
         <div className="mb-5">

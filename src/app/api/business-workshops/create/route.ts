@@ -7,9 +7,9 @@ export async function POST(request: NextRequest) {
   try {
     await connectToDatabase();
 
-    const { name, date, slides, worksheet } = await request.json();
+    const { name, month, slides, worksheet } = await request.json();
 
-    await BusinessWorkshop.create({ name, date, slides, worksheet });
+    await BusinessWorkshop.create({ name, month, slides, worksheet });
 
     await redis.del(["businessWorkshop"]);
 
