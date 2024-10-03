@@ -61,14 +61,11 @@ export default function AdminBusinessWorkshop() {
       setIsSubmitting(true);
       const { name, date, slides, worksheet } = data;
 
-      const slidesUrl = generateDrivePreviewURL(slides);
-      const worksheetUrl = generateDrivePreviewURL(worksheet);
-
       const body = {
         name,
         date,
-        slides: slidesUrl,
-        worksheet: worksheetUrl,
+        slides,
+        worksheet,
       };
 
       if (updateId) {
