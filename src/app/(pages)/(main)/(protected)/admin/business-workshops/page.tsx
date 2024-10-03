@@ -1,9 +1,5 @@
 "use client";
 
-import {
-  generateDrivePreviewURL,
-  uploadBase64ImageToFirebase,
-} from "@/utils/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
@@ -11,7 +7,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-// Define the schema for BusinessWorkshop
 const businessWorkshopSchema = z.object({
   name: z.string().min(1, "Name is required"),
   date: z.string().min(1, "Date is required"),
@@ -29,7 +24,6 @@ export default function AdminBusinessWorkshop() {
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     formState: { errors },
   } = useForm<BusinessWorkshopFormData>({
@@ -99,7 +93,7 @@ export default function AdminBusinessWorkshop() {
             htmlFor="name"
             className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
           >
-            Business Workshop Name
+            Name
           </label>
           <input
             id="name"
@@ -140,7 +134,7 @@ export default function AdminBusinessWorkshop() {
             className={`bg-white border ${
               errors.slides ? "border-red-500" : "border-ennovate-gray"
             } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
-            placeholder="https://drive.google.com/file/d/FILE_ID/view?usp=sharing"
+            placeholder="https://docs.google.com/presentation/d/FILE_ID/view?usp=sharing"
           />
         </div>
         <div className="mb-5">
@@ -157,7 +151,7 @@ export default function AdminBusinessWorkshop() {
             className={`bg-white border ${
               errors.worksheet ? "border-red-500" : "border-ennovate-gray"
             } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
-            placeholder="https://drive.google.com/file/d/FILE_ID/view?usp=sharing"
+            placeholder="https://docs.google.com/document/d/FILE_ID/view?usp=sharing"
           />
         </div>
         <button
