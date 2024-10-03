@@ -53,9 +53,9 @@ export default function BusinessWorkshops() {
         {isAuthenticated &&
           <>
             <td className="px-6 py-4">
-              <button className="font-medium text-ennovate-main hover:underline mr-4">
+              <Link href={`/admin/business-workshops?update=${businessWorkshop._id}`} className="font-medium text-ennovate-main hover:underline mr-4">
                 Edit
-              </button>
+              </Link>
             </td>
             <td className="px-6 py-4">
               <button className="font-medium text-red-600 hover:underline mr-4">
