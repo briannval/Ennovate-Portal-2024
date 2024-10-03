@@ -22,7 +22,7 @@ export async function PUT(
     return NextResponse.json("Success");
   } catch (e) {
     return NextResponse.json(
-      { message: "Failed to update team member" },
+      { message: "Failed to update business proposal" },
       { status: 500 },
     );
   }
