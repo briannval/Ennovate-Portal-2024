@@ -22,7 +22,7 @@ export const ADMIN_RESOURCES_ACTIONS: IAdminResourcesAction[] = [
     addHref: "/admin/business-proposals",
   },
   {
-    heading: "Workshops",
+    heading: "Business Workshops",
     subheading: "Interactive business education workshops for students",
     image: "/admin/workshops.webp",
     viewHref: "/resources/business-workshops",
