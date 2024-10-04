@@ -2,6 +2,9 @@
 
 Official website of Ennovate, Enactus UBC
 
+![Enactus Logo](./public/logos/enactus-logo.webp)
+![Ennovate Logo](./public/ennovate/ennovate-w.webp)
+
 ## Installation and Setup
 
 Clone the project
