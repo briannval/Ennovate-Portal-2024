@@ -21,11 +21,11 @@ const BusinessWorkshopSchema: Schema<IBusinessWorkshop> = new Schema<IBusinessWo
   },
   slides: {
     type: String,
-    required: true,
+    required: false,
   },
   worksheet: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 
