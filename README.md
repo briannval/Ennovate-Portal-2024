@@ -2,8 +2,9 @@
 
 Official website of Ennovate, Enactus UBC
 
-![Enactus Logo](./public/logos/enactus-logo.webp)
-![Ennovate Logo](./public/ennovate/ennovate-w.webp)
+<div style="display: flex; align-items: center;">
+  <img src="./public/logos/enactus-logo.webp" alt="Enactus Logo" style="width: 250px;" />
+</div>
 
 ## Installation and Setup
 
