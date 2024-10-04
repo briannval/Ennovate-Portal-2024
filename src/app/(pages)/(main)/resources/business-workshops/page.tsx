@@ -1,13 +1,14 @@
 "use client";
 
 import Loading from "@/components/loading/loading";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import { IBusinessWorkshop } from "@/models/BusinessWorkshop";
 import { useRouter } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
 type BusinessWorkshopState = {
   businessWorkshops: IBusinessWorkshop[] | null;
@@ -63,11 +64,19 @@ export default function BusinessWorkshops() {
   const { businessWorkshops, toDelete, selectedWorkshop, isDeleting } = state;
   const { isAuthenticated } = useAuth();
   const router = useRouter();
+  const [initialWorkshops, setInitialWorkshops] = useState<IBusinessWorkshop[] | null>(null);
+
+
+  const handleSearch = useDebouncedCallback((s: string) => {
+    dispatch({ type: "SET_WORKSHOPS", payload: initialWorkshops!.filter((b) => b.name.includes(s)) })
+  }, 150);
+
 
   useEffect(() => {
     const initializeData = async () => {
       const workshopsRes = await axios.post("/api/business-workshops/read");
       dispatch({ type: "SET_WORKSHOPS", payload: workshopsRes.data });
+      setInitialWorkshops(workshopsRes.data);
     };
 
     initializeData();
@@ -95,6 +104,7 @@ export default function BusinessWorkshops() {
       </PageCenteringWrapper>
     );
   }
+
 
   const TableRow = ({ businessWorkshop }: { businessWorkshop: IBusinessWorkshop }) => {
     return (
@@ -134,8 +144,40 @@ export default function BusinessWorkshops() {
     );
   };
 
+
   return (
     <div className="mx-8 mt-8">
+      {/* Filter and Search Bar */}
+      <div className="flex flex-col sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4 mb-2">
+        {/* Search Bar */}
+        <label htmlFor="table-search" className="sr-only">
+          Search
+        </label>
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
+            <svg
+              className="w-5 h-5 text-gray-500"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
+          <input
+            type="text"
+            id="table-search"
+            className="block p-2 ps-10 text-md text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Search Workshop Name"
+            onChange={(e) => handleSearch(e.target.value)}
+          />
+        </div>
+      </div>
+
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-md text-left text-gray-500">
           <thead className="bg-gray-50">
