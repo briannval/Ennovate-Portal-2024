@@ -68,7 +68,7 @@ export default function BusinessWorkshops() {
 
 
   const handleSearch = useDebouncedCallback((s: string) => {
-    dispatch({ type: "SET_WORKSHOPS", payload: initialWorkshops!.filter((b) => b.name.includes(s)) })
+    dispatch({ type: "SET_WORKSHOPS", payload: initialWorkshops!.filter((b) => b.name.toLowerCase().includes(s.toLowerCase())) })
   }, 150);
 
 
