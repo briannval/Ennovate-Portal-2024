@@ -57,4 +57,4 @@ Run docker container
 
 ## Support
 
-For support, email brianvalentinoadhitya@gmail.com.
+For support, email ennovateubc@gmail.com or brianvalentinoadhitya@gmail.com.
