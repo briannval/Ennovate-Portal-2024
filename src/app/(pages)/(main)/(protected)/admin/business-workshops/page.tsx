@@ -10,8 +10,8 @@ import { z } from "zod";
 const businessWorkshopSchema = z.object({
   name: z.string().min(1, "Name is required"),
   month: z.string().min(1, "Month and Year are required"),
-  slides: z.string().url("Invalid Google Drive link for slides"),
-  worksheet: z.string().url("Invalid Google Drive link for worksheet"),
+  slides: z.union([z.string().url("Invalid Google Drive link for slides"), z.literal("")]), // if left empty, defaulted to be empty string
+  worksheet: z.union([z.string().url("Invalid Google Drive link for worksheet"), z.literal("")]), // if left empty, defaulted to empty string
 });
 
 type BusinessWorkshopFormData = z.infer<typeof businessWorkshopSchema>;
@@ -48,8 +48,8 @@ export default function AdminBusinessWorkshop() {
         reset({
           name: businessWorkshop.name,
           month: businessWorkshop.month,
-          slides: businessWorkshop.slides,
-          worksheet: businessWorkshop.worksheet,
+          slides: businessWorkshop.slides || null,
+          worksheet: businessWorkshop.worksheet || null,
         });
       }
     };
@@ -65,8 +65,8 @@ export default function AdminBusinessWorkshop() {
       const body = {
         name,
         month,
-        slides,
-        worksheet,
+        slides: slides || null,
+        worksheet: worksheet || null,
       };
 
       if (updateId) {
