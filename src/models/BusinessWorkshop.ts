@@ -4,8 +4,8 @@ export interface IBusinessWorkshop {
   _id: string;
   name: string;
   month: string;
-  slides: string;
-  worksheet: string;
+  slides?: string;
+  worksheet?: string;
 }
 
 mongoose.Promise = global.Promise;

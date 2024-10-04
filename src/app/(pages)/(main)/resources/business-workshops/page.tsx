@@ -114,14 +114,16 @@ export default function BusinessWorkshops() {
         </th>
         <td className="px-6 py-4">{businessWorkshop.month}</td>
         <td className="px-6 py-4">
-          <Link href={businessWorkshop.slides} target="_blank" className="font-medium text-ennovate-main hover:underline">
-            View
-          </Link>
+          {businessWorkshop.slides ?
+            <Link href={businessWorkshop.slides} target="_blank" className="font-medium text-ennovate-main hover:underline">
+              View
+            </Link> : "-"}
         </td>
         <td className="px-6 py-4">
-          <Link href={businessWorkshop.worksheet} target="_blank" className="font-medium text-ennovate-main hover:underline">
-            View
-          </Link>
+          {businessWorkshop.worksheet ?
+            <Link href={businessWorkshop.worksheet} target="_blank" className="font-medium text-ennovate-main hover:underline">
+              View
+            </Link> : "-"}
         </td>
         {isAuthenticated && (
           <>
