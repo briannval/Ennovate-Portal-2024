@@ -16,7 +16,7 @@ const Affiliations = () => {
         Who we work with.
       </h2>
       <Marquee
-        speed={50}
+        speed={120}
         pauseOnClick={true}
         pauseOnHover={true}
         className="mt-16"
@@ -24,7 +24,7 @@ const Affiliations = () => {
       >
         {AFFILIATION_IMAGES.map((img, index) => (
           <Link href={img.href} key={index} target="_blank">
-            <div className="flex flex-col items-center justify-center mr-24 group">
+            <div className="flex flex-col items-center justify-center mr-16 group">
               <div className="w-48 h-56 bg-white flex items-center justify-center hover:bg-ennovate-main hover:bg-opacity-5">
                 <Image
                   src={img.src}
