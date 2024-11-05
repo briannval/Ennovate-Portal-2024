@@ -9,4 +9,5 @@ export const AFFILIATION_IMAGES = [
   { src: "/logos/teadot-logo.webp", name: "Teadot", href: "https://www.teadotdrinks.com/"},
   { src: "/logos/jukebox-logo.webp", name: "JukeBox", href: "https://www.jukeboxprint.com/"},
   { src: "/logos/wizeprep-logo.webp", name: "Wizeprep", href: "https://www.wizeprep.com/"},
+  { src: "/logos/steves-poke-logo.webp", name: "Steve's Poké Bar", href: "https://www.stevespokebar.ca/"}
 ];
