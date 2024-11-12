@@ -57,7 +57,7 @@ export default function LoginForm() {
         <p className="mt-2 text-md text-center italic font-semibold tracking-tight text-ennovate-dark-blue sm:text-lg mb-6">
           WARNING: Ennovate & Enactus UBC members only
         </p>
-        <div className="mb-5 place-self-center">
+        <div className="mb-5">
           <label
             htmlFor="email"
             className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
@@ -68,9 +68,8 @@ export default function LoginForm() {
             type="email"
             id="email"
             {...register("email")}
-            className={`bg-white border ${
-              errors.email ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.email ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="Enter your email"
           />
           {errors.email && (
@@ -88,9 +87,8 @@ export default function LoginForm() {
             type="password"
             id="password"
             {...register("password")}
-            className={`bg-white border ${
-              errors.password ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.password ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="Enter your password"
           />
           {errors.password && (
