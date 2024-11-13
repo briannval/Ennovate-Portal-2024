@@ -17,7 +17,7 @@ const AddTeamMemberCTA = () => {
   );
 };
 
-const TeamMemberGrid = ({ teamMembers }: { teamMembers: ITeamMember[] }) => {
+const TeamMemberGrid = ({ teamMembers, isLastPage }: { teamMembers: ITeamMember[], isLastPage: boolean }) => {
   const { isAuthenticated } = useAuth();
 
   return (
@@ -29,9 +29,9 @@ const TeamMemberGrid = ({ teamMembers }: { teamMembers: ITeamMember[] }) => {
         {teamMembers.map((teamMember, index) => (
           <TeamMember key={index} teamMember={teamMember} />
         ))}
-        {isAuthenticated && teamMembers.length < 12 && <AddTeamMemberCTA />}
+        {(isAuthenticated && teamMembers.length < 12) && <AddTeamMemberCTA />}
       </div>
-      {isAuthenticated && teamMembers.length == 12 && <AddTeamMemberCTA />}
+      {(isAuthenticated && teamMembers.length == 12 && isLastPage) && <AddTeamMemberCTA />}
     </>
   );
 };
