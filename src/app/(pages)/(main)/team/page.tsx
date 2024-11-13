@@ -19,9 +19,9 @@ interface TeamMembersState {
 type TeamMembersAction =
   | { type: "FETCH_START" }
   | {
-      type: "FETCH_SUCCESS";
-      payload: { teamMembers: ITeamMember[]; totalPages: number };
-    }
+    type: "FETCH_SUCCESS";
+    payload: { teamMembers: ITeamMember[]; totalPages: number };
+  }
   | { type: "FETCH_FAILURE" };
 
 const initialState: TeamMembersState = {
@@ -97,7 +97,7 @@ export default function Team({
       ) : totalPages == 0 ? (
         <NoTeam />
       ) : (
-        <TeamMemberGrid teamMembers={teamMembers} />
+        <TeamMemberGrid teamMembers={teamMembers} isLastPage={currentPage == totalPages} />
       )}
       <Pagination totalPages={totalPages} />
     </PageCenteringWrapper>

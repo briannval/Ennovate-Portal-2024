@@ -9,7 +9,7 @@ describe("<TeamMemberGrid /> authenticated", () => {
     cy.fixture("components/teamMemberGrid").then((teamMemberGrid) => {
       cy.mount(
         <MockAuthProvider isAuthenticated={true}>
-          <TeamMemberGrid teamMembers={teamMemberGrid} />
+          <TeamMemberGrid teamMembers={teamMemberGrid} isLastPage />
         </MockAuthProvider>
       );
     });
@@ -25,7 +25,7 @@ describe("<TeamMemberGrid /> authenticated", () => {
       (teamMemberGrid: ITeamMember[]) => {
         cy.mount(
           <MockAuthProvider isAuthenticated={true}>
-            <TeamMemberGrid teamMembers={teamMemberGrid.slice(0, -1)} />
+            <TeamMemberGrid teamMembers={teamMemberGrid.slice(0, -1)} isLastPage />
           </MockAuthProvider>
         );
       }
@@ -43,7 +43,7 @@ describe("<TeamMemberGrid /> unauthenticated", () => {
     cy.fixture("components/teamMemberGrid").then((teamMemberGrid) => {
       cy.mount(
         <MockAuthProvider isAuthenticated={false}>
-          <TeamMemberGrid teamMembers={teamMemberGrid} />
+          <TeamMemberGrid teamMembers={teamMemberGrid} isLastPage />
         </MockAuthProvider>
       );
     });
@@ -57,7 +57,7 @@ describe("Responsiveness", () => {
     cy.fixture("components/teamMemberGrid").then((teamMemberGrid) => {
       cy.mount(
         <MockAuthProvider isAuthenticated={false}>
-          <TeamMemberGrid teamMembers={teamMemberGrid} />
+          <TeamMemberGrid teamMembers={teamMemberGrid} isLastPage />
         </MockAuthProvider>
       );
     });
@@ -69,7 +69,7 @@ describe("Responsiveness", () => {
     cy.fixture("components/teamMemberGrid").then((teamMemberGrid) => {
       cy.mount(
         <MockAuthProvider isAuthenticated={false}>
-          <TeamMemberGrid teamMembers={teamMemberGrid} />
+          <TeamMemberGrid teamMembers={teamMemberGrid} isLastPage />
         </MockAuthProvider>
       );
     });
@@ -81,7 +81,7 @@ describe("Responsiveness", () => {
     cy.fixture("components/teamMemberGrid").then((teamMemberGrid) => {
       cy.mount(
         <MockAuthProvider isAuthenticated={false}>
-          <TeamMemberGrid teamMembers={teamMemberGrid} />
+          <TeamMemberGrid teamMembers={teamMemberGrid} isLastPage />
         </MockAuthProvider>
       );
     });
@@ -93,7 +93,7 @@ describe("Responsiveness", () => {
     cy.fixture("components/teamMemberGrid").then((teamMemberGrid) => {
       cy.mount(
         <MockAuthProvider isAuthenticated={false}>
-          <TeamMemberGrid teamMembers={teamMemberGrid} />
+          <TeamMemberGrid teamMembers={teamMemberGrid} isLastPage />
         </MockAuthProvider>
       );
     });
