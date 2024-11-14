@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { FileRejection, useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
+import { a } from "react-spring";
 import { z } from "zod";
 
 const teamMemberSchema = z.object({
@@ -58,6 +59,8 @@ export default function AdminTeamMember() {
     setUpdateDefault();
   }, [reset, updateId]);
 
+  // use callback to apply memoization
+
   const onDropAccepted = useCallback(
     (acceptedFiles: File[]) => {
       const reader = new FileReader();
@@ -71,14 +74,15 @@ export default function AdminTeamMember() {
     [setValue]
   );
 
-  const onDropRejected = (rejectedFiles: FileRejection[]) => {
+  const onDropRejected = useCallback((rejectedFiles: FileRejection[]) => {
     rejectedFiles.forEach((f: FileRejection) => {
       setError("image", {
         "type": "validate",
         "message": `Invalid file type! Only jpeg, jpg and png are accepted.`
       })
     })
-  }
+  }, [setValue]);
+
 
   const { getRootProps, getInputProps } = useDropzone({
     onDropAccepted,

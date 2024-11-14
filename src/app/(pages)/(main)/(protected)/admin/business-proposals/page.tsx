@@ -62,6 +62,8 @@ export default function AdminBusinessProposal() {
     setUpdateDefault();
   }, [updateId]);
 
+  // use callback to apply memoization
+
   const onDropAccepted = useCallback(
     (acceptedFiles: File[]) => {
       const reader = new FileReader();
@@ -75,14 +77,14 @@ export default function AdminBusinessProposal() {
     [setValue]
   );
 
-  const onDropRejected = (rejectedFiles: FileRejection[]) => {
+  const onDropRejected = useCallback((rejectedFiles: FileRejection[]) => {
     rejectedFiles.forEach((f: FileRejection) => {
       setError("image", {
         "type": "validate",
         "message": `Invalid file type! Only jpeg, jpg and png are accepted.`
       })
     })
-  }
+  }, [setValue]);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDropAccepted,
