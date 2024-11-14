@@ -70,7 +70,12 @@ export default function AdminTeamMember() {
     [setValue]
   );
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop, accept: {
+      "image/png": [".png"],
+      "image/jpeg": [".jpeg", "jpg"],
+    }
+  });
 
   const onSubmit = async (data: TeamMemberFormData) => {
     try {
@@ -145,9 +150,8 @@ export default function AdminTeamMember() {
           <input
             id="name"
             {...register("name")}
-            className={`bg-white border ${
-              errors.name ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.name ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="Ennovate Member"
           />
         </div>
@@ -162,9 +166,8 @@ export default function AdminTeamMember() {
             type="email"
             id="email"
             {...register("email")}
-            className={`bg-white border ${
-              errors.email ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.email ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="ennovateteam@gmail.com"
           />
         </div>
@@ -178,9 +181,8 @@ export default function AdminTeamMember() {
           <input
             id="title"
             {...register("title")}
-            className={`bg-white border ${
-              errors.title ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.title ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="Project Director"
           />
         </div>
@@ -193,9 +195,8 @@ export default function AdminTeamMember() {
           </label>
           <div
             {...getRootProps()}
-            className={`bg-white border ${
-              errors.image ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full h-64 flex items-center justify-center cursor-pointer`}
+            className={`bg-white border ${errors.image ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full h-64 flex items-center justify-center cursor-pointer`}
           >
             <input {...getInputProps()} />
             {imagePreview ? (
