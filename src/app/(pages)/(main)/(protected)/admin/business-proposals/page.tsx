@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import { FileRejection, useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -32,6 +32,7 @@ export default function AdminBusinessProposal() {
     register,
     handleSubmit,
     setValue,
+    setError,
     reset,
     formState: { errors },
   } = useForm<BusinessProposalFormData>({
@@ -61,7 +62,7 @@ export default function AdminBusinessProposal() {
     setUpdateDefault();
   }, [updateId]);
 
-  const onDrop = useCallback(
+  const onDropAccepted = useCallback(
     (acceptedFiles: File[]) => {
       const reader = new FileReader();
       reader.onload = () => {
@@ -74,8 +75,18 @@ export default function AdminBusinessProposal() {
     [setValue]
   );
 
+  const onDropRejected = (rejectedFiles: FileRejection[]) => {
+    rejectedFiles.forEach((f: FileRejection) => {
+      setError("image", {
+        "type": "validate",
+        "message": `${f.file.name} has invalid type, ${f.file.type}`
+      })
+    })
+  }
+
   const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
+    onDropAccepted,
+    onDropRejected,
     accept: {
       "image/jpeg": [".jpeg", ".jpg"],
       "image/png": [".png"],
