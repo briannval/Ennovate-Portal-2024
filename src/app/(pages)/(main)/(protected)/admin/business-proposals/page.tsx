@@ -79,7 +79,7 @@ export default function AdminBusinessProposal() {
     rejectedFiles.forEach((f: FileRejection) => {
       setError("image", {
         "type": "validate",
-        "message": `Invalid file type, ${f.file.type}, only jpeg, jpg and png are accepted.`
+        "message": `Invalid file type! Only jpeg, jpg and png are accepted.`
       })
     })
   }
