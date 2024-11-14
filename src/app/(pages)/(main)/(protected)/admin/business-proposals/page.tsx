@@ -79,7 +79,7 @@ export default function AdminBusinessProposal() {
     rejectedFiles.forEach((f: FileRejection) => {
       setError("image", {
         "type": "validate",
-        "message": `${f.file.name} has invalid type, ${f.file.type}`
+        "message": `Invalid file type, ${f.file.type}, only jpeg, jpg and png are accepted.`
       })
     })
   }
@@ -172,6 +172,9 @@ export default function AdminBusinessProposal() {
               } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="Ennovate UBC"
           />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-2">{errors.name.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -187,6 +190,9 @@ export default function AdminBusinessProposal() {
               } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="2nd Place 24/25 Sem 1"
           />
+          {errors.description && (
+            <p className="text-red-500 text-sm mt-2">{errors.description.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -203,6 +209,9 @@ export default function AdminBusinessProposal() {
               } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="https://drive.google.com/file/d/FILE_ID/view?usp=sharing"
           />
+          {errors.drive && (
+            <p className="text-red-500 text-sm mt-2">{errors.drive.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -227,6 +236,9 @@ export default function AdminBusinessProposal() {
               <CameraIcon />
             )}
           </div>
+          {errors.image && (
+            <p className="text-red-500 text-sm mt-2">{errors.image.message}</p>
+          )}
         </div>
         <button
           type="submit"
