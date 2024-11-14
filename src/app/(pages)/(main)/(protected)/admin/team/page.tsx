@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { DropEvent, FileRejection, useDropzone } from "react-dropzone";
+import { FileRejection, useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -75,7 +75,7 @@ export default function AdminTeamMember() {
     rejectedFiles.forEach((f: FileRejection) => {
       setError("image", {
         "type": "validate",
-        "message": `${f.file.name} has invalid type, ${f.file.type}`
+        "message": `Invalid file type, ${f.file.type}, only jpeg, jpg and png are accepted.`
       })
     })
   }
@@ -166,6 +166,9 @@ export default function AdminTeamMember() {
               } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="Ennovate Member"
           />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-2">{errors.name.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -182,6 +185,9 @@ export default function AdminTeamMember() {
               } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="ennovateteam@gmail.com"
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-2">{errors.email.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -197,6 +203,9 @@ export default function AdminTeamMember() {
               } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="Project Director"
           />
+          {errors.title && (
+            <p className="text-red-500 text-sm mt-2">{errors.title.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -221,6 +230,9 @@ export default function AdminTeamMember() {
               <CameraIcon />
             )}
           </div>
+          {errors.image && (
+            <p className="text-red-500 text-sm mt-2">{errors.image.message}</p>
+          )}
         </div>
         <button
           type="submit"
