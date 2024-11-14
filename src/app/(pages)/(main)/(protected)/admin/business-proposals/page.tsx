@@ -75,9 +75,10 @@ export default function AdminBusinessProposal() {
   );
 
   const { getRootProps, getInputProps } = useDropzone({
-    onDrop, accept: {
+    onDrop,
+    accept: {
+      "image/jpeg": [".jpeg", ".jpg"],
       "image/png": [".png"],
-      "image/jpeg": [".jpeg", "jpg"],
     }
   });
 

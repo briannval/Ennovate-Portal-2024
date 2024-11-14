@@ -71,9 +71,10 @@ export default function AdminTeamMember() {
   );
 
   const { getRootProps, getInputProps } = useDropzone({
-    onDrop, accept: {
+    onDrop,
+    accept: {
+      "image/jpeg": [".jpeg", ".jpg"],
       "image/png": [".png"],
-      "image/jpeg": [".jpeg", "jpg"],
     }
   });
 
