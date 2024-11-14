@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import { FileRejection, useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -31,6 +31,7 @@ export default function AdminTeamMember() {
     register,
     handleSubmit,
     setValue,
+    setError,
     reset,
     formState: { errors },
   } = useForm<TeamMemberFormData>({
@@ -57,7 +58,7 @@ export default function AdminTeamMember() {
     setUpdateDefault();
   }, [reset, updateId]);
 
-  const onDrop = useCallback(
+  const onDropAccepted = useCallback(
     (acceptedFiles: File[]) => {
       const reader = new FileReader();
       reader.onload = () => {
@@ -70,7 +71,23 @@ export default function AdminTeamMember() {
     [setValue]
   );
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const onDropRejected = (rejectedFiles: FileRejection[]) => {
+    rejectedFiles.forEach((f: FileRejection) => {
+      setError("image", {
+        "type": "validate",
+        "message": `Invalid file type! Only jpeg, jpg and png are accepted.`
+      })
+    })
+  }
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDropAccepted,
+    onDropRejected,
+    accept: {
+      "image/jpeg": [".jpeg", ".jpg"],
+      "image/png": [".png"],
+    },
+  });
 
   const onSubmit = async (data: TeamMemberFormData) => {
     try {
@@ -145,11 +162,13 @@ export default function AdminTeamMember() {
           <input
             id="name"
             {...register("name")}
-            className={`bg-white border ${
-              errors.name ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.name ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="Ennovate Member"
           />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-2">{errors.name.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -162,11 +181,13 @@ export default function AdminTeamMember() {
             type="email"
             id="email"
             {...register("email")}
-            className={`bg-white border ${
-              errors.email ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.email ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="ennovateteam@gmail.com"
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-2">{errors.email.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -178,11 +199,13 @@ export default function AdminTeamMember() {
           <input
             id="title"
             {...register("title")}
-            className={`bg-white border ${
-              errors.title ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.title ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="Project Director"
           />
+          {errors.title && (
+            <p className="text-red-500 text-sm mt-2">{errors.title.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -193,9 +216,8 @@ export default function AdminTeamMember() {
           </label>
           <div
             {...getRootProps()}
-            className={`bg-white border ${
-              errors.image ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full h-64 flex items-center justify-center cursor-pointer`}
+            className={`bg-white border ${errors.image ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full h-64 flex items-center justify-center cursor-pointer`}
           >
             <input {...getInputProps()} />
             {imagePreview ? (
@@ -208,6 +230,9 @@ export default function AdminTeamMember() {
               <CameraIcon />
             )}
           </div>
+          {errors.image && (
+            <p className="text-red-500 text-sm mt-2">{errors.image.message}</p>
+          )}
         </div>
         <button
           type="submit"

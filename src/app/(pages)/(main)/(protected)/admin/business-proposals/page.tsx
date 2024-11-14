@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import { FileRejection, useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -32,6 +32,7 @@ export default function AdminBusinessProposal() {
     register,
     handleSubmit,
     setValue,
+    setError,
     reset,
     formState: { errors },
   } = useForm<BusinessProposalFormData>({
@@ -61,7 +62,7 @@ export default function AdminBusinessProposal() {
     setUpdateDefault();
   }, [updateId]);
 
-  const onDrop = useCallback(
+  const onDropAccepted = useCallback(
     (acceptedFiles: File[]) => {
       const reader = new FileReader();
       reader.onload = () => {
@@ -74,7 +75,23 @@ export default function AdminBusinessProposal() {
     [setValue]
   );
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const onDropRejected = (rejectedFiles: FileRejection[]) => {
+    rejectedFiles.forEach((f: FileRejection) => {
+      setError("image", {
+        "type": "validate",
+        "message": `Invalid file type! Only jpeg, jpg and png are accepted.`
+      })
+    })
+  }
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDropAccepted,
+    onDropRejected,
+    accept: {
+      "image/jpeg": [".jpeg", ".jpg"],
+      "image/png": [".png"],
+    }
+  });
 
   const onSubmit = async (data: BusinessProposalFormData) => {
     try {
@@ -151,11 +168,13 @@ export default function AdminBusinessProposal() {
           <input
             id="name"
             {...register("name")}
-            className={`bg-white border ${
-              errors.name ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.name ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="Ennovate UBC"
           />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-2">{errors.name.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -167,11 +186,13 @@ export default function AdminBusinessProposal() {
           <input
             id="description"
             {...register("description")}
-            className={`bg-white border ${
-              errors.description ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.description ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="2nd Place 24/25 Sem 1"
           />
+          {errors.description && (
+            <p className="text-red-500 text-sm mt-2">{errors.description.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -184,11 +205,13 @@ export default function AdminBusinessProposal() {
             type="url"
             id="drive"
             {...register("drive")}
-            className={`bg-white border ${
-              errors.drive ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.drive ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="https://drive.google.com/file/d/FILE_ID/view?usp=sharing"
           />
+          {errors.drive && (
+            <p className="text-red-500 text-sm mt-2">{errors.drive.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -199,9 +222,8 @@ export default function AdminBusinessProposal() {
           </label>
           <div
             {...getRootProps()}
-            className={`bg-white border ${
-              errors.image ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full h-64 flex items-center justify-center cursor-pointer`}
+            className={`bg-white border ${errors.image ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full h-64 flex items-center justify-center cursor-pointer`}
           >
             <input {...getInputProps()} />
             {imagePreview ? (
@@ -214,6 +236,9 @@ export default function AdminBusinessProposal() {
               <CameraIcon />
             )}
           </div>
+          {errors.image && (
+            <p className="text-red-500 text-sm mt-2">{errors.image.message}</p>
+          )}
         </div>
         <button
           type="submit"

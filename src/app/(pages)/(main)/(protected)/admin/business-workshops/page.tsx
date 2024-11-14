@@ -109,6 +109,9 @@ export default function AdminBusinessWorkshop() {
               } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="Ennovate UBC Workshop"
           />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-2">{errors.name.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -125,6 +128,9 @@ export default function AdminBusinessWorkshop() {
               } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             defaultValue={getCurrentMonthYear()}
           />
+          {errors.month && (
+            <p className="text-red-500 text-sm mt-2">{errors.month.message}</p>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -141,6 +147,10 @@ export default function AdminBusinessWorkshop() {
               } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="https://docs.google.com/presentation/d/FILE_ID/view?usp=sharing"
           />
+          {errors.slides && (
+            <p className="text-red-500 text-sm mt-2">{errors.slides.message}</p>
+          )}
+
         </div>
         <div className="mb-5">
           <label
@@ -157,6 +167,9 @@ export default function AdminBusinessWorkshop() {
               } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="https://docs.google.com/document/d/FILE_ID/view?usp=sharing"
           />
+          {errors.worksheet && (
+            <p className="text-red-500 text-sm mt-2">{errors.worksheet.message}</p>
+          )}
         </div>
         <button
           type="submit"
