@@ -19,14 +19,15 @@ jobs:
       NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
       NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}
       REDIS_URL: ${{ secrets.REDIS_URL }}
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Install dependencies
         run: npm install
-      
+
       - name: Cypress run e2e & integration
         uses: cypress-io/github-action@v6
         with:
@@ -38,4 +39,3 @@ jobs:
         with:
           component: true
           working-directory: ./
-
