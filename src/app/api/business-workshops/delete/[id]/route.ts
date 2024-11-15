@@ -1,6 +1,7 @@
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
 import BusinessWorkshop from "@/models/BusinessWorkshop";
+import { captureMessage } from "@sentry/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
@@ -16,6 +17,8 @@ export async function DELETE(
       BusinessWorkshop.findByIdAndDelete(id),
       redis.del([`businessWorkshop:${id}`, "businessWorkshop"]),
     ]);
+
+    captureMessage(`Deleted business workshop with id ${id}`, "info");
 
     return NextResponse.json("Success");
   } catch (e) {

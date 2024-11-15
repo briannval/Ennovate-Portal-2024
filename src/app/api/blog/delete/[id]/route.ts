@@ -1,6 +1,7 @@
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
 import Blog from "@/models/Blog";
+import { captureMessage } from "@sentry/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
@@ -16,6 +17,8 @@ export async function DELETE(
       Blog.findByIdAndDelete(id),
       redis.del(["blog", "blog?featured"]),
     ]);
+
+    captureMessage(`Deleted blog with id ${id}`, 'info');
 
     return NextResponse.json("Success");
   } catch (e) {

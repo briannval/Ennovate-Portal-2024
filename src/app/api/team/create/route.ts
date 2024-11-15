@@ -1,6 +1,7 @@
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
 import TeamMember from "@/models/TeamMember";
+import { captureMessage } from "@sentry/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -16,6 +17,8 @@ export async function POST(request: NextRequest) {
     if (cachedKeys.length > 0) {
       await redis.del(cachedKeys);
     }
+
+    captureMessage(`Created team member ${name}`, "info");
 
     return NextResponse.json("Success");
   } catch (e) {

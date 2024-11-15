@@ -1,6 +1,7 @@
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
 import TeamMember from "@/models/TeamMember";
+import { captureMessage } from "@sentry/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
@@ -19,6 +20,8 @@ export async function DELETE(
     if (cachedKeys.length > 0) {
       await redis.del(cachedKeys);
     }
+
+    captureMessage(`Deleted team member ${id}`, "info");
 
     return NextResponse.json("Success");
   } catch (e) {

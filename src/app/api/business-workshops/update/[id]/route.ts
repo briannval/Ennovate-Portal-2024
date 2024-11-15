@@ -1,6 +1,7 @@
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
 import BusinessWorkshop from "@/models/BusinessWorkshop";
+import { captureMessage } from "@sentry/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
@@ -18,6 +19,8 @@ export async function PUT(
       BusinessWorkshop.findByIdAndUpdate(id, body),
       redis.del([`businessWorkshop:${id}`, "businessWorkshop"]),
     ]);
+
+    captureMessage(`Updated business workshop with id ${id} and params ${body}`, "info");
 
     return NextResponse.json("Success");
   } catch (e) {
