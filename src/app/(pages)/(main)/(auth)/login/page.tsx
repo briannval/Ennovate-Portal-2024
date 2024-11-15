@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { sleep } from "@/utils/utils";
 import { useAuth } from "@/hooks/useAuth";
-import { captureException, captureMessage } from "@sentry/nextjs";
+import { captureException, captureMessage, withScope } from "@sentry/nextjs";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -38,10 +38,13 @@ export default function LoginForm() {
       setIsSubmitting(true);
       await login(data.email, data.password);
       setIsSubmitting(false);
-      captureMessage(`Successful sign in attempt for user: ${data.email}`)
+      captureMessage(`Successful sign in attempt for user: ${data.email}`, "info")
     } catch (e) {
       setIsSubmitting(false);
-      captureException(new Error(`Failed sign in attempt for user: ${data.email}`));
+      withScope((s) => {
+        s.setLevel("fatal");
+        captureException(new Error(`Failed sign in attempt for user: ${data.email}`));
+      })
       setIsInCorrect(true);
       await sleep(4000);
       setIsInCorrect(false);
