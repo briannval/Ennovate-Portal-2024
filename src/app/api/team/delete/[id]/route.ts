@@ -1,6 +1,7 @@
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
 import TeamMember from "@/models/TeamMember";
+import { captureException, captureMessage } from "@sentry/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
@@ -20,8 +21,11 @@ export async function DELETE(
       await redis.del(cachedKeys);
     }
 
+    captureMessage(`Deleted team member ${id}`, "info");
+
     return NextResponse.json("Success");
   } catch (e) {
+    captureException(e);
     return NextResponse.json(
       { message: "Failed to delete team member" },
       { status: 500 },

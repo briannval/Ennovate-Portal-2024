@@ -1,6 +1,7 @@
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
 import Blog from "@/models/Blog";
+import { captureException, captureMessage } from "@sentry/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
@@ -19,8 +20,11 @@ export async function PUT(
       redis.del(["blog", "blog?featured"]),
     ]);
 
+    captureMessage(`Updated blog with id ${id}`, 'info');
+
     return NextResponse.json("Success");
   } catch (e) {
+    captureException(e);
     return NextResponse.json(
       { message: "Failed to update blog" },
       { status: 500 }

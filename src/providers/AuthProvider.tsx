@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  User
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 
@@ -15,11 +16,13 @@ interface AuthProviderProps {
 export default function AuthProvider({ children }: AuthProviderProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const checkAuth = () => {
       onAuthStateChanged(auth, (user) => {
         setIsAuthenticated(!!user);
+        setUser(user);
         setIsLoading(false);
       });
     };
@@ -49,7 +52,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isLoading, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, isLoading, login, logout, user }}>
       {children}
     </AuthContext.Provider>
   );

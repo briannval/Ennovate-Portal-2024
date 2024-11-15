@@ -7,6 +7,7 @@ import {
   CACHE_KEY_EXPIRY_TIME,
   TEAM_MEMBERS_PER_PAGE,
 } from "@/constants/actions";
+import { captureException } from "@sentry/nextjs";
 
 export async function POST(request: NextRequest) {
   try {
@@ -27,8 +28,6 @@ export async function POST(request: NextRequest) {
       .split(" ")
       .map((t: string) => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase())
       .join(" ");
-
-    console.log(finalQuery);
 
     if (query) {
       queryObject = {
@@ -60,6 +59,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(res);
   } catch (e) {
+    captureException(e);
     return NextResponse.json(
       { message: "Failed to fetch team members" },
       { status: 500 }
