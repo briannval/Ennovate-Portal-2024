@@ -2,6 +2,7 @@ import { CACHE_KEY_EXPIRY_TIME } from "@/constants/actions";
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
 import Blog from "@/models/Blog";
+import { captureException } from "@sentry/nextjs";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import { parse } from "node-html-parser";
@@ -81,7 +82,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(blogData);
   } catch (e) {
-    console.log(e);
+    captureException(e);
     return NextResponse.json(
       { message: "Failed to fetch blog data" },
       { status: 500 }

@@ -1,5 +1,6 @@
 import { connectToDatabase } from "@/lib/mongoose";
 import Blog from "@/models/Blog";
+import { captureException } from "@sentry/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -19,7 +20,7 @@ export async function GET(
 
     return NextResponse.json(blog);
   } catch (e) {
-    console.log(e);
+    captureException(e);
     return NextResponse.json(
       { message: "Failed to fetch blog" },
       { status: 500 }

@@ -3,6 +3,7 @@ import { connectToDatabase } from "@/lib/mongoose";
 import BusinessProposal from "@/models/BusinessProposal";
 import { redis } from "@/lib/redis";
 import { CACHE_KEY_EXPIRY_TIME } from "@/constants/actions";
+import { captureException } from "@sentry/nextjs";
 
 export async function GET(
   _: NextRequest,
@@ -36,7 +37,7 @@ export async function GET(
 
     return NextResponse.json(businessProposal);
   } catch (e) {
-    console.log(e);
+    captureException(e);
     return NextResponse.json(
       { message: "Failed to fetch business proposal" },
       { status: 500 }

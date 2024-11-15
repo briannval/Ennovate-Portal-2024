@@ -1,7 +1,7 @@
 import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
 import TeamMember from "@/models/TeamMember";
-import { captureMessage } from "@sentry/nextjs";
+import { captureException, captureMessage } from "@sentry/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json("Success");
   } catch (e) {
+    captureException(e);
     return NextResponse.json(
       { message: "Failed to create team member" },
       { status: 500 },

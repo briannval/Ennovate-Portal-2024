@@ -3,6 +3,7 @@ import { connectToDatabase } from "@/lib/mongoose";
 import { redis } from "@/lib/redis";
 import { CACHE_KEY_EXPIRY_TIME } from "@/constants/actions";
 import BusinessWorkshop from "@/models/BusinessWorkshop";
+import { captureException } from "@sentry/nextjs";
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,6 +26,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(businessWorkshops);
   } catch (e) {
+    captureException(e);
     return NextResponse.json(
       { message: "Failed to fetch business workshops" },
       { status: 500 }

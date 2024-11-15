@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongoose";
 import TeamMember from "@/models/TeamMember";
+import { captureException } from "@sentry/nextjs";
 
 export async function GET(
   _: NextRequest,
@@ -22,6 +23,7 @@ export async function GET(
 
     return NextResponse.json(teamMember);
   } catch (e) {
+    captureException(e);
     return NextResponse.json(
       { message: "Failed to fetch team member" },
       { status: 500 },
