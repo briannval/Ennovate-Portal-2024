@@ -41,10 +41,8 @@ export default function LoginForm() {
       captureMessage(`Successful sign in attempt for user: ${data.email}`, "info")
     } catch (e) {
       setIsSubmitting(false);
-      withScope((s) => {
-        s.setLevel("fatal");
-        captureException(new Error(`Failed sign in attempt for user: ${data.email}`));
-      })
+      captureException(e);
+      captureMessage(`Failed sign in attempt for user: ${data.email}`, "fatal");
       setIsInCorrect(true);
       await sleep(4000);
       setIsInCorrect(false);
