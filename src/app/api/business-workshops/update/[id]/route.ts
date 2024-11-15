@@ -20,7 +20,7 @@ export async function PUT(
       redis.del([`businessWorkshop:${id}`, "businessWorkshop"]),
     ]);
 
-    captureMessage(`Updated business workshop with id ${id} and params ${body}`, "info");
+    captureMessage(`Updated business workshop with id ${id}`, "info");
 
     return NextResponse.json("Success");
   } catch (e) {

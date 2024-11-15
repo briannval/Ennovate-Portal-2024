@@ -20,7 +20,7 @@ export async function PUT(
       redis.del(["blog", "blog?featured"]),
     ]);
 
-    captureMessage(`Updated blog with id ${id} and params ${body}`, 'info');
+    captureMessage(`Updated blog with id ${id}`, 'info');
 
     return NextResponse.json("Success");
   } catch (e) {

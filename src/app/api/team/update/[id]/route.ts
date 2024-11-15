@@ -23,7 +23,7 @@ export async function PUT(
       await redis.del(cachedKeys);
     }
 
-    captureMessage(`Updated team member ${id} with params ${body}`, "info");
+    captureMessage(`Updated team member ${id}`, "info");
 
     return NextResponse.json("Success");
   } catch (e) {
