@@ -1,7 +1,7 @@
 "use client";
 
+import { IBlogPopulated } from "@/models/Blog";
 import { IBusinessProposal } from "@/models/BusinessProposal";
-import { BlogSectionType } from "@/types/blogSectionType";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
@@ -21,7 +21,7 @@ type ProjectFormData = z.infer<typeof projectSchema>;
 export default function AdminProjects() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [businessProposals, setBusinessProposals] = useState<IBusinessProposal[] | null>(null);
-  const [blogs, setBlogs] = useState<BlogSectionType[] | null>(null);
+  const [blogs, setBlogs] = useState<IBlogPopulated[] | null>(null);
   const [selectedBusinessProposal, setSelectedBusinessProposal] = useState<string | null>(null);
   const [selectedBlog, setSelectedBlog] = useState<string | null>(null);
 
@@ -200,7 +200,7 @@ export default function AdminProjects() {
               onChange={(e) => setSelectedBlog(e.target.value)}
             >
               <option value="">None</option>
-              {blogs.map((blog: BlogSectionType) => (
+              {blogs.map((blog: IBlogPopulated) => (
                 <option key={blog.id} value={blog.id}>
                   {blog.title}
                 </option>
