@@ -6,17 +6,7 @@ import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 import Loading from "../loading/loading";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
-
-interface BlogSectionType {
-  coverImage: string;
-  title: string;
-  subtitle: string;
-  readingTime: string;
-  dateUploaded: string;
-  mediumUrl: string;
-  featured: boolean;
-  id: string;
-}
+import { IBlogPopulated } from "@/models/Blog";
 
 interface BlogSectionState {
   toDelete: boolean;
@@ -60,7 +50,7 @@ const blogSectionReducer = (
 };
 
 export default function BlogSection({ featured }: { featured: boolean }) {
-  const [blogs, setBlogs] = useState<BlogSectionType[] | null>(null);
+  const [blogs, setBlogs] = useState<IBlogPopulated[] | null>(null);
   const { isAuthenticated } = useAuth();
   const [state, dispatch] = useReducer(blogSectionReducer, initialState);
   const { toDelete, isDeleting, blogToDelete } = state;
@@ -71,7 +61,7 @@ export default function BlogSection({ featured }: { featured: boolean }) {
         const res = await axios.post("/api/blog/query", {
           featured: featured,
         });
-        setBlogs(res.data as BlogSectionType[]);
+        setBlogs(res.data as IBlogPopulated[]);
       } catch (e) {
         console.error("Error fetching blogs:", e);
       }

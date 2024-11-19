@@ -5,6 +5,16 @@ export interface IBlog {
   mediumUrl: string;
   featured: boolean;
 }
+export interface IBlogPopulated {
+  coverImage: string;
+  title: string;
+  subtitle: string;
+  readingTime: string;
+  dateUploaded: string;
+  mediumUrl: string;
+  featured: boolean;
+  id: string;
+}
 
 mongoose.Promise = global.Promise;
 
