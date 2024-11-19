@@ -159,7 +159,7 @@ export default function AdminProjects() {
             Business Proposal
           </label>
           {!businessProposals ? (
-            <div className="text-center text-gray-500">Loading Business Proposals...</div>
+            <div className="text-center text-gray-500">Loading...</div>
           ) : (
             <select
               id="businessProposal"
@@ -189,7 +189,7 @@ export default function AdminProjects() {
             Blog
           </label>
           {!blogs ? (
-            <div className="text-center text-gray-500">Loading Blogs...</div>
+            <div className="text-center text-gray-500">Loading...</div>
           ) : (
             <select
               id="blog"
