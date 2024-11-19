@@ -6,17 +6,7 @@ import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 import Loading from "../loading/loading";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
-
-interface BlogSectionType {
-  coverImage: string;
-  title: string;
-  subtitle: string;
-  readingTime: string;
-  dateUploaded: string;
-  mediumUrl: string;
-  featured: boolean;
-  id: string;
-}
+import { BlogSectionType } from "@/types/blogSectionType";
 
 interface BlogSectionState {
   toDelete: boolean;
