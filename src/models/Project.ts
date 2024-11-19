@@ -1,4 +1,6 @@
 import mongoose, { Schema } from "mongoose";
+import { IBusinessProposal } from "./BusinessProposal";
+import { IBlogPopulated } from "./Blog";
 
 export interface IProject {
   _id: string;
@@ -6,6 +8,14 @@ export interface IProject {
   description: string;
   businessProposal: mongoose.Types.ObjectId;
   blog: mongoose.Types.ObjectId;
+}
+
+export interface IProjectPopulated {
+  _id: string;
+  name: string;
+  description: string;
+  businessProposal: IBusinessProposal;
+  blog: IBlogPopulated;
 }
 
 mongoose.Promise = global.Promise;
