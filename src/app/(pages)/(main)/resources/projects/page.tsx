@@ -37,9 +37,9 @@ export default function Projects() {
       {projects.map((project) => (
         <div key={project._id} className="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6 w-96 max-h-[600px]">
           <div className="m-2.5 overflow-hidden rounded-md h-80 flex justify-center items-center">
-            <img className="w-full h-full object-cover" src={project.businessProposal ? project.businessProposal.image : (project.blog ? project.blog.coverImage : "/public/ennovate/ennovate-w.webp")} alt="profile-picture" />
+            <img className="w-full h-full object-fill" src={project.businessProposal ? project.businessProposal.image : (project.blog ? project.blog.coverImage : "/logos/enactus-logo.webp")} alt="profile-picture" />
           </div>
-          <div className="p-6 text-center">
+          <div className="p-6 text-center min-h-[250px]">
             <h4 className="mb-1 text-xl font-semibold text-slate-800">
               {project.name}
             </h4>

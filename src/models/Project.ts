@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import { IBusinessProposal } from "./BusinessProposal";
-import { IBlogPopulated } from "./Blog";
+import BusinessProposal, { IBusinessProposal } from "./BusinessProposal";
+import Blog, { IBlogPopulated } from "./Blog";
 
 export interface IProject {
   _id: string;
@@ -31,11 +31,11 @@ const ProjectSchema: Schema<IProject> = new Schema<IProject>({
   },
   businessProposal: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "BusinessProposal",
+    ref: BusinessProposal,
   },
   blog: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Blog",
+    ref: Blog,
   },
 });
 
