@@ -8,9 +8,9 @@ export async function POST(request: NextRequest) {
   try {
     await connectToDatabase();
 
-    const { name, description, businessProposal, blog } = await request.json();
+    const { name, description, presentation_slides, businessProposal, blog } = await request.json();
 
-    await Project.create({ name, description, businessProposal, blog });
+    await Project.create({ name, description, presentation_slides, businessProposal, blog });
 
     await redis.del(["project"]);
 
