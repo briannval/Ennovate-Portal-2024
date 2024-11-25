@@ -6,7 +6,7 @@ export interface IProject {
   _id: string;
   name: string;
   description: string;
-  presentation_slides: string;
+  presentationSlides: string;
   businessProposal: mongoose.Types.ObjectId;
   blog: mongoose.Types.ObjectId;
 }
@@ -15,7 +15,7 @@ export interface IProjectPopulated {
   _id: string;
   name: string;
   description: string;
-  presentation_slides: string;
+  presentationSlides: string;
   businessProposal: IBusinessProposal;
   blog: IBlogPopulated;
 }
@@ -31,7 +31,7 @@ const ProjectSchema: Schema<IProject> = new Schema<IProject>({
     type: String,
     required: true,
   },
-  presentation_slides: {
+  presentationSlides: {
     type: String,
   },
   businessProposal: {

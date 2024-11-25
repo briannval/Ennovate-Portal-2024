@@ -76,14 +76,14 @@ export default function Projects() {
             <h4 className="mb-1 text-xl font-semibold text-slate-800">
               {project.name}
             </h4>
-            <p className="text-base text-slate-600 mt-4 font-light ">
+            <p className="text-base text-slate-600 mt-4 font-light mb-4">
               {project.description}
             </p>
-            {project.presentation_slides &&
-              <Link href={project.presentation_slides}>
-                <p className="my-6 underline text-ennovate-dark-blue">Click here for their presentation slides!</p></Link>}
+            {project.presentationSlides &&
+              <Link href={project.presentationSlides}>
+                <p className="underline text-ennovate-dark-blue">Presentation Slides</p></Link>}
           </div>
-          <div className="flex justify-center p-6 pt-2 gap-7">
+          <div className="flex justify-center p-6 pt-2 gap-7 mt-4">
             <button onClick={() => {
               if (project.businessProposal) {
                 router.push(`/resources/business-proposals/${project.businessProposal._id}`);
@@ -171,7 +171,10 @@ export default function Projects() {
               {modalState == 'slide' && (
                 <input
                   id="description"
-                  onChange={(e) => setSlideLink(e.target.value)}
+                  onChange={(e) => {
+                    setSlideLink(e.target.value);
+                    console.log(slideLink);
+                  }}
                   className="bg-white border border-ennovate-grey text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5 mb-4"
                   placeholder={`${selectedProject.name}'s Presentation Slides Link`}
                 />
