@@ -4,24 +4,30 @@ import Project from "@/models/Project";
 import { captureException, captureMessage } from "@sentry/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } },
+) {
   try {
     await connectToDatabase();
 
-    const { name, description, presentationSlides, businessProposal, blog } = await request.json();
+    const { id } = params;
 
-    await Project.create({ name, description, presentationSlides, businessProposal, blog });
+    const body = await request.json();
 
-    await redis.del(["project"]);
+    await Promise.all([
+      Project.findByIdAndUpdate(id, body),
+      redis.del(["project"]),
+    ]);
 
-    captureMessage(`Created project ${name}`, 'info');
+    captureMessage(`Updated project with id ${id}`, "info");
 
     return NextResponse.json("Success");
   } catch (e) {
     captureException(e);
     return NextResponse.json(
-      { message: "Failed to create project" },
-      { status: 500 }
+      { message: "Failed to update project" },
+      { status: 500 },
     );
   }
 }

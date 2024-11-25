@@ -12,6 +12,7 @@ import { z } from "zod";
 const projectSchema = z.object({
   name: z.string().min(1, "Name is required"),
   description: z.string().min(1, "Description is required"),
+  presentationSlides: z.string().optional(),
   businessProposal: z.string().optional(),
   blog: z.string().optional(),
 });
@@ -22,8 +23,6 @@ export default function AdminProjects() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [businessProposals, setBusinessProposals] = useState<IBusinessProposal[] | null>(null);
   const [blogs, setBlogs] = useState<IBlogPopulated[] | null>(null);
-  const [selectedBusinessProposal, setSelectedBusinessProposal] = useState<string | null>(null);
-  const [selectedBlog, setSelectedBlog] = useState<string | null>(null);
 
   const searchParams = useSearchParams();
   const updateId: string = searchParams.get("update") || "";
@@ -55,18 +54,14 @@ export default function AdminProjects() {
     if (updateId) {
       const fetchProjectData = async () => {
         try {
-          const res = await axios.get(`/api/projects/${updateId}`);
+          const res = await axios.get(`/api/projects/query/${updateId}`);
           const project = res.data;
 
           reset({
             name: project.name,
             description: project.description,
-            businessProposal: project.businessProposal || null,
-            blog: project.blog || null,
+            presentationSlides: project.presentationSlides || null,
           });
-
-          setSelectedBusinessProposal(project.businessProposal || null);
-          setSelectedBlog(project.blog || null);
         } catch (error) {
           console.error("Error fetching project data", error);
         }
@@ -79,11 +74,12 @@ export default function AdminProjects() {
   const onSubmit = async (data: ProjectFormData) => {
     try {
       setIsSubmitting(true);
-      const { name, description, businessProposal, blog } = data;
+      const { name, description, businessProposal, blog, presentationSlides } = data;
 
       const body = {
         name,
         description,
+        presentationSlides: presentationSlides || null,
         businessProposal: businessProposal || null,
         blog: blog || null,
       };
@@ -153,6 +149,24 @@ export default function AdminProjects() {
         </div>
         <div className="mb-5">
           <label
+            htmlFor="presentationSlides"
+            className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
+          >
+            Presentation Slides
+          </label>
+          <input
+            id="description"
+            {...register("presentationSlides")}
+            className={`bg-white border ${errors.presentationSlides ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            placeholder="Project Presentation Slides"
+          />
+          {errors.presentationSlides && (
+            <p className="text-red-500 text-sm mt-2">{errors.presentationSlides.message}</p>
+          )}
+        </div>
+        <div className="mb-5">
+          <label
             htmlFor="businessProposal"
             className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
           >
@@ -166,8 +180,6 @@ export default function AdminProjects() {
               {...register("businessProposal")}
               className={`bg-white border ${errors.businessProposal ? "border-red-500" : "border-ennovate-gray"
                 } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
-              value={selectedBusinessProposal || ""}
-              onChange={(e) => setSelectedBusinessProposal(e.target.value)}
             >
               <option value="">None</option>
               {businessProposals.map((proposal: any) => (
@@ -196,8 +208,6 @@ export default function AdminProjects() {
               {...register("blog")}
               className={`bg-white border ${errors.blog ? "border-red-500" : "border-ennovate-gray"
                 } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
-              value={selectedBlog || ""}
-              onChange={(e) => setSelectedBlog(e.target.value)}
             >
               <option value="">None</option>
               {blogs.map((blog: IBlogPopulated) => (
