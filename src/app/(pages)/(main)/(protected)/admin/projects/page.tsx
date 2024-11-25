@@ -56,12 +56,13 @@ export default function AdminProjects() {
     if (updateId) {
       const fetchProjectData = async () => {
         try {
-          const res = await axios.get(`/api/projects/${updateId}`);
+          const res = await axios.get(`/api/projects/query/${updateId}`);
           const project = res.data;
 
           reset({
             name: project.name,
             description: project.description,
+            presentation_slides: project.presentation_slides || null,
             businessProposal: project.businessProposal || null,
             blog: project.blog || null,
           });
@@ -80,14 +81,14 @@ export default function AdminProjects() {
   const onSubmit = async (data: ProjectFormData) => {
     try {
       setIsSubmitting(true);
-      const { name, description, businessProposal, blog, presentation_slides } = data;
+      const { name, description, presentation_slides } = data;
 
       const body = {
         name,
         description,
         presentation_slides: presentation_slides || null,
-        businessProposal: businessProposal || null,
-        blog: blog || null,
+        businessProposal: null,
+        blog: null,
       };
 
       if (updateId) {
@@ -217,7 +218,10 @@ export default function AdminProjects() {
               className={`bg-white border ${errors.blog ? "border-red-500" : "border-ennovate-gray"
                 } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
               value={selectedBlog || ""}
-              onChange={(e) => setSelectedBlog(e.target.value)}
+              onChange={(e) => {
+                setSelectedBlog(e.target.value);
+                console.log(selectedBlog)
+              }}
             >
               <option value="">None</option>
               {blogs.map((blog: IBlogPopulated) => (

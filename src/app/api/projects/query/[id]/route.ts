@@ -13,7 +13,7 @@ export async function GET(_: NextRequest,
 
     const { id } = params;
 
-    const project = await Project.findById(id);
+    const project = await Project.findById(id).populate("businessProposal").populate("blog");
 
     return NextResponse.json(project);
   } catch (e) {
