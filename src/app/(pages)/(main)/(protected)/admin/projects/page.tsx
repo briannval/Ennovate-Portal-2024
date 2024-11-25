@@ -12,6 +12,7 @@ import { z } from "zod";
 const projectSchema = z.object({
   name: z.string().min(1, "Name is required"),
   description: z.string().min(1, "Description is required"),
+  presentation_slides: z.string().optional(),
   businessProposal: z.string().optional(),
   blog: z.string().optional(),
 });
@@ -79,11 +80,12 @@ export default function AdminProjects() {
   const onSubmit = async (data: ProjectFormData) => {
     try {
       setIsSubmitting(true);
-      const { name, description, businessProposal, blog } = data;
+      const { name, description, businessProposal, blog, presentation_slides } = data;
 
       const body = {
         name,
         description,
+        presentation_slides: presentation_slides || null,
         businessProposal: businessProposal || null,
         blog: blog || null,
       };
@@ -149,6 +151,24 @@ export default function AdminProjects() {
           />
           {errors.description && (
             <p className="text-red-500 text-sm mt-2">{errors.description.message}</p>
+          )}
+        </div>
+        <div className="mb-5">
+          <label
+            htmlFor="presentation_slides"
+            className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
+          >
+            Presentation Slides
+          </label>
+          <input
+            id="description"
+            {...register("presentation_slides")}
+            className={`bg-white border ${errors.presentation_slides ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            placeholder="Project Presentation Slides"
+          />
+          {errors.presentation_slides && (
+            <p className="text-red-500 text-sm mt-2">{errors.presentation_slides.message}</p>
           )}
         </div>
         <div className="mb-5">
