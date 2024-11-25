@@ -5,6 +5,7 @@ import UnderConstruction from "@/components/underConstruction/underConstruction"
 import { IProjectPopulated } from "@/models/Project";
 import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -35,7 +36,7 @@ export default function Projects() {
 
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mx-8 mt-8">
       {projects.map((project) => (
-        <div key={project._id} className="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6 w-96 max-h-[600px]">
+        <div key={project._id} className="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6 w-96 max-h-[650px]">
           <div className="m-2.5 overflow-hidden rounded-md h-80 flex justify-center items-center">
             <img className="w-full h-full object-fill" src={project.businessProposal ? project.businessProposal.image : "/logos/enactus-logo.webp"} alt="profile-picture" />
           </div>
@@ -46,6 +47,9 @@ export default function Projects() {
             <p className="text-base text-slate-600 mt-4 font-light ">
               {project.description}
             </p>
+            {project.presentation_slides &&
+              <Link href={project.presentation_slides}>
+                <p className="my-6 underline text-ennovate-dark-blue">Click here for their presentation slides!</p></Link>}
           </div>
           <div className="flex justify-center p-6 pt-2 gap-7">
             <button onClick={() => {
