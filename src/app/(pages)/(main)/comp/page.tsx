@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const FINAL_COMP_DATE = new Date("2025-01-25T00:00:00-08:00");
@@ -51,6 +52,14 @@ export default function Comp() {
         to final competition on{" "}
         <span className="font-extrabold">{FINAL_COMP_DATE_STR}</span>!
       </h3>
+      <div className="flex flex-col items-center justify-center mt-2">
+        <Link href="/pdf/final_comp_rubric.pdf" target="blank">
+          <button className="text-ennovate-dark-blue text-xl md:text-2xl font-bold bg-ennovate-yellow rounded-3xl py-2 px-6 text-center mb-12 mx-auto">
+            View Rubric
+          </button>
+        </Link>
+      </div>
+
     </div>
   );
 }
