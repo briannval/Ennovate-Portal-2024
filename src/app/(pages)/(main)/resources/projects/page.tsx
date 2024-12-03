@@ -72,6 +72,8 @@ export default function Projects() {
           <div className="m-2.5 overflow-hidden rounded-md h-80 flex justify-center items-center h-[300px]">
             <img className="w-full h-full object-fill" src={project.businessProposal ? project.businessProposal.image : "/logos/enactus-logo.webp"} alt="profile-picture" />
           </div>
+
+          {/* FLEX GROW IMPORTANT */}
           <div className="p-6 text-center flex-grow">
             <h4 className="mb-1 text-xl font-semibold text-slate-800">
               {project.name}
@@ -80,6 +82,7 @@ export default function Projects() {
               {project.description}
             </p>
           </div>
+
           {project.presentationSlides && (
             <p className="text-center">
               View presentation slides{" "}
