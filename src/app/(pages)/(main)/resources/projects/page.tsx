@@ -66,7 +66,7 @@ export default function Projects() {
   }
   return (
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-8 mt-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 mx-8 mt-8">
       {projects.map((project) => (
         <div key={project._id} className="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6 w-96 ">
           <div className="m-2.5 overflow-hidden rounded-md h-80 flex justify-center items-center h-[300px]">
