@@ -66,24 +66,32 @@ export default function Projects() {
   }
   return (
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mx-8 mt-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-8 mt-8">
       {projects.map((project) => (
-        <div key={project._id} className="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6 w-96 max-h-[650px]">
-          <div className="m-2.5 overflow-hidden rounded-md h-80 flex justify-center items-center">
+        <div key={project._id} className="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6 w-96 ">
+          <div className="m-2.5 overflow-hidden rounded-md h-80 flex justify-center items-center h-[300px]">
             <img className="w-full h-full object-fill" src={project.businessProposal ? project.businessProposal.image : "/logos/enactus-logo.webp"} alt="profile-picture" />
           </div>
-          <div className="p-6 text-center min-h-[250px]">
+          <div className="p-6 text-center flex-grow">
             <h4 className="mb-1 text-xl font-semibold text-slate-800">
               {project.name}
             </h4>
             <p className="text-base text-slate-600 mt-4 font-light mb-4">
               {project.description}
             </p>
-            {project.presentationSlides &&
-              <Link href={project.presentationSlides}>
-                <p className="underline text-ennovate-dark-blue">Presentation Slides</p></Link>}
           </div>
-          <div className="flex justify-center p-6 pt-2 gap-7 mt-4">
+          {project.presentationSlides && (
+            <p className="text-center">
+              View presentation slides{" "}
+              <Link href={project.presentationSlides} target="_blank" className="text-ennovate-dark-blue font-semibold hover:underline hover:underline-offset-2">
+                here
+              </Link>
+              !
+            </p>
+          )}
+
+
+          <div className="flex justify-center p-6 pt-2 gap-7 mt-4 shrink">
             <button onClick={() => {
               if (project.businessProposal) {
                 router.push(`/resources/business-proposals/${project.businessProposal._id}`);
@@ -117,93 +125,96 @@ export default function Projects() {
                 Add Slide
               </button>
             </div>}
-        </div>))}
+        </div>))
+      }
 
 
-      {(modalState != 'close' && selectedProject) && (
-        <div
-          className="fixed inset-0 flex justify-center items-center w-full h-full z-50 bg-black bg-opacity-50"
-          data-cy="delete-modal"
-        >
-          <div className="relative bg-white rounded-xl shadow p-8">
-            <button
-              type="button"
-              className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-              data-modal-hide="popup-modal"
-              onClick={() => setModalState('close')}
-              data-cy="close-modal-button"
-            >
-              <svg
-                className="w-3 h-3"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 14 14"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                />
-              </svg>
-            </button>
-            <div className="p-4 md:p-5 text-center">
-              <svg
-                className="mx-auto mb-4 text-ennovate-dark-blue w-12 h-12"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                />
-              </svg>
-              <h3 className="mb-5 text-xl font-bold text-ennovate-dark-blue">
-                {modalState == 'delete' ? `Remove ${selectedProject.name}?` : `Add presentation slides for ${selectedProject.name}`}
-              </h3>
-              {modalState == 'slide' && (
-                <input
-                  id="description"
-                  onChange={(e) => {
-                    setSlideLink(e.target.value);
-                    console.log(slideLink);
-                  }}
-                  className="bg-white border border-ennovate-grey text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5 mb-4"
-                  placeholder={`${selectedProject.name}'s Presentation Slides Link`}
-                />
-              )}
+      {
+        (modalState != 'close' && selectedProject) && (
+          <div
+            className="fixed inset-0 flex justify-center items-center w-full h-full z-50 bg-black bg-opacity-50"
+            data-cy="delete-modal"
+          >
+            <div className="relative bg-white rounded-xl shadow p-8">
               <button
-                data-modal-hide="popup-modal"
                 type="button"
-                className="text-white bg-ennovate-main hover:bg-ennovate-dark-blue font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
-                disabled={action}
-                style={{ opacity: action ? 0.7 : 1 }}
-                onClick={handleAction}
-              >
-                {action ? (modalState == 'delete' ? "Deleting..." : "Setting slides...") : (modalState == 'delete' ? "Yes, I'm sure" : "Set Presentation Slides")}
-              </button>
-              <button
+                className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                 data-modal-hide="popup-modal"
-                type="button"
-                className="py-2.5 px-5 ms-3 text-sm font-semibold text-ennovate-dark-blue bg-white rounded-lg border border-gray-200 hover:bg-gray-100"
                 onClick={() => setModalState('close')}
-                disabled={action}
-                style={{ opacity: action ? 0.7 : 1 }}
-                data-cy="cancel-delete-button"
+                data-cy="close-modal-button"
               >
-                No, cancel
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
               </button>
+              <div className="p-4 md:p-5 text-center">
+                <svg
+                  className="mx-auto mb-4 text-ennovate-dark-blue w-12 h-12"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+                <h3 className="mb-5 text-xl font-bold text-ennovate-dark-blue">
+                  {modalState == 'delete' ? `Remove ${selectedProject.name}?` : `Add presentation slides for ${selectedProject.name}`}
+                </h3>
+                {modalState == 'slide' && (
+                  <input
+                    id="description"
+                    onChange={(e) => {
+                      setSlideLink(e.target.value);
+                      console.log(slideLink);
+                    }}
+                    className="bg-white border border-ennovate-grey text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5 mb-4"
+                    placeholder={`${selectedProject.name}'s Presentation Slides Link`}
+                  />
+                )}
+                <button
+                  data-modal-hide="popup-modal"
+                  type="button"
+                  className="text-white bg-ennovate-main hover:bg-ennovate-dark-blue font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
+                  disabled={action}
+                  style={{ opacity: action ? 0.7 : 1 }}
+                  onClick={handleAction}
+                >
+                  {action ? (modalState == 'delete' ? "Deleting..." : "Setting slides...") : (modalState == 'delete' ? "Yes, I'm sure" : "Set Presentation Slides")}
+                </button>
+                <button
+                  data-modal-hide="popup-modal"
+                  type="button"
+                  className="py-2.5 px-5 ms-3 text-sm font-semibold text-ennovate-dark-blue bg-white rounded-lg border border-gray-200 hover:bg-gray-100"
+                  onClick={() => setModalState('close')}
+                  disabled={action}
+                  style={{ opacity: action ? 0.7 : 1 }}
+                  data-cy="cancel-delete-button"
+                >
+                  No, cancel
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 }
