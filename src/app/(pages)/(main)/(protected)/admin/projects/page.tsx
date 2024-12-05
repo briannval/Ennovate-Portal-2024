@@ -94,7 +94,7 @@ export default function AdminProjects() {
       reset();
 
       if (updateId) {
-        window.location.href = "/projects";
+        window.location.href = "/resources/projects";
       }
     } catch (e) {
       setIsSubmitting(false);
