@@ -36,7 +36,7 @@ export default function Projects() {
           description: selectedProject?.description,
           blog: selectedProject?.blog,
           businessProposal: selectedProject?.businessProposal,
-          presentation_slides: slideLink
+          presentationSlides: slideLink // change one field
         })
       }
       setModalState('close');
