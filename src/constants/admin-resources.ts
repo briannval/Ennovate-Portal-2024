@@ -15,7 +15,7 @@ export const ADMIN_RESOURCES_ACTIONS: IAdminResourcesAction[] = [
     addHref: "/admin/team",
   },
   {
-    heading: "Previous Business Proposals",
+    heading: "Previous Business Proposals & Slides",
     subheading: "Proposals from Ennovate's future entrepreneurs",
     image: "/admin/previous-business-proposals.webp",
     viewHref: "/resources/business-proposals",
