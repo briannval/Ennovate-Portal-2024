@@ -10,7 +10,7 @@ const Landing = () => {
       {/* Background Image */}
       <div className="h-full">
         <Image
-          src="/ennovate/landing-banner.webp"
+          src="/ennovate/landing-banner-new.webp"
           alt="Landing Banner Image"
           fill={true}
           className="object-cover"
@@ -18,7 +18,12 @@ const Landing = () => {
       </div>
 
       {/* Blue Overlay */}
-      <div className="absolute inset-0 bg-blue-900 opacity-50"></div>
+      <div className="absolute inset-0 bg-blue-500 opacity-30"></div>
+      {/* 
+      1. Choice 1: 500 - 30
+      2. Choice 2: 900 - 40
+      3. Choice 3: 700 - 20
+      */}
 
       {/* Text Content */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center h-full">
