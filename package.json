@@ -21,7 +21,7 @@
     "firebase": "^10.12.5",
     "ioredis": "^5.4.1",
     "mongoose": "^8.8.3",
-    "next": "14.2.20",
+    "next": "14.2.22",
     "node-html-parser": "^6.1.13",
     "prettier": "^3.3.3",
     "react": "^18",
