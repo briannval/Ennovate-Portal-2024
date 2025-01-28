@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const FINAL_COMP_DATE = new Date("2025-01-25T00:00:00-08:00");
-const FINAL_COMP_DATE_STR = "January 25th";
+const FINAL_COMP_DATE = new Date("2025-05-24T00:00:00-08:00");
+const FINAL_COMP_DATE_STR = "May 24th";
 
 function TimeUnit({ value, label }: { value: number; label: string }) {
   return (
