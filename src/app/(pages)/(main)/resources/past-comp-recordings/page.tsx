@@ -4,6 +4,7 @@ import Loading from "@/components/loading/loading";
 import { IPastCompRecording } from "@/models/PastCompRecording"
 import PageCenteringWrapper from "@/wrappers/pageCenteringWrapper";
 import axios from "axios";
+import Link from "next/link";
 import { useEffect, useState } from "react"
 
 export default function PastCompRecordings() {
@@ -37,12 +38,12 @@ export default function PastCompRecordings() {
                             {p.title}
                         </h5>
                         <span className="text-lg font-bold text-gray-900">{p.month}</span>
-                        <button
-                            type="button"
-                            onClick={() => window.location.href = p.videoUrl}
-                            className="text-white bg-ennovate-main hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center">
-                            See video
-                        </button>
+                        <Link href={p.videoUrl} target="blank">
+                            <button
+                                className="text-white bg-ennovate-main hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center">
+                                See video
+                            </button>
+                        </Link>
                     </div>
 
                 </div>))
