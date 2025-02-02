@@ -14,7 +14,7 @@ describe("Navigation on lg viewport", () => {
 
     cy.url().should("include", "/comp");
 
-    cy.get('a[href*="resources"]').click();
+    cy.get('a[href*="resources"]').first().click();
 
     cy.url().should("include", "/resources");
   });
@@ -42,7 +42,7 @@ describe("Navigation on base viewport", () => {
 
     cy.get('[data-cy="toggle-navbar-menu"]').click();
 
-    cy.get('a[href*="resources"]').click();
+    cy.get('a[href*="resources"]').first().click();
 
     cy.url().should("include", "/resources");
   });
