@@ -11,6 +11,10 @@ export const FOOTER_SOCIALS_LINKS = [
     img: "/logos/fb-logo.webp",
     href: "https://www.facebook.com/ennovateubc/",
   },
+  {
+    img: "/logos/linkedin-logo.webp",
+    href: "http://linkedin.com/showcase/ennovateubc"
+  }
 ];
 
 export const CONTACT_GOOGLE_FORM_LINK =
