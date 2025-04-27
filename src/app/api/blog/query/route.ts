@@ -30,8 +30,9 @@ export async function POST(req: NextRequest) {
       blogs.map(async (blog) => {
         const url = blog.mediumUrl;
 
-        const res = await axios.get(url);
-        const html = res.data;
+        // do not use axios to avoid 403
+        const res = await fetch(url);
+        const html = await res.text();
         const root = parse(html);
 
         const coverImage = root
@@ -83,6 +84,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(blogData);
   } catch (e) {
     captureException(e);
+    console.error()
     return NextResponse.json(
       { message: "Failed to fetch blog data" },
       { status: 500 }
