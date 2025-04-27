@@ -30,28 +30,28 @@ export async function POST(req: NextRequest) {
       blogs.map(async (blog) => {
         const url = blog.mediumUrl;
 
+        const isMedium = url.includes("medium.com"); // if isMedium false, is LinkedIn post
+
         // do not use axios to avoid 403
         const res = await fetch(url);
         const html = await res.text();
         const root = parse(html);
 
-        const coverImage = root
-          .querySelector('meta[property="og:image"]')
-          ?.getAttribute("content");
+        const coverImage = (isMedium ? root.querySelector('meta[property="og:image"]') : root.querySelectorAll('meta[property="og:image"]')[1])?.getAttribute("content")
 
-        const title = root
+        const title = isMedium ? root
           .querySelector('meta[property="og:title"]')
-          ?.getAttribute("content");
+          ?.getAttribute("content") : root.querySelector('title')?.textContent?.trim();
 
-        const subtitle = root
+        const subtitle = isMedium ? root
           .querySelector('meta[property="og:description"]')
-          ?.getAttribute("content");
+          ?.getAttribute("content") : "";
 
         const readingTime = root
-          .querySelector('meta[name="twitter:data1"]')
-          ?.getAttribute("content");
+          .querySelector(`meta[name="twitter:data${isMedium ? 1 : 2}"]`)
+          ?.getAttribute("content")
 
-        const dateUploaded = new Date(
+        const dateUploaded = isMedium ? new Date(
           root
             .querySelector('meta[property="article:published_time"]')!
             .getAttribute("content")
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
           year: "numeric",
           month: "short",
           day: "numeric",
-        });
+        }) : root.querySelector('.base-main-card__metadata')?.textContent?.trim().replace('Published ', '').trim();
 
         return {
           coverImage,

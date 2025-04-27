@@ -78,22 +78,21 @@ export default function AdminBlog() {
         className="max-w-xl w-full bg-white p-8 border-2 border-ennovate-gray shadow-xl rounded-lg"
       >
         <p className="mt-2 text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl mb-6">
-          {updateId ? "Update Medium Blog" : "Register Medium Blog"}
+          {updateId ? "Update Blog" : "Register Blog"}
         </p>
         <div className="mb-5">
           <label
             htmlFor="mediumUrl"
             className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
           >
-            Medium URL
+            Medium / LinkedIn URL
           </label>
           <input
             type="url"
             id="mediumUrl"
             {...register("mediumUrl")}
-            className={`bg-white border ${
-              errors.mediumUrl ? "border-red-500" : "border-ennovate-gray"
-            } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
+            className={`bg-white border ${errors.mediumUrl ? "border-red-500" : "border-ennovate-gray"
+              } text-ennovate-main text-sm rounded-md focus:ring-blue-500 focus:border-ennovate-main block w-full p-2.5`}
             placeholder="https://medium.com/@username/article"
           />
           {errors.mediumUrl && (
