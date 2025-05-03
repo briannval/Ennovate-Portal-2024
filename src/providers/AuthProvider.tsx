@@ -21,7 +21,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     const checkAuth = () => {
       onAuthStateChanged(auth, (user) => {
-        setIsAuthenticated(!!user);
+        setIsAuthenticated(!!user); // truthiness in TypeScript -> boolean equivalent
         setUser(user);
         setIsLoading(false);
       });
