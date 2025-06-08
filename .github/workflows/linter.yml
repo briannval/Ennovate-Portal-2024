@@ -28,14 +28,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Cypress run e2e & integration
-        uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm start
-
-      - name: Cypress run component tests
-        uses: cypress-io/github-action@v6
-        with:
-          component: true
-          working-directory: ./
+      - name: Run linter
+        run: npm run lint
