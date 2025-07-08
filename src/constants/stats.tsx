@@ -36,7 +36,7 @@ export const STATS_DATA: IStatsData[] = [
         ></path>
       </svg>
     ),
-    value: 275,
+    value: 220,
     label: "High School Students Impacted",
   },
   {
@@ -51,7 +51,7 @@ export const STATS_DATA: IStatsData[] = [
         <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5" />
       </svg>
     ),
-    value: 25,
+    value: 50,
     label: "Student-Led Businesses",
   },
   {
@@ -67,8 +67,8 @@ export const STATS_DATA: IStatsData[] = [
         <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2z" />
       </svg>
     ),
-    value: 6500,
-    label: "Net Income Generated",
+    value: 14000,
+    label: "Revenue Generated",
     pre: "$",
   },
   {
@@ -96,7 +96,7 @@ export const STATS_DATA: IStatsData[] = [
         ></path>
       </svg>
     ),
-    value: 500,
+    value: 775,
     label: "Members Influenced",
   },
 ];
