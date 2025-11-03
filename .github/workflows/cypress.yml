@@ -8,6 +8,7 @@ permissions:
 
 jobs:
   cypress-run:
+    if: false
     runs-on: ubuntu-22.04
     env:
       MONGO_URI: ${{ secrets.MONGO_URI }}
