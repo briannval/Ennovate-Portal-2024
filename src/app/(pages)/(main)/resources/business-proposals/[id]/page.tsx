@@ -82,7 +82,7 @@ export default function BusinessProposals({
       dispatch({ type: "CLOSE_DELETE_MODAL" });
       router.push("/resources/business-proposals");
     } catch (error) {
-      console.error("Failed to delete business proposal", error);
+      console.error("Failed to delete business report", error);
     } finally {
       dispatch({ type: "SET_IS_DELETING", payload: false });
     }

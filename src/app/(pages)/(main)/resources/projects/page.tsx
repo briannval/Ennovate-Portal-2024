@@ -100,7 +100,7 @@ export default function Projects() {
                 router.push(`/resources/business-proposals/${project.businessProposal._id}`);
               }
             }} disabled={project.businessProposal === null} className="min-w-32 rounded-md bg-ennovate-main py-2 px-4 border border-transparent text-center text-md text-white transition-all shadow-md hover:bg-ennovate-dark-blue disabled:opacity-50 disabled:cursor-not-allowed" type="button">
-              Business Proposal
+              Business Report
             </button>
             <button onClick={() => {
               if (project.blog) {

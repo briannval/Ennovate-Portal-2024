@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
   } catch (e) {
     captureException(e);
     return NextResponse.json(
-      { message: "Failed to fetch business proposals" },
+      { message: "Failed to fetch business reports" },
       { status: 500 }
     );
   }

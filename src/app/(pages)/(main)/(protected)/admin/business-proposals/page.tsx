@@ -158,14 +158,14 @@ export default function AdminBusinessProposal() {
         className="max-w-xl w-full bg-white p-8 border-2 border-ennovate-gray shadow-xl rounded-lg"
       >
         <p className="mt-2 text-4xl text-center font-extrabold tracking-tight text-ennovate-dark-blue sm:text-5xl mb-6">
-          {updateId ? "Update Business Proposal" : "Register Business Proposal"}
+          {updateId ? "Update Business Report" : "Register Business Report"}
         </p>
         <div className="mb-5">
           <label
             htmlFor="name"
             className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
           >
-            Business Proposal Name
+            Business Report Name
           </label>
           <input
             id="name"
@@ -183,7 +183,7 @@ export default function AdminBusinessProposal() {
             htmlFor="description"
             className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
           >
-            Business Proposal Description
+            Business Report Description
           </label>
           <input
             id="description"
@@ -220,7 +220,7 @@ export default function AdminBusinessProposal() {
             htmlFor="image"
             className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
           >
-            Business Proposal Image
+            Business Report Image
           </label>
           <div
             {...getRootProps()}

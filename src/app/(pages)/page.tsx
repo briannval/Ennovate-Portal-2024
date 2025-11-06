@@ -33,6 +33,7 @@ export default function Home() {
         images={ABOUT_ENACTUS_IMAGES}
         content={ABOUT_ENACTUS_CONTENT}
         flipped
+        id="why-join-us"
       />
       <Affiliations />
     </PageCenteringWrapper>
