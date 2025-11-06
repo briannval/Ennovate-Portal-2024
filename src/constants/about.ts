@@ -26,7 +26,7 @@ export const ABOUT_ENACTUS_CONTENT: IAboutContent[] = [
   {
     heading: "Our Past Results",
     content:
-      "Enactus UBC has won regionals and nationals in the TD Entrepreneurship Challenge for 3 years straight, 2022 to 2024.",
+      "Enactus UBC has won regionals in the TD Entrepreneurship Challenge for 4 years straight, 2022 to 2025.",
   },
 ];
 
