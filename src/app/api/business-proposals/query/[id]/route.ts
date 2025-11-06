@@ -24,7 +24,7 @@ export async function GET(
 
     if (!businessProposal) {
       return NextResponse.json(
-        { message: "Business Proposal not found" },
+        { message: "Business Report not found" },
         { status: 404 }
       );
     }
@@ -39,7 +39,7 @@ export async function GET(
   } catch (e) {
     captureException(e);
     return NextResponse.json(
-      { message: "Failed to fetch business proposal" },
+      { message: "Failed to fetch business report" },
       { status: 500 }
     );
   }

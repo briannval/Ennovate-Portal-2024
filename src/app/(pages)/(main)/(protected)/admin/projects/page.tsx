@@ -170,7 +170,7 @@ export default function AdminProjects() {
             htmlFor="businessProposal"
             className="block mb-2 text-lg font-bold text-ennovate-dark-blue"
           >
-            Business Proposal
+            Business Report
           </label>
           {!businessProposals ? (
             <div className="text-center text-gray-500">Loading...</div>

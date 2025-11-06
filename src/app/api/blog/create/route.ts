@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     captureException(e);
 
     return NextResponse.json(
-      { message: "Failed to create business proposal" },
+      { message: "Failed to create business report" },
       { status: 500 }
     );
   }

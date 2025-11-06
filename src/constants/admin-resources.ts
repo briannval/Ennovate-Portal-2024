@@ -15,7 +15,7 @@ export const ADMIN_RESOURCES_ACTIONS: IAdminResourcesAction[] = [
     addHref: "/admin/team",
   },
   {
-    heading: "Previous Business Proposals & Slides",
+    heading: "Previous Business Reports & Slides",
     subheading: "Proposals from Ennovate's future entrepreneurs",
     image: "/admin/previous-business-proposals.webp",
     viewHref: "/resources/business-proposals",
@@ -29,8 +29,8 @@ export const ADMIN_RESOURCES_ACTIONS: IAdminResourcesAction[] = [
     addHref: "/admin/workshop-content",
   },
   {
-    heading: "Previous Projects",
-    subheading: "High quality, presentable projects from students",
+    heading: "Past Student Businesses",
+    subheading: "High quality, student-led business ventures",
     image: "/admin/previous-projects.webp",
     viewHref: "/resources/projects",
     addHref: "/admin/projects",

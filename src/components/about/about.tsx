@@ -9,12 +9,14 @@ const About = ({
   content,
   images,
   flipped = false,
+  id = "about",
 }: {
   title: string;
   subtitle: string;
   content: IAboutContent[];
   images: string[];
   flipped?: boolean;
+  id?: string;
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
@@ -86,7 +88,7 @@ const About = ({
   return (
     <div
       className="overflow-hidden bg-white py-24 scroll-mt-20 mx-8"
-      id="about"
+      id={id}
     >
       <div className="mx-auto max-w-screen-xl ">
         <div

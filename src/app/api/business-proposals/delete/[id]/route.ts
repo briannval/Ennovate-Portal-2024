@@ -18,13 +18,13 @@ export async function DELETE(
       redis.del([`businessProposal:${id}`, "businessProposal"]),
     ]);
 
-    captureMessage(`Deleted business proposal ${id}`, 'info');
+    captureMessage(`Deleted business report ${id}`, 'info');
 
     return NextResponse.json("Success");
   } catch (e) {
     captureException(e);
     return NextResponse.json(
-      { message: "Failed to delete business proposal" },
+      { message: "Failed to delete business report" },
       { status: 500 },
     );
   }

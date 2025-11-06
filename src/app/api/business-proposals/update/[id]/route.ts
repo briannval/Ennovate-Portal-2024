@@ -20,13 +20,13 @@ export async function PUT(
       redis.del([`businessProposal:${id}`, "businessProposal"]),
     ]);
 
-    captureMessage(`Updated business proposal ${id}`, 'info');
+    captureMessage(`Updated business report ${id}`, 'info');
 
     return NextResponse.json("Success");
   } catch (e) {
     captureException(e);
     return NextResponse.json(
-      { message: "Failed to update business proposal" },
+      { message: "Failed to update business report" },
       { status: 500 },
     );
   }

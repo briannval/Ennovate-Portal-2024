@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { navbarLinks } from "@/constants/navbar";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
@@ -8,6 +8,8 @@ import { useRouter, usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
   const { isAuthenticated, logout, isLoading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
@@ -15,12 +17,19 @@ const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
     const handleScroll = () => setScrollPosition(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMounted]);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen((prev) => !prev);
+  }, []);
 
   const handleAuthAction = () => {
     if (!isLoading) {
@@ -32,7 +41,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className="fixed w-full h-20 z-50 top-0 start-0"
+      className="fixed w-full z-50 top-0 start-0"
       style={{
         backgroundColor:
           pathname === "/"
@@ -57,11 +66,13 @@ const Navbar = () => {
 
           {/* Hamburger (always visible) */}
           <button
+            ref={hamburgerRef}
             onClick={toggleMenu}
             type="button"
-            className="inline-flex items-center bg-transparent p-2 w-10 h-10 justify-center rounded-lg"
+            className="inline-flex items-center bg-transparent p-2 w-10 h-10 justify-center rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
             aria-controls="navbar-menu"
             aria-expanded={isMenuOpen}
+            style={{ pointerEvents: 'auto', WebkitTapHighlightColor: 'transparent' }}
           >
             <svg
               className="w-6 h-6"
@@ -79,8 +90,8 @@ const Navbar = () => {
 
       {/* Dropdown (appears under navbar) */}
       {isMenuOpen && (
-        <div className="bg-ennovate-main px-4 py-4">
-          <ul className="flex flex-col gap-4">
+        <div className="absolute top-20 left-0 w-full bg-ennovate-main px-4 py-4 z-50">
+          <ul className="flex flex-col gap-4 max-w-screen-xl mx-auto">
             {isAuthenticated && (
               <li>
                 <Link
