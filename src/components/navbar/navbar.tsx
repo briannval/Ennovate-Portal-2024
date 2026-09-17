@@ -45,8 +45,8 @@ const Navbar = () => {
       style={{
         backgroundColor:
           pathname === "/"
-            ? `rgba(63, 107, 180, ${scrollPosition * 0.01})`
-            : "#3f6bb4",
+            ? `rgba(0, 59, 111, ${scrollPosition * 0.01})`
+            : "#003B6F",
       }}
     >
       <div className="max-w-screen-xl h-20 flex items-center justify-between mx-auto px-4">
